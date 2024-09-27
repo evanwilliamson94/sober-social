@@ -141,27 +141,76 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer with Social Media Icons */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex justify-center space-x-6 mb-4">
-            {/* Social Media Icons */}
-            <a href="#" className="text-white hover:text-yellow-400 transition">
-              <FaFacebookF size={24} />
-            </a>
-            <a href="#" className="text-white hover:text-yellow-400 transition">
-              <FaTwitter size={24} />
-            </a>
-            <a href="#" className="text-white hover:text-yellow-400 transition">
-              <FaInstagram size={24} />
-            </a>
-            <a href="#" className="text-white hover:text-yellow-400 transition">
-              <FaLinkedinIn size={24} />
-            </a>
+ {/* Footer with Social Media Icons, Links, and Newsletter */}
+<footer className="bg-gray-900 text-white py-12">
+  <div className="max-w-7xl mx-auto px-4 md:px-0">
+    {/* Social Media Icons */}
+    <div className="flex justify-center space-x-6 mb-8">
+      <a href="#" className="text-white hover:text-yellow-400 transition">
+        <FaFacebookF size={24} />
+      </a>
+      <a href="#" className="text-white hover:text-yellow-400 transition">
+        <FaTwitter size={24} />
+      </a>
+      <a href="#" className="text-white hover:text-yellow-400 transition">
+        <FaInstagram size={24} />
+      </a>
+      <a href="#" className="text-white hover:text-yellow-400 transition">
+        <FaLinkedinIn size={24} />
+      </a>
+    </div>
+
+    {/* Footer Links */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left mb-8">
+      <div>
+        <h4 className="text-xl font-bold mb-4">Quick Links</h4>
+        <ul>
+          <li><a href="#" className="hover:text-yellow-400 transition">About Us</a></li>
+          <li><a href="#" className="hover:text-yellow-400 transition">Privacy Policy</a></li>
+          <li><a href="#" className="hover:text-yellow-400 transition">Terms of Service</a></li>
+          <li><a href="#" className="hover:text-yellow-400 transition">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="text-xl font-bold mb-4">Resources</h4>
+        <ul>
+          <li><a href="#" className="hover:text-yellow-400 transition">Blog</a></li>
+          <li><a href="#" className="hover:text-yellow-400 transition">Community</a></li>
+          <li><a href="#" className="hover:text-yellow-400 transition">Support</a></li>
+          <li><a href="#" className="hover:text-yellow-400 transition">Help Center</a></li>
+        </ul>
+      </div>
+
+      {/* Newsletter Signup */}
+      <div>
+        <h4 className="text-xl font-bold mb-4">Join Our Newsletter</h4>
+        <p className="text-gray-400 mb-4">Stay updated on new features and community stories.</p>
+        <form>
+          <div className="flex items-center">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full px-4 py-2 rounded-l-md focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="bg-yellow-400 text-blue-900 font-bold px-4 py-2 rounded-r-md hover:bg-yellow-300 transition"
+            >
+              Subscribe
+            </button>
           </div>
-          <p className="text-sm">&copy; 2024 SoberSocial. All rights reserved.</p>
-        </div>
-      </footer>
+        </form>
+      </div>
+    </div>
+
+    {/* Copyright */}
+    <div className="text-center border-t border-gray-700 pt-8">
+      <p className="text-sm">&copy; 2024 SoberSocial. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
     </div>
   );
 }
