@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { ChartBarIcon, UsersIcon, AcademicCapIcon } from '@heroicons/react/24/outline';  // v2 icons
+import { ChartBarIcon, UsersIcon, AcademicCapIcon } from '@heroicons/react/24/outline';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';  // Social media icons
 
 export default function Home() {
   return (
@@ -109,10 +110,10 @@ export default function Home() {
 
           {/* Trust and Social Proof */}
           <div className="mt-16">
-  <p className="text-gray-600 text-lg md:text-xl">
-    Over <span className="text-yellow-400 font-semibold">95% of members</span> report feeling more supported and empowered in their sobriety journey with <span className="text-yellow-400 font-semibold">SoberSocial</span>.
-  </p>
-</div>
+            <p className="text-gray-600 text-lg md:text-xl">
+              Over <span className="text-yellow-400 font-semibold">95% of members</span> report feeling more supported and empowered in their sobriety journey with <span className="text-yellow-400 font-semibold">SoberSocial</span>.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -140,9 +141,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer with Social Media Icons */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto text-center">
+          <div className="flex justify-center space-x-6 mb-4">
+            {/* Social Media Icons */}
+            <a href="#" className="text-white hover:text-yellow-400 transition">
+              <FaFacebookF size={24} />
+            </a>
+            <a href="#" className="text-white hover:text-yellow-400 transition">
+              <FaTwitter size={24} />
+            </a>
+            <a href="#" className="text-white hover:text-yellow-400 transition">
+              <FaInstagram size={24} />
+            </a>
+            <a href="#" className="text-white hover:text-yellow-400 transition">
+              <FaLinkedinIn size={24} />
+            </a>
+          </div>
           <p className="text-sm">&copy; 2024 SoberSocial. All rights reserved.</p>
         </div>
       </footer>
