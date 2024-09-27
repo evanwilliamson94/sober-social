@@ -1,114 +1,154 @@
-import Image from "next/image";
-import localFont from "next/font/local";
+import Head from 'next/head';
+import Image from 'next/image';
+import { ChartBarIcon, UsersIcon, AcademicCapIcon } from '@heroicons/react/24/outline';  // v2 icons
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+
 
 export default function Home() {
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gray-100">
+      <Head>
+        <title>SoberSocial | Transform Your Sobriety Journey</title>
+        <meta name="description" content="Join a thriving community and track your sobriety journey with SoberSocial." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+   {/* Hero Section with Interactive CTAs */}
+<section className="relative flex items-center justify-center h-screen text-white">
+  <div className="absolute inset-0 z-0">
+    <Image
+      src="/Sober-Livings.png"  // Ensure this is the correct path
+      alt="SoberSocial Community"
+      layout="fill"
+      objectFit="cover"
+      objectPosition="center"
+      priority
+      className="opacity-70"
+    />
+  </div>
+
+  <div className="absolute inset-0 bg-gradient-to-t from-black via-black to-transparent opacity-60"></div>
+
+  <div className="relative z-10 text-center px-6 md:px-12">
+    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 drop-shadow-lg">
+      Join the <span className="text-yellow-400">SoberSocial</span> Community
+    </h1>
+    <p className="text-lg md:text-xl lg:text-2xl mb-8 drop-shadow-lg">
+      Track your sobriety, connect with others, and get personalized support.
+    </p>
+    <div className="space-y-4">
+      <a
+        href="#"
+        className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl"
+      >
+        Start Your Journey Today
+      </a>
+      <a
+        href="#"
+        className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-2xl"
+      >
+        Explore Features
+      </a>
+    </div>
+  </div>
+</section>
+
+
+{/* Value Proposition and Trust Elements */}
+<section className="bg-gradient-to-b from-gray-50 to-white py-16">
+  <div className="max-w-6xl mx-auto text-center px-4">
+    <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+      Why <span className="text-yellow-400">SoberSocial</span>?
+    </h2>
+    <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+      Empowering thousands of individuals on their sobriety journey. Join a community that understands and supports you.
+    </p>
+
+    {/* Cards for the value proposition */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      {/* Card 1 - Track Your Sobriety */}
+      <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105">
+        <div className="mb-4 flex justify-center items-center">
+          {/* Track Your Sobriety Icon */}
+          <div className="bg-blue-100 p-4 rounded-full">
+            <ChartBarIcon className="w-12 h-12 text-blue-600" />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <h3 className="text-2xl font-semibold text-blue-600">Track Your Sobriety</h3>
+        <p className="mt-4 text-gray-600">
+          Monitor your sober days, milestones, and progress with intuitive trackers designed for success.
+        </p>
+      </div>
+
+      {/* Card 2 - Community Support */}
+      <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105">
+        <div className="mb-4 flex justify-center items-center">
+          {/* Community Support Icon */}
+          <div className="bg-blue-100 p-4 rounded-full">
+            <UsersIcon className="w-12 h-12 text-blue-600" />
+          </div>
+        </div>
+        <h3 className="text-2xl font-semibold text-blue-600">Community Support</h3>
+        <p className="mt-4 text-gray-600">
+          Engage with others on a similar journey. Get encouragement and accountability when you need it most.
+        </p>
+      </div>
+
+      {/* Card 3 - Personalized Coaching */}
+      <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105">
+        <div className="mb-4 flex justify-center items-center">
+          {/* Personalized Coaching Icon */}
+          <div className="bg-blue-100 p-4 rounded-full">
+            <AcademicCapIcon className="w-12 h-12 text-blue-600" />
+          </div>
+        </div>
+        <h3 className="text-2xl font-semibold text-blue-600">Personalized Coaching</h3>
+        <p className="mt-4 text-gray-600">
+          Access exclusive tools, coaching, and resources tailored to your specific needs and goals.
+        </p>
+      </div>
+    </div>
+
+    {/* Trust and Social Proof */}
+    <div className="mt-16">
+  <p className="text-gray-600 text-lg md:text-xl">
+    Your journey is our priority. At <span className="text-yellow-400 font-semibold">SoberSocial</span>, we’re building a platform tailored to your needs, focused on sobriety, support, and success.
+  </p>
+</div>
+  </div>
+</section>
+
+      {/* Call to Action */}
+      <section className="bg-gradient-to-r from-blue-600 to-blue-700 py-16 text-white text-center">
+  <h2 className="text-4xl font-bold mb-4">Ready to Begin Your Journey?</h2>
+  <p className="text-lg mb-8">
+    Join SoberSocial today and take control of your sobriety in a supportive and motivating environment.
+  </p>
+  
+  {/* Flexbox for Button Layout */}
+  <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+    <a
+      href="#"
+      className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg"
+    >
+      Join Now
+    </a>
+    <a
+      href="#"
+      className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-lg"
+    >
+      Learn More
+    </a>
+  </div>
+</section>
+
+
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-sm">&copy; 2024 SoberSocial. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   );
