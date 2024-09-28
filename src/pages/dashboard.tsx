@@ -28,169 +28,177 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-roboto">
-      {/* Dashboard Hero Section */}
-      <section className="px-4 py-6 bg-gray-800 text-white rounded-b-3xl shadow-lg">
-        <div className="flex items-center space-x-4">
-          {/* Profile Picture with Hover Effect */}
-          <div className="relative w-16 h-16 transition-all transform hover:scale-105">
-            <Image
-              src="/profile.jpg"
-              alt="Profile Picture"
-              layout="fill"
-              className="rounded-full border-4 border-gray-300 shadow-2xl"
-            />
-          </div>
-
-          {/* Welcome Message and Days Sober */}
-          <div className="flex-1 text-left">
-            <h1 className="text-lg font-semibold">Welcome back, [User Name]!</h1>
-            <p className="text-md">
-              You have been sober for <span className="font-bold text-yellow-400 animate-pulse">{daysSober} days</span>.
-            </p>
-          </div>
-
-          {/* Settings / Profile Button */}
-          <div className="flex items-center justify-center">
-            <a href="/profile" className="text-yellow-300">
-              <FaUserCircle size={24} />
-            </a>
-          </div>
+    {/* Dashboard Hero Section */}
+    <section className="px-4 py-6 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white rounded-b-3xl shadow-lg">
+      <div className="flex items-center space-x-4">
+        {/* Profile Picture with Hover Effect */}
+        <div className="relative w-16 h-16 transition-all transform hover:scale-105">
+          <Image
+            src="/profile.jpg"
+            alt="Profile Picture"
+            layout="fill"
+            className="rounded-full border-4 border-gray-300 shadow-2xl"
+          />
         </div>
 
-        {/* Sobriety Progress Section */}
-        <div className="mt-6 flex flex-col items-center">
-          <div className="w-44 h-44 relative">
-            {/* Circular Progress Bar with larger size and gradient */}
-            <CircularProgressbar
-              value={percentage}
-              text={`${daysSober} days`}
-              strokeWidth={6}  // This adjusts both the path and trail width
-              styles={buildStyles({
-                pathColor: percentage >= 100 ? "#00C851" : "#FFD700",
-                textColor: "#FFFFFF",
-                trailColor: "#2c2c2c", // Updated for a darker trail
-                backgroundColor: "#3e98c7",
-              })}
-            />
-            {/* Add SVG gradient for the circular progress */}
-            <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-              <defs>
-                <linearGradient id="yellowGradient" gradientTransform="rotate(90)">
-                  <stop offset="0%" stopColor="#FFD700" />
-                  <stop offset="100%" stopColor="#FFB200" />
-                </linearGradient>
-                <linearGradient id="greenGradient" gradientTransform="rotate(90)">
-                  <stop offset="0%" stopColor="#00C851" />
-                  <stop offset="100%" stopColor="#00A843" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          {/* Goal text with better spacing */}
-          <p className="text-white text-lg mt-4 font-semibold tracking-wide">
-            Goal: {milestone} Days
+        {/* Welcome Message and Days Sober */}
+        <div className="flex-1 text-left">
+          <h1 className="text-lg font-semibold tracking-wide">
+            Welcome back, <span className="text-yellow-400">[User Name]</span>!
+          </h1>
+          <p className="text-md">
+            You have been sober for{" "}
+            <span className="font-bold text-yellow-400 animate-pulse">
+              {daysSober} days
+            </span>.
           </p>
         </div>
-      </section>
 
-
-      {/* Daily Motivation Section */}
-  <section className="px-6 py-8 bg-gray-800 shadow-lg rounded-lg my-6 transition-all hover:shadow-xl">
-    <h2 className="text-2xl font-semibold text-white mb-4 text-center md:text-left">
-      Your Daily Motivation
-    </h2>
-    {loading ? (
-      <p className="mt-2 text-gray-400 italic animate-pulse text-center md:text-left">
-        Loading...
-      </p>  
-    ) : (
-      <blockquote className="text-lg text-gray-300 italic font-light tracking-wide border-l-4 border-yellow-500 pl-4 md:max-w-3xl mx-auto md:mx-0">
-        "{dailyQuote}"
-      </blockquote>
-    )}
-  </section>
-
-  {/* Quick Actions Section */}
-  <section className="px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8 my-8 bg-gray-900 rounded-lg shadow-inner">
-    {/* Card 1 - Track Sobriety */}
-    <div className="relative p-8 bg-gray-800 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
-      <div className="flex justify-center mb-6">
-        <FaClipboardList className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
-      </div>
-      <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
-        Track Sobriety
-      </h3>
-      <p className="text-gray-400 text-base">Log your sobriety progress and set personal goals.</p>
-      
-      {/* Ripple Effect */}
-      <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
-    </div>
-
-    {/* Card 2 - Community */}
-    <div className="relative p-8 bg-gray-800 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
-      <div className="flex justify-center mb-6">
-        <FaUsers className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
-      </div>
-      <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
-        Community
-      </h3>
-      <p className="text-gray-400 text-base">Engage with others in the sober community and stay connected.</p>
-      
-      {/* Ripple Effect */}
-      <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
-    </div>
-
-    {/* Card 3 - Resources & Coaching */}
-    <div className="relative p-8 bg-gray-800 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
-      <div className="flex justify-center mb-6">
-        <FaUser className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
-      </div>
-      <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
-        Resources & Coaching
-      </h3>
-      <p className="text-gray-400 text-base">Access personalized coaching, tools, and exclusive resources.</p>
-      
-      {/* Ripple Effect */}
-      <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
-    </div>
-  </section>
-
-
-  {/* Sticky Bottom Navigation */}
-  <nav className="fixed bottom-0 left-0 right-0 bg-gray-900 text-white shadow-lg rounded-t-3xl px-4 py-4 z-50">
-    <div className="flex justify-between items-center max-w-lg mx-auto relative">
-      {/* Home Icon */}
-      <a href="/dashboard" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
-        <FaHome size={28} className="group-hover:text-yellow-400 transition duration-300" />
-        <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Home</span>
-      </a>
-
-      {/* Tracker Icon */}
-      <a href="/tracker" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
-        <FaClipboardList size={28} className="group-hover:text-yellow-400 transition duration-300" />
-        <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Tracker</span>
-      </a>
-
-      {/* Central Action Button */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 -top-8 w-16 h-16 bg-yellow-400 border-4 border-gray-900 rounded-full p-3 shadow-2xl flex items-center justify-center transform hover:scale-110 transition-all duration-300 ease-in-out">
-        <a href="/create" className="text-gray-900">
-          <FaPlus size={34} />
-        </a>
+        {/* Settings / Profile Button */}
+        <div className="flex items-center justify-center">
+          <a href="/profile" className="text-yellow-300">
+            <FaUserCircle size={24} />
+          </a>
+        </div>
       </div>
 
-      {/* Community Icon */}
-      <a href="/community" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
-        <FaUsers size={28} className="group-hover:text-yellow-400 transition duration-300" />
-        <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Community</span>
-      </a>
+      {/* Sobriety Progress Section */}
+      <div className="mt-6 flex flex-col items-center">
+        <div className="w-44 h-44 relative">
+          {/* Circular Progress Bar with gradient */}
+          <CircularProgressbar
+            value={percentage}
+            text={`${daysSober} days`}
+            strokeWidth={8} // Thicker for prominence
+            styles={buildStyles({
+              pathColor: percentage >= 100 ? "url(#greenGradient)" : "url(#yellowGradient)",
+              textColor: "#FFFFFF",
+              trailColor: "#1F1F1F", // Darker trail for better contrast
+              strokeLinecap: "round",
+            })}
+          />
+          {/* Add SVG gradient for the circular progress */}
+          <svg style={{ position: "absolute", width: 0, height: 0 }}>
+            <defs>
+              <linearGradient id="yellowGradient" gradientTransform="rotate(90)">
+                <stop offset="0%" stopColor="#FFD700" />
+                <stop offset="100%" stopColor="#FFB200" />
+              </linearGradient>
+              <linearGradient id="greenGradient" gradientTransform="rotate(90)">
+                <stop offset="0%" stopColor="#00C851" />
+                <stop offset="100%" stopColor="#00A843" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        {/* Goal text with better spacing */}
+        <p className="text-white text-lg mt-4 font-semibold tracking-wide">
+          Goal: {milestone} Days
+        </p>
+      </div>
+    </section>
+  
+{/* Daily Motivation Section */}
+<section className="px-6 py-8 bg-gray-900 shadow-lg rounded-lg my-6 transition-all hover:shadow-2xl">
+  <h2 className="text-2xl font-semibold text-white mb-4 text-center md:text-left">
+    Your Daily Motivation
+  </h2>
+  {loading ? (
+    <p className="mt-2 text-gray-400 italic animate-pulse text-center md:text-left">
+      Loading...
+    </p>  
+  ) : (
+    <blockquote className="text-lg text-gray-300 italic font-light tracking-wide border-l-4 border-yellow-500 pl-4 md:max-w-3xl mx-auto md:mx-0 bg-gray-800 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg shadow-inner">
+      "{dailyQuote}"
+    </blockquote>
+  )}
+</section>
 
-      {/* Profile Icon */}
-      <a href="/profile" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
-        <FaUser size={28} className="group-hover:text-yellow-400 transition duration-300" />
-        <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Profile</span>
+
+{/* Quick Actions Section */}
+<section className="px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8 my-8 bg-black rounded-lg shadow-inner">
+  {/* Card 1 - Track Sobriety */}
+  <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
+    <div className="flex justify-center mb-6">
+      <FaClipboardList className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
+    </div>
+    <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
+      Track Sobriety
+    </h3>
+    <p className="text-gray-300 text-base">Log your sobriety progress and set personal goals.</p>
+    
+    {/* Ripple Effect */}
+    <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
+  </div>
+
+  {/* Card 2 - Community */}
+  <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
+    <div className="flex justify-center mb-6">
+      <FaUsers className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
+    </div>
+    <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
+      Community
+    </h3>
+    <p className="text-gray-300 text-base">Engage with others in the sober community and stay connected.</p>
+    
+    {/* Ripple Effect */}
+    <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
+  </div>
+
+  {/* Card 3 - Resources & Coaching */}
+  <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
+    <div className="flex justify-center mb-6">
+      <FaUser className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
+    </div>
+    <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
+      Resources & Coaching
+    </h3>
+    <p className="text-gray-300 text-base">Access personalized coaching, tools, and exclusive resources.</p>
+    
+    {/* Ripple Effect */}
+    <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
+  </div>
+</section>
+
+
+{/* Sticky Bottom Navigation */}
+<nav className="fixed bottom-0 left-0 right-0 bg-gray-900 text-white shadow-xl rounded-t-3xl px-4 py-4 z-50">
+  <div className="flex justify-between items-center max-w-lg mx-auto relative">
+    
+    {/* Home Icon */}
+    <a href="/dashboard" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
+      <FaHome size={28} className="group-hover:text-yellow-400 transition duration-300" />
+      <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Home</span>
+    </a>
+
+    {/* Tracker Icon */}
+    <a href="/tracker" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
+      <FaClipboardList size={28} className="group-hover:text-yellow-400 transition duration-300" />
+      <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Tracker</span>
+    </a>
+
+    {/* Central Action Button */}
+    <div className="absolute left-1/2 transform -translate-x-1/2 -top-8 w-16 h-16 bg-yellow-400 border-4 border-gray-900 rounded-full p-3 shadow-2xl flex items-center justify-center transform hover:scale-110 hover:shadow-3xl transition-all duration-300 ease-in-out">
+      <a href="/create" className="text-gray-900">
+        <FaPlus size={34} className="hover:animate-pulse" />
       </a>
     </div>
-  </nav>
+
+    {/* Community Icon */}
+    <a href="/community" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
+      <FaUsers size={28} className="group-hover:text-yellow-400 transition duration-300" />
+      <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Community</span>
+    </a>
+
+    {/* Profile Icon */}
+    <a href="/profile" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
+      <FaUser size={28} className="group-hover:text-yellow-400 transition duration-300" />
+      <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Profile</span>
+    </a>
+  </div>
+</nav>
+
+
   </div>
   );
 }
