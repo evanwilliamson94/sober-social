@@ -27,92 +27,104 @@ export default function Dashboard() {
   const percentage = (daysSober / milestone) * 100;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-roboto">
-    {/* Dashboard Hero Section */}
-    <section className="px-4 py-6 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white rounded-b-3xl shadow-lg">
-      <div className="flex items-center space-x-4">
-        {/* Profile Picture with Hover Effect */}
-        <div className="relative w-16 h-16 transition-all transform hover:scale-105">
-          <Image
-            src="/profile.jpg"
-            alt="Profile Picture"
-            layout="fill"
-            className="rounded-full border-4 border-gray-300 shadow-2xl"
-          />
-        </div>
-
-        {/* Welcome Message and Days Sober */}
-        <div className="flex-1 text-left">
-          <h1 className="text-lg font-semibold tracking-wide">
-            Welcome back, <span className="text-yellow-400">[User Name]</span>!
-          </h1>
-          <p className="text-md">
-            You have been sober for{" "}
-            <span className="font-bold text-yellow-400 animate-pulse">
-              {daysSober} days
-            </span>.
-          </p>
-        </div>
-
-        {/* Settings / Profile Button */}
-        <div className="flex items-center justify-center">
-          <a href="/profile" className="text-yellow-300">
-            <FaUserCircle size={24} />
-          </a>
-        </div>
+<div className="min-h-screen bg-gray-900 text-white font-roboto">
+  {/* Dashboard Hero Section */}
+  <section className="px-2 py-4 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white rounded-b-3xl shadow-lg">
+    <div className="flex items-center space-x-4">
+      {/* Profile Picture with Hover Effect */}
+      <div className="relative w-12 h-12 transition-all transform hover:scale-105">
+        <Image
+          src="/profile.jpg"
+          alt="Profile Picture"
+          layout="fill"
+          className="rounded-full border-4 border-gray-300 shadow-2xl"
+        />
       </div>
 
-      {/* Sobriety Progress Section */}
-      <div className="mt-6 flex flex-col items-center">
-        <div className="w-44 h-44 relative">
-          {/* Circular Progress Bar with gradient */}
-          <CircularProgressbar
-            value={percentage}
-            text={`${daysSober} days`}
-            strokeWidth={8} // Thicker for prominence
-            styles={buildStyles({
-              pathColor: percentage >= 100 ? "url(#greenGradient)" : "url(#yellowGradient)",
-              textColor: "#FFFFFF",
-              trailColor: "#1F1F1F", // Darker trail for better contrast
-              strokeLinecap: "round",
-            })}
-          />
-          {/* Add SVG gradient for the circular progress */}
-          <svg style={{ position: "absolute", width: 0, height: 0 }}>
-            <defs>
-              <linearGradient id="yellowGradient" gradientTransform="rotate(90)">
-                <stop offset="0%" stopColor="#FFD700" />
-                <stop offset="100%" stopColor="#FFB200" />
-              </linearGradient>
-              <linearGradient id="greenGradient" gradientTransform="rotate(90)">
-                <stop offset="0%" stopColor="#00C851" />
-                <stop offset="100%" stopColor="#00A843" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        {/* Goal text with better spacing */}
-        <p className="text-white text-lg mt-4 font-semibold tracking-wide">
-          Goal: {milestone} Days
+      {/* Welcome Message and Days Sober */}
+      <div className="flex-1 text-left">
+        <h1 className="text-base font-semibold tracking-wide">
+          Welcome back, <span className="text-yellow-400">[User Name]</span>!
+        </h1>
+        <p className="text-sm">
+          You have been sober for{" "}
+          <span className="font-bold text-yellow-400 animate-pulse">
+            {daysSober} days
+          </span>.
         </p>
       </div>
-    </section>
-  
-{/* Daily Motivation Section */}
-<section className="px-6 py-8 bg-gray-900 shadow-lg rounded-lg my-6 transition-all hover:shadow-2xl">
+
+      {/* Settings / Profile Button */}
+      <div className="flex items-center justify-center">
+        <a href="/profile" className="text-yellow-300">
+          <FaUserCircle size={20} />
+        </a>
+      </div>
+    </div>
+    <div className="mt-4 flex flex-col items-center">
+  <div className="w-36 h-36 relative">
+    {/* Circular Progress Bar with gradient and animation */}
+    <CircularProgressbar
+      value={percentage}
+      text={`${daysSober} days`}
+      strokeWidth={6} // Slightly thinner for a sleek look
+      styles={buildStyles({
+        pathColor: percentage >= 100 ? "url(#greenGradient)" : "url(#yellowGradient)",
+        textColor: "#FFFFFF",
+        trailColor: "rgba(255, 255, 255, 0.1)", // Softer trail for a sleek look
+        strokeLinecap: "round", // Rounded edges for a smoother feel
+        pathTransitionDuration: 1.5, // Smooth transition for the progress bar
+        textSize: '16px', // Refined text size
+      })}
+    />
+    
+    {/* Add SVG gradient for the circular progress */}
+    <svg style={{ position: "absolute", width: 0, height: 0 }}>
+      <defs>
+        <linearGradient id="yellowGradient" gradientTransform="rotate(90)">
+          <stop offset="0%" stopColor="#FFD700" />
+          <stop offset="100%" stopColor="#FFB200" />
+        </linearGradient>
+        <linearGradient id="greenGradient" gradientTransform="rotate(90)">
+          <stop offset="0%" stopColor="#00C851" />
+          <stop offset="100%" stopColor="#00A843" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    {/* Optional Glow Effect */}
+    <div className="absolute inset-0 rounded-full shadow-lg" style={{
+      boxShadow: "0 0 15px rgba(255, 215, 0, 0.5)",
+      opacity: percentage >= 100 ? 0.7 : 0.3,
+      transition: "opacity 0.5s ease",
+    }} />
+  </div>
+
+  {/* Goal text with subtle hover effect */}
+  <p className="text-white text-sm mt-2 font-semibold tracking-wide hover:scale-105 transition-all">
+    Goal: {milestone} Days
+  </p>
+</div>
+
+  </section>
+
+  {/* Daily Motivation Section */}
+  <section className="px-6 py-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black shadow-lg rounded-lg my-6 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl">
   <h2 className="text-2xl font-semibold text-white mb-4 text-center md:text-left">
     Your Daily Motivation
   </h2>
-  {loading ? (
-    <p className="mt-2 text-gray-400 italic animate-pulse text-center md:text-left">
-      Loading...
-    </p>  
-  ) : (
-    <blockquote className="text-lg text-gray-300 italic font-light tracking-wide border-l-4 border-yellow-500 pl-4 md:max-w-3xl mx-auto md:mx-0 bg-gray-800 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg shadow-inner">
-      "{dailyQuote}"
-    </blockquote>
-  )}
-</section>
+    {loading ? (
+      <p className="mt-2 text-gray-400 italic animate-pulse text-center md:text-left">
+        Loading...
+      </p>
+    ) : (
+      <blockquote className="text-lg text-gray-300 italic font-light tracking-wide border-l-4 border-yellow-500 pl-4 md:max-w-3xl mx-auto md:mx-0 bg-gray-800 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg shadow-inner">
+        "{dailyQuote}"
+      </blockquote>
+    )}
+  </section>
+
+
 
 
 {/* Quick Actions Section */}
@@ -162,18 +174,18 @@ export default function Dashboard() {
 
 
 {/* Sticky Bottom Navigation */}
-<nav className="fixed bottom-0 left-0 right-0 bg-gray-900 text-white shadow-xl rounded-t-3xl px-4 py-4 z-50">
+<nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-black text-white shadow-2xl rounded-t-3xl px-4 py-4 z-50 transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-3xl">
   <div className="flex justify-between items-center max-w-lg mx-auto relative">
     
     {/* Home Icon */}
     <a href="/dashboard" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
-      <FaHome size={28} className="group-hover:text-yellow-400 transition duration-300" />
+      <FaHome size={28} className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110" />
       <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Home</span>
     </a>
 
     {/* Tracker Icon */}
     <a href="/tracker" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
-      <FaClipboardList size={28} className="group-hover:text-yellow-400 transition duration-300" />
+      <FaClipboardList size={28} className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110" />
       <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Tracker</span>
     </a>
 
@@ -186,17 +198,18 @@ export default function Dashboard() {
 
     {/* Community Icon */}
     <a href="/community" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
-      <FaUsers size={28} className="group-hover:text-yellow-400 transition duration-300" />
+      <FaUsers size={28} className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110" />
       <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Community</span>
     </a>
 
     {/* Profile Icon */}
     <a href="/profile" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
-      <FaUser size={28} className="group-hover:text-yellow-400 transition duration-300" />
+      <FaUser size={28} className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110" />
       <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Profile</span>
     </a>
   </div>
 </nav>
+
 
 
   </div>
