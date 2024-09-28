@@ -13,15 +13,15 @@ const ProfilePage = () => {
     return (
       <div className="min-h-screen bg-gray-900 text-white p-6">
         {/* Profile Header */}
-        <div className="flex items-center space-x-4 mb-8">
+        <div className="flex items-center space-x-4 mb-8 bg-gray-800 p-4 rounded-lg shadow-lg">
           {/* Profile Picture */}
-          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-500 shadow-lg">
+          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300">
             <img src="/profile-placeholder.jpg" alt="Profile" />
           </div>
   
           {/* User Info */}
           <div>
-            <h1 className="text-3xl font-semibold">{userName}</h1>
+            <h1 className="text-3xl font-bold">{userName}</h1>
             <p className="text-lg mt-2">
               You have been sober for{" "}
               <span className="font-bold text-yellow-400">{daysSober} days</span>.
@@ -35,10 +35,10 @@ const ProfilePage = () => {
         {/* Progress Overview */}
         <div className="mb-8">
           <h2 className="text-xl font-semibold mb-4">Sobriety Progress</h2>
-          {/* Progress Bar */}
-          <div className="relative w-full h-6 bg-gray-700 rounded-full">
+          {/* Animated Progress Bar */}
+          <div className="relative w-full h-6 bg-gray-700 rounded-full shadow-inner">
             <div
-              className="absolute top-0 left-0 h-full bg-yellow-400 rounded-full"
+              className="absolute top-0 left-0 h-full bg-yellow-400 rounded-full transition-all duration-1000"
               style={{ width: `${(daysSober / sobrietyGoal) * 100}%` }}
             ></div>
           </div>
@@ -48,27 +48,29 @@ const ProfilePage = () => {
         </div>
   
         {/* Achievements Section */}
-        <div>
+        <div className="mb-8">
           <h2 className="text-xl font-semibold mb-4">Achievements</h2>
-          <ul>
+          <div className="grid grid-cols-2 gap-4">
             {achievements.map((achievement, index) => (
-              <li
+              <div
                 key={index}
-                className={`mb-2 text-md ${
-                  achievement.achieved ? "text-green-400" : "text-gray-500"
+                className={`p-4 rounded-lg text-center shadow-lg transition-transform duration-300 ${
+                  achievement.achieved
+                    ? "bg-green-600 text-white"
+                    : "bg-gray-700 text-gray-400"
                 }`}
               >
-                {achievement.title}
-              </li>
+                <p className="font-bold">{achievement.title}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
   
         {/* Edit Profile Button */}
         <div className="mt-8">
           <a
             href="/settings"
-            className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg hover:bg-yellow-300 transition-all"
+            className="bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg shadow-lg hover:bg-yellow-300 transition-all"
           >
             Edit Profile
           </a>
