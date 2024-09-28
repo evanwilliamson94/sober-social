@@ -5,13 +5,13 @@ const ProfilePage = () => {
     const sobrietyGoal = 180;
     const nextMilestone = 30; // days left for next milestone
     const achievements = [
-      { title: "30 Days Sober", achieved: true },
-      { title: "100 Days Sober", achieved: true },
-      { title: "1 Year Sober", achieved: false },
+      { title: "30 Days Sober", achieved: true, icon: "🎉" },
+      { title: "100 Days Sober", achieved: true, icon: "🏅" },
+      { title: "1 Year Sober", achieved: false, icon: "🎖️" },
     ];
     const futureAchievements = [
-      { title: "1 Year Sober", achieved: false },
-      { title: "5 Years Sober", achieved: false },
+      { title: "1 Year Sober", achieved: false, icon: "🎖️" },
+      { title: "5 Years Sober", achieved: false, icon: "🏆" },
     ];
     const posts = [
       {
@@ -34,15 +34,17 @@ const ProfilePage = () => {
     const following = 85;
   
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-800 via-blue-900 to-gray-900 text-white p-8 lg:p-12">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12">
         {/* Two-column layout on large screens */}
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
-      
+        
           {/* Left Column: Profile and Progress */}
           <div className="lg:col-span-1 space-y-10">
             {/* Profile Header */}
-            <div className="bg-gradient-to-r from-purple-600 to-blue-700 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              <div className="flex items-center space-x-6">
+            <div className="relative p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 bg-gradient-to-r from-gray-900 to-black">
+              {/* Overlay Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent opacity-50 rounded-lg"></div>
+              <div className="relative flex items-center space-x-6">
                 {/* Profile Picture */}
                 <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300">
                   <img src="/profile-placeholder.jpg" alt="Profile" />
@@ -62,7 +64,7 @@ const ProfilePage = () => {
               </div>
       
               {/* Followers/Following */}
-              <div className="mt-8 flex justify-around text-center">
+              <div className="mt-8 flex justify-around text-center relative">
                 <div>
                   <p className="text-lg font-extrabold text-yellow-400">{followers}</p>
                   <p className="text-sm text-gray-300">Followers</p>
@@ -73,9 +75,9 @@ const ProfilePage = () => {
                 </div>
               </div>
             </div>
-      
+        
             {/* Sobriety Progress */}
-            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
               <h2 className="text-3xl font-bold mb-6">Sobriety Progress</h2>
               <div className="relative w-full h-6 bg-gray-700 rounded-full shadow-inner">
                 <div
@@ -87,7 +89,7 @@ const ProfilePage = () => {
                 {daysSober}/{sobrietyGoal} Days
               </p>
             </div>
-      
+        
             {/* Edit Profile Button */}
             <div className="text-center">
               <a
@@ -98,12 +100,12 @@ const ProfilePage = () => {
               </a>
             </div>
           </div>
-      
+        
           {/* Right Column: Achievements and Posts */}
           <div className="lg:col-span-2 space-y-12">
-      
+        
             {/* Achievements Section */}
-            <div className="bg-gradient-to-r from-blue-800 to-purple-800 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
               <h2 className="text-3xl font-bold mb-6">Achievements</h2>
               <div className="grid grid-cols-2 gap-6">
                 {achievements.map((achievement, index) => (
@@ -115,9 +117,15 @@ const ProfilePage = () => {
                         : "bg-gray-700 text-gray-400"
                     }`}
                   >
+                    <div className="flex items-center justify-center">
+                      <span className="text-4xl">{achievement.icon}</span>
+                    </div>
                     <p className="font-bold text-xl hover:text-2xl transition-all duration-300">
                       {achievement.title}
                     </p>
+                    {achievement.achieved && (
+                      <div className="mt-2 text-sm text-yellow-400 animate-pulse">Achieved!</div>
+                    )}
                   </div>
                 ))}
                 {/* Future Achievements */}
@@ -126,16 +134,20 @@ const ProfilePage = () => {
                     key={index}
                     className="p-6 rounded-lg text-center shadow-lg bg-gray-500 hover:scale-105 transition-all duration-300 opacity-50"
                   >
+                    <div className="flex items-center justify-center">
+                      <span className="text-4xl">{achievement.icon}</span>
+                    </div>
                     <p className="font-bold text-xl transition-all duration-300">
                       {achievement.title} <span className="text-xs">(Locked)</span>
                     </p>
+                    <div className="mt-2 text-sm text-gray-400">Reach {achievement.title} to unlock</div>
                   </div>
                 ))}
               </div>
             </div>
-      
+        
             {/* User Posts Section */}
-            <div className="bg-gradient-to-r from-gray-800 to-purple-900 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
               <h2 className="text-3xl font-bold mb-6">Your Posts</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {posts.map((post) => (
@@ -155,7 +167,7 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-      
+        
         </div>
       </div>
     );
