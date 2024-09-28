@@ -9,11 +9,30 @@ const ProfilePage = () => {
       { title: "100 Days Sober", achieved: true },
       { title: "1 Year Sober", achieved: false },
     ];
+    const posts = [
+      {
+        id: 1,
+        content: "Feeling great! 100 days sober!",
+        image: "/post-image1.jpg",
+        likes: 120,
+        comments: 15,
+      },
+      {
+        id: 2,
+        content: "Meditation is keeping me strong.",
+        image: "/post-image2.jpg",
+        likes: 80,
+        comments: 10,
+      },
+    ];
+  
+    const followers = 150;
+    const following = 85;
   
     return (
       <div className="min-h-screen bg-gray-900 text-white p-6">
         {/* Profile Header */}
-        <div className="flex items-center space-x-4 mb-8 bg-gray-800 p-4 rounded-lg shadow-lg">
+        <div className="flex items-center justify-between space-x-4 mb-8 bg-gray-800 p-4 rounded-lg shadow-lg">
           {/* Profile Picture */}
           <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300">
             <img src="/profile-placeholder.jpg" alt="Profile" />
@@ -28,6 +47,16 @@ const ProfilePage = () => {
             </p>
             <p className="text-md mt-1">
               <span className="text-yellow-400">{nextMilestone} days</span> until your next milestone!
+            </p>
+          </div>
+  
+          {/* Followers/Following */}
+          <div className="text-center">
+            <p className="text-sm">
+              <span className="font-bold text-yellow-400">{followers}</span> Followers
+            </p>
+            <p className="text-sm">
+              <span className="font-bold text-yellow-400">{following}</span> Following
             </p>
           </div>
         </div>
@@ -61,6 +90,27 @@ const ProfilePage = () => {
                 }`}
               >
                 <p className="font-bold">{achievement.title}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+  
+        {/* User Posts Section */}
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Your Posts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {posts.map((post) => (
+              <div key={post.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <img
+                  src={post.image}
+                  alt="Post"
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                <p className="text-md mb-4">{post.content}</p>
+                <div className="flex justify-between text-sm text-gray-400">
+                  <p>{post.likes} Likes</p>
+                  <p>{post.comments} Comments</p>
+                </div>
               </div>
             ))}
           </div>
