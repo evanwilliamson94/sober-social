@@ -37,7 +37,7 @@ const ProfilePage = () => {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12">
         {/* Two-column layout on large screens */}
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
-        
+          
           {/* Left Column: Profile and Progress */}
           <div className="lg:col-span-1 space-y-10">
             {/* Profile Header */}
@@ -46,39 +46,39 @@ const ProfilePage = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent opacity-50 rounded-lg"></div>
               <div className="relative flex items-center space-x-6">
                 {/* Profile Picture */}
-                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300">
+                <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300">
                   <img src="/profile-placeholder.jpg" alt="Profile" />
                 </div>
-      
+  
                 {/* User Info */}
                 <div>
-                  <h1 className="text-5xl font-extrabold">{userName}</h1>
-                  <p className="text-lg mt-4">
+                  <h1 className="text-4xl font-bold">{userName}</h1>
+                  <p className="text-base mt-3">
                     Sober for{" "}
                     <span className="font-bold text-yellow-400 animate-pulse">{daysSober} days</span>.
                   </p>
-                  <p className="text-md mt-2">
+                  <p className="text-sm mt-1">
                     <span className="text-yellow-400">{nextMilestone} days</span> until your next milestone!
                   </p>
                 </div>
               </div>
-      
+  
               {/* Followers/Following */}
               <div className="mt-8 flex justify-around text-center relative">
                 <div>
-                  <p className="text-lg font-extrabold text-yellow-400">{followers}</p>
+                  <p className="text-lg font-bold text-yellow-400">{followers}</p>
                   <p className="text-sm text-gray-300">Followers</p>
                 </div>
                 <div>
-                  <p className="text-lg font-extrabold text-yellow-400">{following}</p>
+                  <p className="text-lg font-bold text-yellow-400">{following}</p>
                   <p className="text-sm text-gray-300">Following</p>
                 </div>
               </div>
             </div>
-        
+  
             {/* Sobriety Progress */}
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              <h2 className="text-3xl font-bold mb-6">Sobriety Progress</h2>
+            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+              <h2 className="text-2xl font-semibold mb-4">Sobriety Progress</h2>
               <div className="relative w-full h-6 bg-gray-700 rounded-full shadow-inner">
                 <div
                   className="absolute top-0 left-0 h-full bg-yellow-400 rounded-full transition-all duration-1000"
@@ -89,29 +89,29 @@ const ProfilePage = () => {
                 {daysSober}/{sobrietyGoal} Days
               </p>
             </div>
-        
+  
             {/* Edit Profile Button */}
             <div className="text-center">
               <a
                 href="/settings"
-                className="bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-300 transition-all hover:scale-105"
+                className="bg-yellow-400 text-gray-900 px-5 py-2 rounded-lg shadow-lg hover:bg-yellow-300 transition-all hover:scale-105"
               >
                 Edit Profile
               </a>
             </div>
           </div>
-        
+  
           {/* Right Column: Achievements and Posts */}
           <div className="lg:col-span-2 space-y-12">
-        
+  
             {/* Achievements Section */}
-            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              <h2 className="text-3xl font-bold mb-6">Achievements</h2>
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+              <h2 className="text-2xl font-semibold mb-4">Achievements</h2>
               <div className="grid grid-cols-2 gap-6">
                 {achievements.map((achievement, index) => (
                   <div
                     key={index}
-                    className={`p-6 rounded-lg text-center shadow-lg transition-transform duration-300 ${
+                    className={`p-4 rounded-lg text-center shadow-lg transition-transform duration-300 ${
                       achievement.achieved
                         ? "bg-green-600 text-white hover:scale-105"
                         : "bg-gray-700 text-gray-400"
@@ -120,11 +120,11 @@ const ProfilePage = () => {
                     <div className="flex items-center justify-center">
                       <span className="text-4xl">{achievement.icon}</span>
                     </div>
-                    <p className="font-bold text-xl hover:text-2xl transition-all duration-300">
+                    <p className="font-semibold text-base hover:text-lg transition-all duration-300">
                       {achievement.title}
                     </p>
                     {achievement.achieved && (
-                      <div className="mt-2 text-sm text-yellow-400 animate-pulse">Achieved!</div>
+                      <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
                     )}
                   </div>
                 ))}
@@ -132,33 +132,33 @@ const ProfilePage = () => {
                 {futureAchievements.map((achievement, index) => (
                   <div
                     key={index}
-                    className="p-6 rounded-lg text-center shadow-lg bg-gray-500 hover:scale-105 transition-all duration-300 opacity-50"
+                    className="p-4 rounded-lg text-center shadow-lg bg-gray-500 hover:scale-105 transition-all duration-300 opacity-50"
                   >
                     <div className="flex items-center justify-center">
                       <span className="text-4xl">{achievement.icon}</span>
                     </div>
-                    <p className="font-bold text-xl transition-all duration-300">
+                    <p className="font-semibold text-base transition-all duration-300">
                       {achievement.title} <span className="text-xs">(Locked)</span>
                     </p>
-                    <div className="mt-2 text-sm text-gray-400">Reach {achievement.title} to unlock</div>
+                    <div className="mt-1 text-xs text-gray-400">Reach {achievement.title} to unlock</div>
                   </div>
                 ))}
               </div>
             </div>
-        
+  
             {/* User Posts Section */}
-            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              <h2 className="text-3xl font-bold mb-6">Your Posts</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+              <h2 className="text-2xl font-semibold mb-4">Your Posts</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {posts.map((post) => (
-                  <div key={post.id} className="bg-gray-900 p-6 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+                  <div key={post.id} className="bg-gray-900 p-4 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
                     <img
                       src={post.image}
                       alt="Post"
-                      className="w-full h-48 object-cover rounded-lg mb-6"
+                      className="w-full h-48 object-cover rounded-lg mb-4"
                     />
-                    <p className="text-md mb-6 text-gray-300">{post.content}</p>
-                    <div className="flex justify-between text-sm text-gray-400">
+                    <p className="text-sm mb-4 text-gray-300">{post.content}</p>
+                    <div className="flex justify-between text-xs text-gray-400">
                       <p>{post.likes} Likes</p>
                       <p>{post.comments} Comments</p>
                     </div>
@@ -167,7 +167,7 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-        
+  
         </div>
       </div>
     );
