@@ -142,7 +142,7 @@ export default function Home() {
       </section>
 
  {/* Footer with Social Media Icons, Links, and Newsletter */}
-<footer className="bg-gray-900 text-white py-12">
+ <footer className="bg-gray-900 text-white py-12">
   <div className="max-w-7xl mx-auto px-4 md:px-0">
     {/* Social Media Icons */}
     <div className="flex justify-center space-x-6 mb-8">
@@ -187,15 +187,15 @@ export default function Home() {
         <h4 className="text-xl font-bold mb-4">Join Our Newsletter</h4>
         <p className="text-gray-400 mb-4">Stay updated on new features and community stories.</p>
         <form>
-          <div className="flex items-center">
+          <div className="flex flex-col md:flex-row">
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full px-4 py-2 rounded-l-md focus:outline-none"
+              className="w-full px-4 py-2 rounded-md focus:outline-none text-gray-800"
             />
             <button
               type="submit"
-              className="bg-yellow-400 text-blue-900 font-bold px-4 py-2 rounded-r-md hover:bg-yellow-300 transition"
+              className="bg-yellow-400 text-blue-900 font-bold px-4 py-2 rounded-md hover:bg-yellow-300 transition"
             >
               Subscribe
             </button>
