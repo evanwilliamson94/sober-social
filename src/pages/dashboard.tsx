@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { FaHome, FaClipboardList, FaUsers, FaUser, FaPlus, FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
+import { FaHome, FaClipboardList, FaUsers, FaUser, FaPlus, FaQuoteLeft, FaQuoteRight, FaUserCircle } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import { getDailyQuote } from "../utils/motivationService"; // Assume this fetches a daily quote
@@ -32,45 +32,70 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Dashboard Hero Section */}
-      <section className="px-6 py-8 bg-indigo-700 text-white rounded-b-3xl shadow-lg">
-        <div className="flex items-center space-x-6">
-          <div className="relative w-20 h-20 transition-all transform hover:scale-105">
-            <Image
-              src="/profile.jpg"
-              alt="Profile Picture"
-              width={80}
-              height={80}
-              className="rounded-full border-4 border-white shadow-2xl"
-            />
-          </div>
-          <div className="flex flex-col">
-            <h1 className="text-3xl font-bold mb-2">Welcome back, [User Name]!</h1>
-            <p className="text-xl">
-              You have been sober for{" "}
-              <span className="font-bold text-yellow-400 animate-pulse">
-                {daysSober} days
-              </span>.
-            </p>
-          </div>
-        </div>
-        
-        {/* Sobriety Progress Section */}
-        <div className="mt-8 flex justify-center">
-          <div className="w-40 h-40">
-            <CircularProgressbar
-              value={percentage}
-              text={`${daysSober} days`}
-              styles={buildStyles({
-                pathColor: percentage >= 100 ? "#00C851" : "#FFD700",
-                textColor: "#FFFFFF",
-                trailColor: "#D3D3D3",
-                backgroundColor: "#3e98c7",
-              })}
-            />
-            <p className="text-white text-center mt-4">Goal: {milestone} Days</p>
-          </div>
-        </div>
-      </section>
+<section className="px-4 py-6 bg-indigo-700 text-white rounded-b-3xl shadow-lg">
+  <div className="flex items-center space-x-4">
+    {/* Profile Picture with Hover Effect */}
+    <div className="relative w-16 h-16 transition-all transform hover:scale-105">
+      <Image
+        src="/profile.jpg"
+        alt="Profile Picture"
+        layout="fill"
+        className="rounded-full border-4 border-white shadow-2xl"
+      />
+    </div>
+
+    {/* Welcome Message and Days Sober */}
+    <div className="flex-1 text-left">
+      <h1 className="text-lg font-semibold">Welcome back, [User Name]!</h1>
+      <p className="text-md">
+        You have been sober for <span className="font-bold text-yellow-400 animate-pulse">{daysSober} days</span>.
+      </p>
+    </div>
+
+    {/* Settings / Profile Button */}
+    <div className="flex items-center justify-center">
+      <a href="/profile" className="text-yellow-300">
+        <FaUserCircle size={24} />
+      </a>
+    </div>
+  </div>
+
+ {/* Sobriety Progress Section */}
+<div className="mt-6 flex flex-col items-center">
+  <div className="w-44 h-44 relative">
+    {/* Circular Progress Bar with larger size and gradient */}
+    <CircularProgressbar
+  value={percentage}
+  text={`${daysSober} days`}
+  strokeWidth={6}  // This adjusts both the path and trail width
+  styles={buildStyles({
+    pathColor: percentage >= 100 ? "#00C851" : "#FFD700",
+    textColor: "#FFFFFF",
+    trailColor: "#D3D3D3",
+    backgroundColor: "#3e98c7",
+  })}
+/>
+    {/* Add SVG gradient for the circular progress */}
+    <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+      <defs>
+        <linearGradient id="yellowGradient" gradientTransform="rotate(90)">
+          <stop offset="0%" stopColor="#FFD700" />
+          <stop offset="100%" stopColor="#FFB200" />
+        </linearGradient>
+        <linearGradient id="greenGradient" gradientTransform="rotate(90)">
+          <stop offset="0%" stopColor="#00C851" />
+          <stop offset="100%" stopColor="#00A843" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  {/* Goal text with better spacing */}
+  <p className="text-white text-lg mt-4 font-semibold tracking-wide">
+    Goal: {milestone} Days
+  </p>
+</div>
+        </section>
+
 
       {/* Daily Motivation Section */}
       <section className="px-6 py-8 bg-white shadow-md rounded-lg my-6 transition-all hover:shadow-lg">
