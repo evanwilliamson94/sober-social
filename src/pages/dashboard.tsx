@@ -13,9 +13,9 @@ export default function Dashboard() {
     // Fetch days sober (this can be dynamically calculated from user data)
     const sobrietyStartDate = new Date("2024-01-01"); // Placeholder for user sobriety date
     const today = new Date();
-    const diffTime = Math.abs(today - sobrietyStartDate);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    setDaysSober(diffDays);
+    const diffTime = Math.abs(today.getTime() - sobrietyStartDate.getTime()); // Use .getTime()
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  setDaysSober(diffDays);
 
     // Fetch daily quote
     getDailyQuote().then((quote) => {
