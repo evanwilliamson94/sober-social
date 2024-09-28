@@ -91,9 +91,9 @@ export default function Dashboard() {
 </section>
 
 
-    {/* Sticky Bottom Navigation */}
-<nav className="fixed bottom-0 left-0 right-0 bg-blue-600 text-white shadow-lg rounded-t-3xl px-4 py-3 z-50">
-  <div className="flex justify-between items-center max-w-md mx-auto relative">
+{/* Sticky Bottom Navigation */}
+<nav className="fixed bottom-0 left-0 right-0 bg-blue-600 text-white shadow-lg rounded-t-3xl px-4 py-4 z-50">
+  <div className="flex justify-between items-center max-w-lg mx-auto relative">
     
     {/* Home Icon */}
     <a href="/dashboard" className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out">
@@ -107,11 +107,13 @@ export default function Dashboard() {
       <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">Tracker</span>
     </a>
 
-    {/* Central Action Button */}
-    <div className="absolute -top-8 mx-auto bg-yellow-400 rounded-full p-4 shadow-2xl hover:bg-yellow-300 transition-all duration-300 ease-in-out transform hover:scale-110">
-      <a href="/create" className="text-blue-900">
-        <FaPlus size={34} />
-      </a>
+    {/* Central Action Button - Square-like and Integrated */}
+    <div className="relative flex items-center justify-center mx-2">
+      <div className="w-16 h-16 bg-white border-4 border-blue-600 rounded-xl p-3 shadow-2xl flex items-center justify-center transform hover:scale-105 transition-all duration-300 ease-in-out">
+        <a href="/create" className="text-blue-600">
+          <FaPlus size={34} />
+        </a>
+      </div>
     </div>
 
     {/* Community Icon */}
@@ -127,6 +129,7 @@ export default function Dashboard() {
     </a>
   </div>
 </nav>
+
 
 
     </div>
