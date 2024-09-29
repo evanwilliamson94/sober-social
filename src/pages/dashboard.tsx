@@ -163,8 +163,9 @@ export default function Dashboard() {
           </div>
         </Link>
 
-  {/* Card 3 - Resources & Coaching */}
-  <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
+ {/* Card 3 - Resources & Coaching */}
+<div className="relative bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
+  <div className="p-8 space-y-4">
     <div className="flex justify-center mb-6">
       <FaUser className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
     </div>
@@ -172,10 +173,19 @@ export default function Dashboard() {
       Resources & Coaching
     </h3>
     <p className="text-gray-300 text-base">Access personalized coaching, tools, and exclusive resources.</p>
-    
-    {/* Ripple Effect */}
-    <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
   </div>
+
+  {/* Unlock Premium Overlay */}
+  <div className="absolute inset-0 bg-black/60 flex justify-center items-center rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+    <button className="bg-white text-yellow-600 px-8 py-3 rounded-lg shadow hover:bg-yellow-100 transition duration-300">
+      Unlock Premium
+    </button>
+  </div>
+
+  {/* Ripple Effect */}
+  <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
+</div>
+
 </section>
 
 

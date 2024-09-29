@@ -97,14 +97,16 @@ const TrackerPage = () => {
 </div>
 
 {/* Reflection & Gratitude Journal Section */}
-<div className="bg-gradient-to-r from-purple-400 to-pink-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative space-y-4">
-  <h2 className="text-3xl font-bold">Reflection & Gratitude</h2>
-  <p className="text-sm text-gray-300">
-    What are you grateful for today?
-  </p>
-  <button className="bg-purple-600 text-white px-8 py-3 rounded-lg shadow hover:bg-purple-500 transition duration-300">
-    Write in Journal (Premium)
-  </button>
+<div className="bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative">
+  <div className="p-8 space-y-4">
+    <h2 className="text-3xl font-bold">Reflection & Gratitude</h2>
+    <p className="text-sm text-gray-300">
+      What are you grateful for today?
+    </p>
+    <button className="bg-purple-600 text-white px-8 py-3 rounded-lg shadow hover:bg-purple-500 transition duration-300">
+      Write in Journal (Premium)
+    </button>
+  </div>
   {/* Unlock Premium Overlay */}
   <div className="absolute inset-0 bg-black/60 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-500">
     <button className="bg-white text-purple-600 px-8 py-3 rounded-lg shadow hover:bg-purple-100 transition duration-300">
@@ -114,14 +116,16 @@ const TrackerPage = () => {
 </div>
 
 {/* Exercise & Wellness Tracker Section */}
-<div className="bg-gradient-to-r from-teal-400 to-green-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative space-y-4">
-  <h2 className="text-3xl font-bold">Exercise & Wellness</h2>
-  <p className="text-sm text-gray-300">
-    Track your physical activity for a healthier lifestyle.
-  </p>
-  <button className="bg-teal-500 text-white px-8 py-3 rounded-lg shadow hover:bg-teal-400 transition duration-300">
-    Log Exercise (Premium)
-  </button>
+<div className="bg-gradient-to-r from-teal-400 to-green-500 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative">
+  <div className="p-8 space-y-4">
+    <h2 className="text-3xl font-bold">Exercise & Wellness</h2>
+    <p className="text-sm text-gray-300">
+      Track your physical activity for a healthier lifestyle.
+    </p>
+    <button className="bg-teal-500 text-white px-8 py-3 rounded-lg shadow hover:bg-teal-400 transition duration-300">
+      Log Exercise (Premium)
+    </button>
+  </div>
   {/* Unlock Premium Overlay */}
   <div className="absolute inset-0 bg-black/60 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-500">
     <button className="bg-yellow-500 text-white px-8 py-3 rounded-lg shadow hover:bg-yellow-400 transition duration-300">
@@ -131,14 +135,16 @@ const TrackerPage = () => {
 </div>
 
 {/* Streaks & Badges Section */}
-<div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative space-y-4">
-  <h2 className="text-3xl font-bold">Sobriety Streaks & Badges</h2>
-  <p className="text-sm text-gray-300">
-    Keep up your streak and earn badges for reaching milestones!
-  </p>
-  <button className="bg-yellow-500 text-white px-8 py-3 rounded-lg shadow hover:bg-yellow-400 transition duration-300">
-    View Badges (Premium)
-  </button>
+<div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative">
+  <div className="p-8 space-y-4">
+    <h2 className="text-3xl font-bold">Sobriety Streaks & Badges</h2>
+    <p className="text-sm text-gray-300">
+      Keep up your streak and earn badges for reaching milestones!
+    </p>
+    <button className="bg-yellow-500 text-white px-8 py-3 rounded-lg shadow hover:bg-yellow-400 transition duration-300">
+      View Badges (Premium)
+    </button>
+  </div>
   {/* Unlock Premium Overlay */}
   <div className="absolute inset-0 bg-black/60 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-500">
     <button className="bg-white text-yellow-500 px-8 py-3 rounded-lg shadow hover:bg-yellow-100 transition duration-300">
@@ -146,6 +152,7 @@ const TrackerPage = () => {
     </button>
   </div>
 </div>
+
 
 {/* Sticky Bottom Navigation */}
 <nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-black text-white shadow-2xl rounded-t-3xl px-4 py-4 z-50 transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-3xl">
