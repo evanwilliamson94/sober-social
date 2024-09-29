@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaHeart, FaComment } from "react-icons/fa"; // Icons for interaction buttons
 
 interface Post {
@@ -38,6 +38,7 @@ const CommunityPage: React.FC = () => {
 
   const [postList, setPostList] = useState<Post[]>(initialPosts);
 
+  // Handle like button click
   const handleLike = (id: number) => {
     setPostList(
       postList.map((post) =>
@@ -48,41 +49,52 @@ const CommunityPage: React.FC = () => {
     );
   };
 
+  // Subtle entrance animation
+  useEffect(() => {
+    const page = document.querySelector(".page-content");
+    if (page) {
+      page.classList.add("animate-fadeIn");
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 page-content">
       <div className="container mx-auto space-y-12">
-
+        
         {/* Page Header */}
-        <h2 className="text-4xl font-bold mb-6">Community</h2>
+        <h2 className="text-5xl font-bold mb-10 text-center lg:text-left transition-transform duration-300 transform hover:scale-105">
+          Sober Social
+        </h2>
 
-        <div className="filter-section flex flex-col md:flex-row justify-between items-center mb-6">
-  {/* Search Bar */}
-  <input 
-    type="text" 
-    placeholder="Search posts..." 
-    className="p-3 rounded-lg w-full md:w-1/3 bg-gray-700 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-gray-600 transition duration-300 mb-4 md:mb-0"
-  />
+        {/* Filters & Search */}
+        <div className="filter-section flex flex-col md:flex-row justify-between items-center mb-10">
+          {/* Search Bar */}
+          <input 
+            type="text" 
+            placeholder="Search posts..." 
+            className="p-4 rounded-lg w-full md:w-1/3 bg-gray-700 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-gray-600 transition duration-300 mb-4 md:mb-0"
+          />
 
-  {/* Filter Buttons */}
-  <div className="filter-options flex space-x-4">
-    <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300">
-      Most Recent
-    </button>
-    <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300">
-      Most Liked
-    </button>
-    <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300">
-      Milestones
-    </button>
-  </div>
-</div>
+          {/* Filter Buttons */}
+          <div className="filter-options flex space-x-4">
+            <button className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300 transform hover:scale-105">
+              Most Recent
+            </button>
+            <button className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300 transform hover:scale-105">
+              Most Liked
+            </button>
+            <button className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300 transform hover:scale-105">
+              Milestones
+            </button>
+          </div>
+        </div>
 
         {/* Trending Section */}
         <div className="trending-section mb-8">
-          <h3 className="text-3xl font-semibold mb-4">Trending Posts</h3>
+          <h3 className="text-3xl font-semibold mb-6">Trending Posts</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {postList.filter((post) => post.likes > 50).map((post) => (
-              <div key={post.id} className="post-card bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+              <div key={post.id} className="post-card bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
                 <div className="post-header flex items-center mb-4">
                   <a href={`/profile/${post.username}`} className="flex items-center">
                     <img src={post.avatar} alt="avatar" className="avatar w-10 h-10 rounded-full mr-2"/>
@@ -109,10 +121,10 @@ const CommunityPage: React.FC = () => {
 
         {/* Top Community Posts */}
         <div className="featured-posts mb-6">
-          <h3 className="text-3xl font-semibold mb-4">Top Community Posts</h3>
+          <h3 className="text-3xl font-semibold mb-6">Top Community Posts</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {postList.map((post) => (
-              <div key={post.id} className="post-card bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+              <div key={post.id} className="post-card bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
                 <div className="post-header flex items-center mb-4">
                   <a href={`/profile/${post.username}`} className="flex items-center">
                     <img src={post.avatar} alt="avatar" className="avatar w-10 h-10 rounded-full mr-2"/>
@@ -139,7 +151,9 @@ const CommunityPage: React.FC = () => {
 
         {/* Infinite Scroll or Load More Button */}
         <div className="text-center">
-          <button className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-400 transition duration-300">Load More Posts</button>
+          <button className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md transform hover:scale-105">
+            Load More Posts
+          </button>
         </div>
       </div>
     </div>
