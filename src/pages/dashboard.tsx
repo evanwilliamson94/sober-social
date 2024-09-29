@@ -4,6 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import { getDailyQuote } from "../utils/motivationService"; // Assume this fetches a daily quote
 import Image from "next/image";
+import Link from 'next/link';
 
 export default function Dashboard() {
   const [daysSober, setDaysSober] = useState(0); // Track days sober
@@ -126,36 +127,40 @@ export default function Dashboard() {
 
 
 
-
 {/* Quick Actions Section */}
 <section className="px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8 my-8 bg-black rounded-lg shadow-inner">
+  
   {/* Card 1 - Track Sobriety */}
-  <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
-    <div className="flex justify-center mb-6">
-      <FaClipboardList className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
+  <Link href="/tracker">
+    <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group cursor-pointer">
+      <div className="flex justify-center mb-6">
+        <FaClipboardList className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
+      </div>
+      <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
+        Track Sobriety
+      </h3>
+      <p className="text-gray-300 text-base">Log your sobriety progress and set personal goals.</p>
+      
+      {/* Ripple Effect */}
+      <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
     </div>
-    <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
-      Track Sobriety
-    </h3>
-    <p className="text-gray-300 text-base">Log your sobriety progress and set personal goals.</p>
-    
-    {/* Ripple Effect */}
-    <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
-  </div>
+  </Link>
 
   {/* Card 2 - Community */}
-  <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
-    <div className="flex justify-center mb-6">
-      <FaUsers className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
+  <Link href="/community">
+    <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group cursor-pointer">
+      <div className="flex justify-center mb-6">
+        <FaUsers className="text-yellow-400 w-12 h-12 group-hover:text-yellow-500 transition-colors duration-300" />
+      </div>
+      <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
+        Community
+      </h3>
+      <p className="text-gray-300 text-base">Engage with others in the sober community and stay connected.</p>
+      
+      {/* Ripple Effect */}
+      <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
     </div>
-    <h3 className="text-2xl font-semibold text-white mb-3 group-hover:text-yellow-400 transition-colors duration-300">
-      Community
-    </h3>
-    <p className="text-gray-300 text-base">Engage with others in the sober community and stay connected.</p>
-    
-    {/* Ripple Effect */}
-    <div className="absolute inset-0 bg-yellow-400 opacity-0 rounded-xl group-hover:opacity-10 transition duration-500"></div>
-  </div>
+  </Link>
 
   {/* Card 3 - Resources & Coaching */}
   <div className="relative p-8 bg-gray-700 shadow-xl rounded-xl transition-all duration-300 transform hover:shadow-2xl hover:scale-105 group">
