@@ -6,6 +6,7 @@ const CreatePage: React.FC = () => {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [caption, setCaption] = useState<string>('');
+  const [progress, setProgress] = useState<number>(0); // Mock progress state
 
   // Handle image upload and generate preview
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +14,22 @@ const CreatePage: React.FC = () => {
     if (file) {
       setImage(file);
       setImagePreview(URL.createObjectURL(file));
+      simulateProgress(); // Simulate progress for image upload
     }
+  };
+
+  // Mock progress for image upload
+  const simulateProgress = () => {
+    setProgress(0);
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prevProgress + 10;
+      });
+    }, 200);
   };
 
   // Handle form submission (simulating post submission)
@@ -25,6 +41,7 @@ const CreatePage: React.FC = () => {
       setImage(null);
       setImagePreview(null);
       setCaption('');
+      setProgress(0);
     } else {
       alert("Please upload an image and add a caption.");
     }
@@ -35,7 +52,9 @@ const CreatePage: React.FC = () => {
       <div className="container mx-auto space-y-8">
         
         {/* Page Header */}
-        <h2 className="text-4xl font-bold mb-6 text-center">Create a New Post</h2>
+        <h2 className="text-4xl font-bold mb-6 text-center bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+          Sober Community Post
+        </h2>
 
         {/* Post Form */}
         <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-6">
@@ -43,7 +62,7 @@ const CreatePage: React.FC = () => {
           {/* Image Upload */}
           <div className="upload-section">
             <label className="block text-lg font-semibold mb-2">Upload an Image</label>
-            <div className="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center">
+            <div className="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center transition-all duration-300 hover:shadow-xl hover:border-yellow-500">
               {imagePreview ? (
                 <div className="relative">
                   <img src={imagePreview} alt="Preview" className="w-full h-64 object-cover rounded-lg" />
@@ -69,6 +88,19 @@ const CreatePage: React.FC = () => {
                 </label>
               )}
             </div>
+
+            {/* Progress Bar (if image is uploading) */}
+            {image && progress > 0 && (
+              <div className="mt-4">
+                <div className="progress-bar bg-gray-700 rounded-full overflow-hidden h-2">
+                  <div
+                    className="bg-yellow-500 h-full transition-all duration-500"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <p className="text-sm text-gray-400 mt-2">{progress}% Uploaded</p>
+              </div>
+            )}
           </div>
 
           {/* Caption Input */}
@@ -86,7 +118,7 @@ const CreatePage: React.FC = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-yellow-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-yellow-400 transition duration-300 transform hover:scale-105 w-full text-center">
+            className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg hover:bg-yellow-400 transition duration-300 transform hover:scale-105 w-full text-center">
             Submit Post
           </button>
         </form>
