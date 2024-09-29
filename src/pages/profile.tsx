@@ -1,4 +1,4 @@
-import { FaHome, FaClipboardList, FaPlus, FaUsers, FaUser } from "react-icons/fa"; // Importing necessary icons
+import { FaHome, FaClipboardList, FaPlus, FaUsers, FaUser, FaHeart, FaComment } from "react-icons/fa"; // Importing necessary icons
 const ProfilePage = () => {
     // Placeholder static data
     const userName = "John Doe";
@@ -147,26 +147,33 @@ const ProfilePage = () => {
               </div>
             </div>
   
-            {/* User Posts Section */}
-            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              <h2 className="text-2xl font-semibold mb-4">Your Posts</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {posts.map((post) => (
-                  <div key={post.id} className="bg-gray-900 p-4 rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
-                    <img
-                      src={post.image}
-                      alt="Post"
-                      className="w-full h-48 object-cover rounded-lg mb-4"
-                    />
-                    <p className="text-sm mb-4 text-gray-300">{post.content}</p>
-                    <div className="flex justify-between text-xs text-gray-400">
-                      <p>{post.likes} Likes</p>
-                      <p>{post.comments} Comments</p>
+           {/* User Posts Section */}
+          <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+            <h2 className="text-2xl font-semibold mb-4">Your Posts</h2>
+            <div className="grid grid-cols-3 gap-4">
+              {posts.map((post) => (
+                <div key={post.id} className="relative group">
+                  {/* Post Image */}
+                  <img
+                    src={post.image}
+                    alt="Post"
+                    className="w-full h-40 object-cover rounded-lg"
+                  />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 flex items-center justify-center rounded-lg">
+                    <div className="text-white text-sm flex space-x-4">
+                      <span className="flex items-center">
+                        <FaHeart className="mr-1" /> {post.likes}
+                      </span>
+                      <span className="flex items-center">
+                        <FaComment className="mr-1" /> {post.comments}
+                      </span>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
+          </div>
           </div>
   
         </div>
