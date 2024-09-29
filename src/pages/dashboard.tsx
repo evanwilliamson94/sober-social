@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaHome, FaClipboardList, FaUsers, FaUser, FaPlus, FaQuoteLeft, FaQuoteRight, FaUserCircle } from "react-icons/fa";
+import { FaHome, FaClipboardList, FaUsers, FaUser, FaPlus, FaUserCircle } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import { getDailyQuote } from "../utils/motivationService"; // Assume this fetches a daily quote
