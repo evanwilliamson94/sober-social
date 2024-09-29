@@ -55,15 +55,27 @@ const CommunityPage: React.FC = () => {
         {/* Page Header */}
         <h2 className="text-4xl font-bold mb-6">Community</h2>
 
-        {/* Filters & Search */}
-        <div className="filter-section flex justify-between mb-6 space-y-4 sm:space-y-0">
-          <input type="text" placeholder="Search posts..." className="p-2 rounded-lg w-full md:w-1/3 bg-gray-700 text-white placeholder-gray-400"/>
-          <div className="filter-options flex space-x-4">
-            <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition">Most Recent</button>
-            <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition">Most Liked</button>
-            <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition">Milestones</button>
-          </div>
-        </div>
+        <div className="filter-section flex flex-col md:flex-row justify-between items-center mb-6">
+  {/* Search Bar */}
+  <input 
+    type="text" 
+    placeholder="Search posts..." 
+    className="p-3 rounded-lg w-full md:w-1/3 bg-gray-700 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-yellow-500 focus:bg-gray-600 transition duration-300 mb-4 md:mb-0"
+  />
+
+  {/* Filter Buttons */}
+  <div className="filter-options flex space-x-4">
+    <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300">
+      Most Recent
+    </button>
+    <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300">
+      Most Liked
+    </button>
+    <button className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md focus:ring-2 focus:ring-yellow-300">
+      Milestones
+    </button>
+  </div>
+</div>
 
         {/* Trending Section */}
         <div className="trending-section mb-8">
