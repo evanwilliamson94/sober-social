@@ -34,9 +34,11 @@ const CommunityPage: React.FC = () => {
       comments: 10,
       isLiked: false,
     },
+    // Add more initial posts here if needed
   ];
 
   const [postList, setPostList] = useState<Post[]>(initialPosts);
+  const [loading, setLoading] = useState(false);
 
   // Handle like button click
   const handleLike = (id: number) => {
@@ -49,18 +51,52 @@ const CommunityPage: React.FC = () => {
     );
   };
 
-  // Subtle entrance animation
+  // Simulate fetching more posts (you would replace this with an API call)
+  const fetchMorePosts = () => {
+    if (loading) return;
+    
+    setLoading(true);
+    
+    // Simulate fetching data
+    setTimeout(() => {
+      const newPosts = [
+        {
+          id: 3,
+          username: "Alex Johnson",
+          avatar: "/path-to-avatar3.jpg",
+          image: "/post-image3.jpg",
+          caption: "Proud of hitting the 6-month milestone!",
+          likes: 150,
+          comments: 25,
+          isLiked: false,
+        },
+        // Add more new posts here if needed
+      ];
+      setPostList((prevPosts) => [...prevPosts, ...newPosts]);
+      setLoading(false);
+    }, 1500); // Simulate network delay
+  };
+
+  // Infinite scroll implementation
   useEffect(() => {
-    const page = document.querySelector(".page-content");
-    if (page) {
-      page.classList.add("animate-fadeIn");
-    }
-  }, []);
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+      
+      if (scrollTop + clientHeight >= scrollHeight - 100 && !loading) {
+        fetchMorePosts();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loading]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 page-content">
       <div className="container mx-auto space-y-12">
-        
+
         {/* Page Header */}
         <h2 className="text-5xl font-bold mb-10 text-center lg:text-left transition-transform duration-300 transform hover:scale-105">
           Sober Social
@@ -149,12 +185,12 @@ const CommunityPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Infinite Scroll or Load More Button */}
-        <div className="text-center">
-          <button className="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-400 transition duration-300 shadow-md transform hover:scale-105">
-            Load More Posts
-          </button>
-        </div>
+        {/* Infinite Scroll Loader */}
+        {loading && (
+          <div className="text-center">
+            <p className="text-yellow-500">Loading more posts...</p>
+          </div>
+        )}
       </div>
     </div>
   );
