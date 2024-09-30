@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
     FaHome,
     FaClipboardList,
@@ -105,16 +107,15 @@ import {
               </p>
             </div>
   
-            {/* Edit Profile Button */}
-            <div className="text-center">
-              <a
-                href="/settings"
-                className="bg-yellow-400 text-gray-900 px-4 py-2 lg:px-5 lg:py-2 rounded-lg shadow-lg hover:bg-yellow-300 transition-all hover:scale-105"
-              >
-                Edit Profile
-              </a>
-            </div>
-          </div>
+          {/* Edit Profile Button */}
+<div className="text-center">
+  <Link href="/settings" passHref>
+    <button className="bg-yellow-400 text-gray-900 px-4 py-2 lg:px-5 lg:py-2 rounded-lg shadow-lg hover:bg-yellow-300 transition-all hover:scale-105">
+      Edit Profile
+    </button>
+  </Link>
+</div>
+</div>
   
          {/* Achievements Section */}
 <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">

@@ -60,10 +60,8 @@ export default function Home() {
       <section className="bg-white py-12 text-center">
         <h3 className="text-lg font-bold text-gray-700 mb-6">Trusted by</h3>
         <div className="flex justify-center space-x-8">
-          <Image src="/sober-tracker-logo.png" alt="Sober Tracker" width={150} height={60} />
-          <Image src="/media-outlet-1.png" alt="Media Outlet 1" width={150} height={60} />
-          <Image src="/media-outlet-2.png" alt="Media Outlet 2" width={150} height={60} />
-          <Image src="/media-outlet-3.png" alt="Media Outlet 3" width={150} height={60} />
+          <Image src="/Sober Tracker.png" alt="Media Outlet 1" width={150} height={60} />
+          <Image src="/Sober Media.png" alt="Media Outlet 2" width={150} height={60} />
         </div>
       </section>
 
