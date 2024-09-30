@@ -118,5 +118,4 @@ const AchievementsPage: React.FC = () => {
     </div>
   );
 };
-
 export default AchievementsPage;
