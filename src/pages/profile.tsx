@@ -116,54 +116,42 @@ import {
             </div>
           </div>
   
-          {/* Right Column: Achievements and Posts */}
-          <div className="lg:col-span-2 space-y-12">
-            {/* Achievements Section */}
-            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
-              <div className="grid grid-cols-2 gap-6">
-                {achievements.map((achievement, index) => (
-                  <div
-                    key={index}
-                    className={`p-4 rounded-lg text-center shadow-lg transition-transform duration-300 ${
-                      achievement.achieved
-                        ? "bg-green-600 text-white hover:scale-105"
-                        : "bg-gray-700 text-gray-400"
-                    }`}
-                  >
-                    <div className="flex items-center justify-center">
-                      <span className="text-4xl">{achievement.icon}</span>
-                    </div>
-                    <p className="font-semibold text-base hover:text-lg transition-all duration-300">
-                      {achievement.title}
-                    </p>
-                    {achievement.achieved && (
-                      <div className="mt-1 text-xs text-yellow-400 animate-pulse">
-                        Achieved!
-                      </div>
-                    )}
-                  </div>
-                ))}
-                {/* Future Achievements */}
-                {futureAchievements.map((achievement, index) => (
-                  <div
-                    key={index}
-                    className="p-4 rounded-lg text-center shadow-lg bg-gray-500 hover:scale-105 transition-all duration-300 opacity-50"
-                  >
-                    <div className="flex items-center justify-center">
-                      <span className="text-4xl">{achievement.icon}</span>
-                    </div>
-                    <p className="font-semibold text-base transition-all duration-300">
-                      {achievement.title} <span className="text-xs">(Locked)</span>
-                    </p>
-                    <div className="mt-1 text-xs text-gray-400">
-                      Reach {achievement.title} to unlock
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-  
+         {/* Achievements Section */}
+<div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+  <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
+
+  {/* Show Only Unlocked Achievements */}
+  <div className="grid grid-cols-2 gap-6">
+    {achievements
+      .filter(achievement => achievement.achieved)  // Only show unlocked achievements
+      .map((achievement, index) => (
+        <div
+          key={index}
+          className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
+        >
+          <div className="flex items-center justify-center">
+            <span className="text-4xl">{achievement.icon}</span>
+          </div>
+          <p className="font-semibold text-base hover:text-lg transition-all duration-300">
+            {achievement.title}
+          </p>
+          <div className="mt-1 text-xs text-yellow-400 animate-pulse">
+            Achieved!
+          </div>
+        </div>
+    ))}
+  </div>
+
+  {/* Link to All Achievements Page */}
+  <div className="text-center mt-4">
+    <a
+      href="/achievements"
+      className="text-yellow-400 hover:underline hover:text-yellow-300 text-sm"
+    >
+      View All Achievements
+    </a>
+  </div>
+
             {/* User Posts Section */}
             <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
               <h2 className="text-xl lg:text-2xl font-semibold mb-4">Your Posts</h2>
