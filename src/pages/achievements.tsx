@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaLock, FaTrophy } from "react-icons/fa"; // FaTrophy for unlocked and FaLock for locked
 
 // Expanded list of achievements
@@ -24,20 +24,29 @@ const allAchievements = [
 const AchievementsPage: React.FC = () => {
   const [visibleAchievements, setVisibleAchievements] = useState(6); // Initial number of visible achievements
 
-  // Function to load more achievements
-  const loadMoreAchievements = () => {
-    setVisibleAchievements((prev) => prev + 6); // Load 6 more achievements each time
+  // Infinite scroll handler to load more achievements
+  const handleScroll = () => {
+    if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 50) {
+      setVisibleAchievements((prev) => (prev + 6 > allAchievements.length ? allAchievements.length : prev + 6));
+    }
   };
+
+  // Effect to attach the scroll event listener
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12">
       <div className="container mx-auto space-y-12">
         
        {/* Page Header */}
-<h1 className="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-10 lg:mb-16 tracking-wider animate-fadeIn">
-  Achievements
-</h1>
-
+        <h1 className="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-10 lg:mb-16 tracking-wider animate-fadeIn">
+          Achievements
+        </h1>
 
         {/* Achievements Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -94,15 +103,10 @@ const AchievementsPage: React.FC = () => {
           ))}
         </div>
 
-        {/* Load More Achievements Button */}
+        {/* Add a loading spinner or loader at the bottom if necessary */}
         {visibleAchievements < allAchievements.length && (
           <div className="text-center mt-12">
-            <button
-              onClick={loadMoreAchievements}
-              className="bg-yellow-500 text-black px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300 hover:scale-105"
-            >
-              Load More Achievements
-            </button>
+            <p className="text-gray-400">Loading more achievements...</p>
           </div>
         )}
 
@@ -119,4 +123,5 @@ const AchievementsPage: React.FC = () => {
     </div>
   );
 };
+
 export default AchievementsPage;
