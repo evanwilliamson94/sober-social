@@ -33,10 +33,11 @@ const AchievementsPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12">
       <div className="container mx-auto space-y-12">
         
-        {/* Page Header */}
-        <h1 className="text-5xl font-bold text-center mb-10 lg:mb-16 tracking-wider animate-fadeIn">
-          Achievements
-        </h1>
+       {/* Page Header */}
+<h1 className="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-10 lg:mb-16 tracking-wider animate-fadeIn">
+  Achievements
+</h1>
+
 
         {/* Achievements Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
