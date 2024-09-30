@@ -56,6 +56,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Partner Logos */}
+      <section className="bg-white py-12 text-center">
+        <h3 className="text-lg font-bold text-gray-700 mb-6">Trusted by</h3>
+        <div className="flex justify-center space-x-8">
+          <Image src="/sober-tracker-logo.png" alt="Sober Tracker" width={150} height={60} />
+          <Image src="/media-outlet-1.png" alt="Media Outlet 1" width={150} height={60} />
+          <Image src="/media-outlet-2.png" alt="Media Outlet 2" width={150} height={60} />
+          <Image src="/media-outlet-3.png" alt="Media Outlet 3" width={150} height={60} />
+        </div>
+      </section>
+
       {/* Value Proposition and Trust Elements */}
       <section className="bg-gradient-to-b from-gray-50 to-white py-16">
         <div className="max-w-6xl mx-auto text-center px-4">
@@ -71,7 +82,7 @@ export default function Home() {
             {/* Card 1 - Track Your Sobriety */}
             <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105">
               <div className="mb-4 flex justify-center items-center">
-                <div className="bg-blue-100 p-4 rounded-full">
+                <div className="bg-blue-100 p-4 rounded-full hover:animate-bounce">
                   <ChartBarIcon className="w-12 h-12 text-blue-600" />
                 </div>
               </div>
@@ -84,7 +95,7 @@ export default function Home() {
             {/* Card 2 - Community Support */}
             <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105">
               <div className="mb-4 flex justify-center items-center">
-                <div className="bg-blue-100 p-4 rounded-full">
+                <div className="bg-blue-100 p-4 rounded-full hover:animate-bounce">
                   <UsersIcon className="w-12 h-12 text-blue-600" />
                 </div>
               </div>
@@ -97,7 +108,7 @@ export default function Home() {
             {/* Card 3 - Personalized Coaching */}
             <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105">
               <div className="mb-4 flex justify-center items-center">
-                <div className="bg-blue-100 p-4 rounded-full">
+                <div className="bg-blue-100 p-4 rounded-full hover:animate-bounce">
                   <AcademicCapIcon className="w-12 h-12 text-blue-600" />
                 </div>
               </div>
@@ -119,7 +130,7 @@ export default function Home() {
 
       {/* Call to Action */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-700 py-16 text-white text-center">
-        <h2 className="text-4xl font-bold mb-4">Ready to Begin Your Journey?</h2>
+        <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">Ready to Begin Your Journey?</h2>
         <p className="text-lg mb-8">
           Join SoberSocial today and take control of your sobriety in a supportive and motivating environment.
         </p>
@@ -140,78 +151,76 @@ export default function Home() {
           </a>
         </div>
       </section>
-
- {/* Footer with Social Media Icons, Links, and Newsletter */}
- <footer className="bg-gray-900 text-white py-12 md:py-16">
-  <div className="max-w-7xl mx-auto px-4 md:px-0">
-    {/* Social Media Icons */}
-    <div className="flex justify-center space-x-6 mb-8">
-      <a href="#" className="text-white hover:text-yellow-400 transition">
-        <FaFacebookF size={24} />
-      </a>
-      <a href="#" className="text-white hover:text-yellow-400 transition">
-        <FaTwitter size={24} />
-      </a>
-      <a href="#" className="text-white hover:text-yellow-400 transition">
-        <FaInstagram size={24} />
-      </a>
-      <a href="#" className="text-white hover:text-yellow-400 transition">
-        <FaLinkedinIn size={24} />
-      </a>
-    </div>
-
-    {/* Footer Links */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left mb-8">
-      <div>
-        <h4 className="text-xl font-bold mb-4">Quick Links</h4>
-        <ul>
-          <li><a href="#" className="hover:text-yellow-400 transition">About Us</a></li>
-          <li><a href="#" className="hover:text-yellow-400 transition">Privacy Policy</a></li>
-          <li><a href="#" className="hover:text-yellow-400 transition">Terms of Service</a></li>
-          <li><a href="#" className="hover:text-yellow-400 transition">Contact Us</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 className="text-xl font-bold mb-4">Resources</h4>
-        <ul>
-          <li><a href="#" className="hover:text-yellow-400 transition">Blog</a></li>
-          <li><a href="#" className="hover:text-yellow-400 transition">Community</a></li>
-          <li><a href="#" className="hover:text-yellow-400 transition">Support</a></li>
-          <li><a href="#" className="hover:text-yellow-400 transition">Help Center</a></li>
-        </ul>
-      </div>
-
-      {/* Newsletter Signup */}
-      <div>
-        <h4 className="text-xl font-bold mb-4">Join Our Newsletter</h4>
-        <p className="text-gray-400 mb-4">Stay updated on new features and community stories.</p>
-        <form>
-          <div className="flex flex-col md:flex-row">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 mb-4 md:mb-0 md:mr-2 rounded-md focus:outline-none text-gray-800"
-            />
-            <button
-              type="submit"
-              className="bg-yellow-400 text-blue-900 font-bold px-4 py-3 rounded-md hover:bg-yellow-300 transition"
-            >
-              Subscribe
-            </button>
+      
+    {/* Footer with Social Media Icons, Links, and Newsletter */}
+    <footer className="bg-gray-900 text-white py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-0">
+          {/* Social Media Icons */}
+          <div className="flex justify-center space-x-6 mb-8">
+            <a href="#" className="text-white hover:text-yellow-400 transition">
+              <FaFacebookF size={24} />
+            </a>
+            <a href="#" className="text-white hover:text-yellow-400 transition">
+              <FaTwitter size={24} />
+            </a>
+            <a href="#" className="text-white hover:text-yellow-400 transition">
+              <FaInstagram size={24} />
+            </a>
+            <a href="#" className="text-white hover:text-yellow-400 transition">
+              <FaLinkedinIn size={24} />
+            </a>
           </div>
-        </form>
-      </div>
-    </div>
 
-    {/* Copyright */}
-    <div className="text-center border-t border-gray-700 pt-8">
-      <p className="text-sm">&copy; 2024 SoberSocial. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+          {/* Footer Links */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left mb-8">
+            <div>
+              <h4 className="text-xl font-bold mb-4">Quick Links</h4>
+              <ul>
+                <li><a href="#" className="hover:text-yellow-400 transition">About Us</a></li>
+                <li><a href="#" className="hover:text-yellow-400 transition">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-yellow-400 transition">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-yellow-400 transition">Contact Us</a></li>
+              </ul>
+            </div>
 
+            <div>
+              <h4 className="text-xl font-bold mb-4">Resources</h4>
+              <ul>
+                <li><a href="#" className="hover:text-yellow-400 transition">Blog</a></li>
+                <li><a href="#" className="hover:text-yellow-400 transition">Community</a></li>
+                <li><a href="#" className="hover:text-yellow-400 transition">Support</a></li>
+                <li><a href="#" className="hover:text-yellow-400 transition">Help Center</a></li>
+              </ul>
+            </div>
 
+            {/* Newsletter Signup */}
+            <div>
+              <h4 className="text-xl font-bold mb-4">Join Our Newsletter</h4>
+              <p className="text-gray-400 mb-4">Stay updated on new features and community stories.</p>
+              <form>
+                <div className="flex flex-col md:flex-row">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 mb-4 md:mb-0 md:mr-2 rounded-md focus:outline-none text-gray-800"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-yellow-400 text-blue-900 font-bold px-4 py-3 rounded-md hover:bg-yellow-300 transition"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="text-center border-t border-gray-700 pt-8">
+            <p className="text-sm">&copy; 2024 SoberSocial. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
