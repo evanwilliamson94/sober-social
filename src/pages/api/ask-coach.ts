@@ -24,7 +24,8 @@ export default async function handler(
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,  // Using the API key from environment variable
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,
+            // Using the API key from environment variable
           'Content-Type': 'application/json',
         },
       }
