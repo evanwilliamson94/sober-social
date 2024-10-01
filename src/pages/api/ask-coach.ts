@@ -12,6 +12,9 @@ export default async function handler(
   const { prompt } = req.body;
 
   try {
+    // Log the prompt to verify the input is being passed correctly
+    console.log('Prompt:', prompt);
+
     const response = await axios.post(
       'https://api.openai.com/v1/completions',
       {
