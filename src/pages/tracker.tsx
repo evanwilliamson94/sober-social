@@ -84,16 +84,18 @@ const TrackerPage = () => {
   </div>
 </div>
 {/* AI Sober Coach Section */}
-<div className="bg-gradient-to-r from-gray-800 to-black p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
+<div className="bg-gradient-to-r from-indigo-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
   <h2 className="text-3xl font-bold">AI Sober Coach</h2>
   <p className="text-sm text-gray-300">
-    Get personalized advice and guidance on your sobriety journey.
+    Get personalized advice and guidance with our AI Sober Coach. Ask anything!
   </p>
-  <Link href="/sobercoach">
-    <a className="bg-yellow-500 text-white px-8 py-3 rounded-lg shadow hover:bg-yellow-400 transition duration-300">
-      Talk to Sober Coach
-    </a>
-  </Link>
+  <div className="flex justify-center">
+    <Link href="/sobercoach">
+      <button className="bg-purple-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-purple-500 transition-all transform hover:scale-105">
+        Talk to Your Coach
+      </button>
+    </Link>
+  </div>
 </div>
 
 
