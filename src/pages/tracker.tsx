@@ -1,5 +1,5 @@
 import { FaHome, FaClipboardList, FaUsers, FaUser, FaPlus } from "react-icons/fa";
-
+import Link from "next/link";
 import React from 'react';
 
 const TrackerPage = () => {
@@ -83,6 +83,19 @@ const TrackerPage = () => {
     </button>
   </div>
 </div>
+{/* AI Sober Coach Section */}
+<div className="bg-gradient-to-r from-gray-800 to-black p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
+  <h2 className="text-3xl font-bold">AI Sober Coach</h2>
+  <p className="text-sm text-gray-300">
+    Get personalized advice and guidance on your sobriety journey.
+  </p>
+  <Link href="/sobercoach">
+    <a className="bg-yellow-500 text-white px-8 py-3 rounded-lg shadow hover:bg-yellow-400 transition duration-300">
+      Talk to Sober Coach
+    </a>
+  </Link>
+</div>
+
 
 {/* Trigger & Cravings Log Section */}
 <div className="bg-gradient-to-r from-red-400 to-pink-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
