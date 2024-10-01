@@ -6,24 +6,27 @@ const SoberCoachPage: React.FC = () => {
   const [userInput, setUserInput] = useState('');
   const [aiResponse, setAiResponse] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
+    setError(false); // Clear error on new input
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setAiResponse(''); // Clear any previous response
 
     try {
-      // Make API request to OpenAI (or any other AI service)
       const response = await axios.post('/api/ask-coach', {
         prompt: userInput,
       });
 
-      setAiResponse(response.data.reply); // Assuming API returns the reply under 'reply'
+      setAiResponse(response.data.reply);
     } catch (error) {
       console.error('Error fetching AI response:', error);
+      setError(true);
       setAiResponse('Sorry, something went wrong. Please try again later.');
     }
 
@@ -57,7 +60,7 @@ const SoberCoachPage: React.FC = () => {
             />
             <button
               type="submit"
-              className="w-full bg-yellow-400 text-blue-900 font-bold py-3 rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"
+              className={`w-full bg-yellow-400 text-blue-900 font-bold py-3 rounded-lg shadow-lg transition-all transform ${loading ? 'cursor-wait' : 'hover:bg-yellow-300 hover:scale-105'}`}
               disabled={loading}
             >
               {loading ? 'Thinking...' : 'Get Advice'}
@@ -65,9 +68,22 @@ const SoberCoachPage: React.FC = () => {
           </form>
 
           {/* AI Response */}
-          {aiResponse && (
+          {loading && (
+            <div className="bg-gray-700 p-4 rounded-lg text-gray-300 mt-4 animate-pulse">
+              Your coach is processing your question...
+            </div>
+          )}
+
+          {aiResponse && !error && (
             <div className="bg-gray-700 p-4 rounded-lg text-white mt-4">
               <p className="text-xl">{aiResponse}</p>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-500 p-4 rounded-lg text-white mt-4">
+              <p>Oops! There was an error processing your request. Please try again later.</p>
             </div>
           )}
         </div>
