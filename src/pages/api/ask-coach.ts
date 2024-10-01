@@ -12,15 +12,14 @@ export default async function handler(
   const { prompt } = req.body;
 
   try {
-    // Log the prompt to verify it is being passed correctly
-    console.log('Prompt:', prompt);
-
     const response = await axios.post(
       'https://api.openai.com/v1/completions',
       {
-        model: 'text-davinci-003', // Ensure you're using the correct model
+        model: 'text-davinci-003',  // Make sure this model is supported by your OpenAI account
         prompt: prompt,
-        max_tokens: 100,
+        max_tokens: 100,            // Adjust this value if needed
+        temperature: 0.7,           // You can set a value for creativity
+        n: 1,                       // Number of completions to generate
       },
       {
         headers: {
@@ -30,13 +29,10 @@ export default async function handler(
       }
     );
 
-    // Log the entire response from OpenAI
-    console.log('OpenAI Response:', response.data);
-
-    const aiResponse = response.data.choices[0].text;
+    const aiResponse = response.data.choices[0].text.trim();
     res.status(200).json({ reply: aiResponse });
   } catch (error: any) {
-    console.error('Error from OpenAI:', error.response?.data || error.message);
+    console.error('Error:', error.response?.data || error.message);
     res.status(500).json({ reply: 'Error: Unable to get a response from AI' });
   }
 }
