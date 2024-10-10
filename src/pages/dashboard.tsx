@@ -43,9 +43,9 @@ export default function Dashboard() {
             <div className="flex items-center space-x-4">
               {/* Profile Picture with Hover Effect */}
               <div className="relative w-12 h-12 transition-all transform hover:scale-105">
-                {user?.profileImageUrl ? (
+                {user?.imageUrl ? (
                   <Image
-                    src={user.profileImageUrl}
+                    src={user.imageUrl}
                     alt="Profile Picture"
                     width={48}
                     height={48}
