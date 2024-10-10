@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { ChartBarIcon, UsersIcon, AcademicCapIcon } from '@heroicons/react/24/outline';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';  // Social media icons
+import { SignInButton, SignUpButton } from '@clerk/nextjs';
+
 
 export default function Home() {
   return (
@@ -39,20 +41,18 @@ export default function Home() {
             Track your sobriety, connect with others, and get personalized support.
           </p>
           <div className="space-y-4 md:flex md:space-y-0 md:space-x-4 justify-center">
-            <a
-              href="#"
-              className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl"
-              style={{ boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.3)' }}
-            >
-              Start Your Journey Today
-            </a>
-            <a
-              href="#"
-              className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-2xl"
-            >
-              Explore Features
-            </a>
-          </div>
+  <SignUpButton>
+    <button className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl">
+      Start Your Journey Today
+    </button>
+  </SignUpButton>
+
+  <SignInButton>
+    <button className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-2xl">
+      Sign In
+    </button>
+  </SignInButton>
+</div>
         </div>
       </section>
 
