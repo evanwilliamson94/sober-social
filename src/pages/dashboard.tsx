@@ -5,6 +5,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { getDailyQuote } from "../utils/motivationService"; // Assume this fetches a daily quote
 import Image from "next/image";
 import Link from 'next/link';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 
 export default function Dashboard() {
   const [daysSober, setDaysSober] = useState(0); // Track days sober
@@ -27,7 +28,14 @@ export default function Dashboard() {
 
   const percentage = (daysSober / milestone) * 100;
 
+  
+
   return (
+    <>
+    <SignedIn>
+      {/* Place your entire dashboard content here */}
+      <div>
+
     <div className="min-h-screen bg-gray-900 text-white font-roboto pb-20"> {/* Add padding to the bottom */}
       {/* Dashboard Hero Section */}
       <section className="px-2 py-4 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white rounded-b-3xl shadow-lg">
@@ -39,7 +47,7 @@ export default function Dashboard() {
               alt="Profile Picture"
               layout="fill"
               className="rounded-full border-4 border-gray-300 shadow-2xl"
-            />
+              />
           </div>
 
           {/* Welcome Message and Days Sober */}
@@ -71,14 +79,14 @@ export default function Dashboard() {
               text={`${daysSober} days`}
               strokeWidth={6} // Slightly thinner for a sleek look
               styles={buildStyles({
-                pathColor: percentage >= 100 ? "url(#greenGradient)" : "url(#yellowGradient)",
-                textColor: "#FFFFFF",
-                trailColor: "rgba(255, 255, 255, 0.1)", // Softer trail for a sleek look
-                strokeLinecap: "round", // Rounded edges for a smoother feel
-                pathTransitionDuration: 1.5, // Smooth transition for the progress bar
-                textSize: '16px', // Refined text size
-              })}
-            />
+                  pathColor: percentage >= 100 ? "url(#greenGradient)" : "url(#yellowGradient)",
+                  textColor: "#FFFFFF",
+                  trailColor: "rgba(255, 255, 255, 0.1)", // Softer trail for a sleek look
+                  strokeLinecap: "round", // Rounded edges for a smoother feel
+                  pathTransitionDuration: 1.5, // Smooth transition for the progress bar
+                  textSize: '16px', // Refined text size
+                })}
+                />
 
             {/* Add SVG gradient for the circular progress */}
             <svg style={{ position: "absolute", width: 0, height: 0 }}>
@@ -96,9 +104,9 @@ export default function Dashboard() {
 
             {/* Optional Glow Effect */}
             <div className="absolute inset-0 rounded-full shadow-lg" style={{
-              boxShadow: "0 0 15px rgba(255, 215, 0, 0.5)",
-              opacity: percentage >= 100 ? 0.7 : 0.3,
-              transition: "opacity 0.5s ease",
+                boxShadow: "0 0 15px rgba(255, 215, 0, 0.5)",
+                opacity: percentage >= 100 ? 0.7 : 0.3,
+                transition: "opacity 0.5s ease",
             }} />
           </div>
 
@@ -116,11 +124,11 @@ export default function Dashboard() {
           Your Daily Motivation
         </h2>
         {loading ? (
-          <p className="mt-2 text-gray-400 italic animate-pulse text-center md:text-left">
+            <p className="mt-2 text-gray-400 italic animate-pulse text-center md:text-left">
             Loading...
           </p>
         ) : (
-          <blockquote className="text-lg text-gray-300 italic font-light tracking-wide border-l-4 border-yellow-500 pl-4 md:max-w-3xl mx-auto md:mx-0 bg-gray-800 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg shadow-inner">
+            <blockquote className="text-lg text-gray-300 italic font-light tracking-wide border-l-4 border-yellow-500 pl-4 md:max-w-3xl mx-auto md:mx-0 bg-gray-800 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg shadow-inner">
             "{dailyQuote}"
           </blockquote>
         )}
@@ -229,5 +237,11 @@ export default function Dashboard() {
 
 
   </div>
-  );
+        </div>
+        </SignedIn>
+    <SignedOut>
+      <RedirectToSignIn />
+    </SignedOut>
+  </>
+);
 }
