@@ -64,9 +64,9 @@ export default function Dashboard() {
 
           {/* Welcome Message and Days Sober */}
           <div className="flex-1 text-left">
-            <h1 className="text-base font-semibold tracking-wide">
-              Welcome back, <span className="text-yellow-400">[User Name]</span>!
-            </h1>
+          <h1 className="text-base font-semibold tracking-wide">
+    Welcome back, <span className="text-yellow-400">{user?.fullName || "User"}</span>!
+  </h1>
             <p className="text-sm">
               You have been sober for{" "}
               <span className="font-bold text-yellow-400 animate-pulse">
