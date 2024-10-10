@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ChartBarIcon, UsersIcon, AcademicCapIcon } from '@heroicons/react/24/outline';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';  // Social media icons
 import { SignInButton, SignUpButton } from '@clerk/nextjs';
-
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -34,25 +34,26 @@ export default function Home() {
 
         {/* Centered Content with Subtle Text Enhancements */}
         <div className="relative z-10 text-center px-6 md:px-12">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 drop-shadow-lg">
-            Join the <span className="text-yellow-400">SoberSocial</span> Community
-          </h1>
-          <p className="text-lg md:text-xl lg:text-2xl mb-8 drop-shadow-lg">
-            Track your sobriety, connect with others, and get personalized support.
-          </p>
-          <div className="space-y-4 md:flex md:space-y-0 md:space-x-4 justify-center">
+  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-2xl">
+    Join the <span className="text-yellow-400">SoberSocial</span> Community
+  </h1>
+          <p className="text-base md:text-lg lg:text-xl mb-8 drop-shadow-lg text-gray-200">
+    Track your sobriety, connect with others, and get personalized support.
+  </p>
+          <div className="space-y-4 md:space-y-0 md:flex md:space-x-4 justify-center">
   <SignUpButton>
-    <button className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-2xl">
+    <button className="w-full md:w-auto px-8 py-4 bg-yellow-400 text-blue-900 font-semibold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-xl">
       Start Your Journey Today
     </button>
   </SignUpButton>
 
   <SignInButton>
-    <button className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-2xl">
+    <button className="w-full md:w-auto px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-xl">
       Sign In
     </button>
   </SignInButton>
 </div>
+
         </div>
       </section>
 
@@ -78,17 +79,19 @@ export default function Home() {
           {/* Cards for the value proposition */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Card 1 - Track Your Sobriety */}
-            <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105">
-              <div className="mb-4 flex justify-center items-center">
-                <div className="bg-blue-100 p-4 rounded-full hover:animate-bounce">
-                  <ChartBarIcon className="w-12 h-12 text-blue-600" />
-                </div>
-              </div>
-              <h3 className="text-2xl font-semibold text-blue-600">Track Your Sobriety</h3>
-              <p className="mt-4 text-gray-600">
-                Monitor your sober days, milestones, and progress with intuitive trackers designed for success.
-              </p>
-            </div>
+            <Link href="/tracker">
+  <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105 cursor-pointer">
+    <div className="mb-4 flex justify-center items-center">
+      <div className="bg-blue-100 p-4 rounded-full hover:animate-bounce">
+        <ChartBarIcon className="w-12 h-12 text-blue-600" />
+      </div>
+    </div>
+    <h3 className="text-2xl font-semibold text-blue-600">Track Your Sobriety</h3>
+    <p className="mt-4 text-gray-600">
+      Monitor your sober days, milestones, and progress with intuitive trackers designed for success.
+    </p>
+  </div>
+</Link>
 
             {/* Card 2 - Community Support */}
             <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-2xl transition-all transform hover:scale-105">
@@ -126,28 +129,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-700 py-16 text-white text-center">
-        <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">Ready to Begin Your Journey?</h2>
-        <p className="text-lg mb-8">
-          Join SoberSocial today and take control of your sobriety in a supportive and motivating environment.
-        </p>
-        
-        {/* Flexbox for Button Layout */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-          <a
-            href="#"
-            className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg"
-          >
-            Join Now
-          </a>
-          <a
-            href="#"
-            className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-lg"
-          >
-            Learn More
-          </a>
-        </div>
+     {/* Call to Action */}
+<section className="bg-gradient-to-r from-blue-600 to-blue-700 py-16 md:py-24 text-white text-center">
+  <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600 drop-shadow-lg">
+    Ready to Begin Your Journey?
+  </h2>
+  <p className="text-md md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-gray-200">
+    Join SoberSocial today and take control of your sobriety in a supportive and motivating environment.
+  </p>
+ {/* Flexbox for Button Layout */}
+<div className="flex flex-col md:flex-row justify-center items-center gap-4">
+  <SignUpButton>
+    <button className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-xl">
+      Join Now
+    </button>
+  </SignUpButton>
+
+  <SignInButton>
+    <button className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-xl">
+      Sign In
+    </button>
+  </SignInButton>
+
+</div>
       </section>
       
     {/* Footer with Social Media Icons, Links, and Newsletter */}
