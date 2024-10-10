@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 
 import {
     FaHome,
@@ -46,6 +47,11 @@ import {
     const following = 85;
   
     return (
+        <>
+        <SignedIn>
+          {/* Profile content here */}
+          <div>
+
       <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-6 lg:p-12 pb-20">
         {/* Two-column layout on large screens */}
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -100,7 +106,7 @@ import {
                 <div
                   className="absolute top-0 left-0 h-full bg-yellow-400 rounded-full transition-all duration-1000"
                   style={{ width: `${(daysSober / sobrietyGoal) * 100}%` }}
-                ></div>
+                  ></div>
               </div>
               <p className="text-right mt-1 lg:mt-2 text-xs lg:text-sm text-gray-300">
                 {daysSober}/{sobrietyGoal} Days
@@ -126,10 +132,10 @@ import {
     {achievements
       .filter(achievement => achievement.achieved)  // Only show unlocked achievements
       .map((achievement, index) => (
-        <div
+          <div
           key={index}
           className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
-        >
+          >
           <div className="flex items-center justify-center">
             <span className="text-4xl">{achievement.icon}</span>
           </div>
@@ -148,7 +154,7 @@ import {
     <a
       href="/achievements"
       className="text-yellow-400 hover:underline hover:text-yellow-300 text-sm"
-    >
+      >
       View All Achievements
     </a>
   </div>
@@ -158,13 +164,13 @@ import {
               <h2 className="text-xl lg:text-2xl font-semibold mb-4">Your Posts</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
                 {posts.map((post) => (
-                  <div key={post.id} className="relative group">
+                    <div key={post.id} className="relative group">
                     {/* Post Image */}
                     <img
                       src={post.image}
                       alt="Post"
                       className="w-full h-40 object-cover rounded-lg"
-                    />
+                      />
                     {/* Hover overlay */}
                     <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 flex items-center justify-center rounded-lg">
                       <div className="text-white text-sm flex space-x-4">
@@ -190,11 +196,11 @@ import {
             <a
               href="/dashboard"
               className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out"
-            >
+              >
               <FaHome
                 size={28}
                 className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-              />
+                />
               <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">
                 Home
               </span>
@@ -204,11 +210,11 @@ import {
             <a
               href="/tracker"
               className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out"
-            >
+              >
               <FaClipboardList
                 size={28}
                 className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-              />
+                />
               <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">
                 Tracker
               </span>
@@ -225,11 +231,11 @@ import {
             <a
               href="/community"
               className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out"
-            >
+              >
               <FaUsers
                 size={28}
                 className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-              />
+                />
               <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">
                 Community
               </span>
@@ -239,11 +245,11 @@ import {
             <a
               href="/profile"
               className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out"
-            >
+              >
               <FaUser
                 size={28}
                 className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-              />
+                />
               <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">
                 Profile
               </span>
@@ -251,7 +257,13 @@ import {
           </div>
         </nav>
       </div>
-    );
+                </div>
+                </SignedIn>
+    <SignedOut>
+      <RedirectToSignIn />
+    </SignedOut>
+  </>
+);
   };
   
   export default ProfilePage;
