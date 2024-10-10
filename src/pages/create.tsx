@@ -90,7 +90,6 @@ const CreatePage: React.FC = () => {
                 </label>
               )}
             </div>
-
             {/* Progress Bar (if image is uploading) */}
             {image && progress > 0 && (
               <div className="mt-4">
