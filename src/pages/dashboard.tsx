@@ -1,54 +1,66 @@
+import { useUser } from '@clerk/nextjs';
 import { useState, useEffect } from "react";
 import { FaHome, FaClipboardList, FaUsers, FaUser, FaPlus, FaUserCircle } from "react-icons/fa";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
-import { getDailyQuote } from "../utils/motivationService"; // Assume this fetches a daily quote
+import { getDailyQuote } from "../utils/motivationService";
 import Image from "next/image";
 import Link from 'next/link';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 
 export default function Dashboard() {
-  const [daysSober, setDaysSober] = useState(0); // Track days sober
-  const [dailyQuote, setDailyQuote] = useState(""); // Daily motivational quote
-  const [loading, setLoading] = useState(true); // Track loading state
-  const milestone = 30; // Define a sobriety milestone (e.g., 30 days)
-
-  useEffect(() => {
-    const sobrietyStartDate = new Date("2024-01-01"); // Placeholder for user sobriety date
-    const today = new Date();
-    const diffTime = Math.abs(today.getTime() - sobrietyStartDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    setDaysSober(diffDays);
-
-    getDailyQuote().then((quote) => {
-      setDailyQuote(quote);
-      setLoading(false); // Once quote is fetched, stop loading
-    });
-  }, []);
+    const { user } = useUser(); // Access user object
+  
+    // Track days sober and daily quote
+    const [daysSober, setDaysSober] = useState(0);
+    const [dailyQuote, setDailyQuote] = useState("");
+    const [loading, setLoading] = useState(true);
+    const milestone = 30;
+  
+    useEffect(() => {
+      const sobrietyStartDate = new Date("2024-01-01");
+      const today = new Date();
+      const diffTime = Math.abs(today.getTime() - sobrietyStartDate.getTime());
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      setDaysSober(diffDays);
+  
+      getDailyQuote().then((quote) => {
+        setDailyQuote(quote);
+        setLoading(false);
+      });
+    }, []);
 
   const percentage = (daysSober / milestone) * 100;
-
-  
 
   return (
     <>
     <SignedIn>
-      {/* Place your entire dashboard content here */}
       <div>
 
-    <div className="min-h-screen bg-gray-900 text-white font-roboto pb-20"> {/* Add padding to the bottom */}
-      {/* Dashboard Hero Section */}
-      <section className="px-2 py-4 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white rounded-b-3xl shadow-lg">
-        <div className="flex items-center space-x-4">
-          {/* Profile Picture with Hover Effect */}
-          <div className="relative w-12 h-12 transition-all transform hover:scale-105">
-            <Image
-              src="/profile.jpg"
-              alt="Profile Picture"
-              layout="fill"
-              className="rounded-full border-4 border-gray-300 shadow-2xl"
-              />
-          </div>
+      <div className="min-h-screen bg-gray-900 text-white font-roboto pb-20">
+          {/* Dashboard Hero Section */}
+          <section className="px-2 py-4 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white rounded-b-3xl shadow-lg">
+            <div className="flex items-center space-x-4">
+              {/* Profile Picture with Hover Effect */}
+              <div className="relative w-12 h-12 transition-all transform hover:scale-105">
+                {user?.profileImageUrl ? (
+                  <Image
+                    src={user.profileImageUrl}
+                    alt="Profile Picture"
+                    width={48}
+                    height={48}
+                    className="rounded-full border-4 border-gray-300 shadow-2xl"
+                  />
+                ) : (
+                  <Image
+                    src="/default-profile.jpg"
+                    alt="Default Profile Picture"
+                    width={48}
+                    height={48}
+                    className="rounded-full border-4 border-gray-300 shadow-2xl"
+                  />
+  )}
+</div>
 
           {/* Welcome Message and Days Sober */}
           <div className="flex-1 text-left">
