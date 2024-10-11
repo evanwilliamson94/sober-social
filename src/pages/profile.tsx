@@ -62,23 +62,23 @@ const ProfilePage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent opacity-50 rounded-lg"></div>
         <div className="relative flex flex-col lg:flex-row lg:space-x-6 items-center lg:items-start">
           {/* Profile Picture */}
-          <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300 mb-4 lg:mb-0">
+          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300 mb-4 lg:mb-0">
             {user?.imageUrl ? (
-              <Image
-                        src={user.imageUrl}
-                        alt="Profile"
-                        width={96}
-                        height={96}
-                        className="rounded-full"
-                      />
-                    ) : (
-                      <Image
-                        src="/profile-placeholder.jpg"
-                        alt="Profile"
-                        width={96}
-                        height={96}
-                        className="rounded-full"
-                      />
+               <Image
+               src={user.imageUrl}
+               alt="Profile"
+               width={96}
+               height={96}
+               className="rounded-full object-cover"
+             />
+           ) : (
+             <Image
+               src="/profile-placeholder.jpg"
+               alt="Profile"
+               width={96}
+               height={96}
+               className="rounded-full object-cover"
+             />
                     )}
                   </div>
   
@@ -172,19 +172,21 @@ const ProfilePage = () => {
     </a>
   </div>
 
-          {/* User Posts Section */}
+         {/* User Posts Section */}
 <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 mt-8">
   <h2 className="text-xl lg:text-2xl font-semibold mb-4">Your Posts</h2>
-  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {posts.map((post) => (
       <div key={post.id} className="relative group">
-        {/* Post Image */}
-        <img
-          src={post.image}
-          alt="Post"
-          className="w-full h-40 object-cover rounded-lg"
-        />
-                   {/* Hover Overlay */}
+        {/* Square aspect ratio for posts */}
+        <div className="w-full aspect-w-1 aspect-h-1">
+          <img
+            src={post.image}
+            alt="Post"
+            className="w-full h-full object-cover rounded-lg"
+          />
+        </div>
+        {/* Hover overlay */}
         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 flex items-center justify-center rounded-lg">
           <div className="text-white text-sm flex space-x-4">
             <span className="flex items-center">
