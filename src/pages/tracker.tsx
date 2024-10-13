@@ -50,42 +50,54 @@ const TrackerPage = () => {
         <p className="text-right text-sm text-gray-300">{(savings / savingsGoal) * 100}% of your savings goal achieved!</p>
       </div>
 
-          {/* Mood Tracker Section */}
-          <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
-          <h2 className="text-3xl font-bold">Mood Tracker</h2>
-          <p className="text-sm text-gray-300">
-            How are you feeling today?
-          </p>
-          <div className="flex justify-between">
-            <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
-              😊
-            </button>
-            <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
-              😐
-            </button>
-            <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
-              😔
-            </button>
-          </div>
-        </div>
-{/* Sleep Tracker Section */}
-<div className="bg-gradient-to-r from-indigo-400 to-blue-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
-  <h2 className="text-3xl font-bold animate-fadeIn">Sleep Tracker</h2>
+    {/* Mood Tracker Section */}
+<div className="bg-gradient-to-r from-blue-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
+  <h2 className="text-3xl font-bold">Mood Tracker</h2>
   <p className="text-sm text-gray-300">
-    How was your sleep last night?
+    How are you feeling today?
   </p>
-  <div className="flex justify-between space-x-4">
-    <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-all transform hover:scale-105 duration-300">
-      😴 Great
-    </button>
-    <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-all transform hover:scale-105 duration-300">
-      😐 Average
-    </button>
-    <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-all transform hover:scale-105 duration-300">
-      😴 Poor
-    </button>
+  <div className="flex justify-between">
+    <Link href="/MoodTracker">
+      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
+        😊
+      </button>
+    </Link>
+    <Link href="/MoodTracker">
+      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
+        😐
+      </button>
+    </Link>
+    <Link href="/MoodTracker">
+      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
+        😔
+      </button>
+    </Link>
   </div>
 </div>
+<div className="bg-gradient-to-r from-indigo-400 to-blue-500 p-8 rounded-lg shadow-2xl transition-shadow duration-500 space-y-6">
+  <h2 className="text-4xl font-extrabold text-white mb-2 animate-fadeIn">Sleep Tracker</h2>
+  <p className="text-base text-gray-200">How was your sleep last night?</p>
+
+  <div className="flex justify-between space-x-4">
+    <Link href="/SleepTracker">
+      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
+        😴 Great
+      </button>
+    </Link>
+    <Link href="/SleepTracker">
+      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
+        😐 Average
+      </button>
+    </Link>
+    <Link href="/SleepTracker">
+      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
+        😴 Poor
+      </button>
+    </Link>
+  </div>
+</div>
+
+
 {/* AI Sober Coach Section */}
 <div className="bg-gradient-to-r from-indigo-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
   <h2 className="text-3xl font-bold">AI Sober Coach</h2>
