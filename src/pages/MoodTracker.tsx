@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend } from 'chart.js';
+import { Chart, LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, Filler } from 'chart.js';
 import Link from 'next/link';
+
+Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, Filler);
+
 
 const MoodTracker = () => {
   useEffect(() => {
