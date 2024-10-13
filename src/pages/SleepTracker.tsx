@@ -1,13 +1,17 @@
-import { useEffect } from 'react';
+// components/SleepTracker.tsx
+import { useEffect, useRef } from 'react';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title } from 'chart.js';
 import Link from 'next/link';
 
 const SleepTracker = () => {
+  const chartRef = useRef<HTMLCanvasElement | null>(null);
+
   useEffect(() => {
+    if (!chartRef.current) return;
+
     Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 
-    const ctx = document.getElementById('sleepChart') as HTMLCanvasElement;
-    const sleepChart = new Chart(ctx, {
+    const sleepChart = new Chart(chartRef.current, {
       type: 'line',
       data: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -38,18 +42,16 @@ const SleepTracker = () => {
   return (
     <div className="bg-gradient-to-r from-indigo-400 to-blue-500 p-8 rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-500 space-y-6">
       <h2 className="text-4xl font-extrabold text-white animate-fadeIn">Sleep Tracker</h2>
-      <p className="text-base text-gray-300">
-        How was your sleep last night?
-      </p>
+      <p className="text-base text-gray-300">How was your sleep last night?</p>
 
       <div className="flex justify-around space-x-4">
-        <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
+        <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-all transform hover:scale-110 shadow-lg hover:shadow-2xl">
           😴 Great
         </button>
-        <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
+        <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-all transform hover:scale-110 shadow-lg hover:shadow-2xl">
           😐 Average
         </button>
-        <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
+        <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-all transform hover:scale-110 shadow-lg hover:shadow-2xl">
           😔 Poor
         </button>
       </div>
@@ -57,7 +59,7 @@ const SleepTracker = () => {
       {/* Sleep Progress Chart */}
       <div className="mt-8">
         <h3 className="text-2xl font-bold text-gray-200 mb-4">Your Sleep Progress</h3>
-        <canvas id="sleepChart" className="w-full h-64 rounded-lg bg-white"></canvas>
+        <canvas ref={chartRef} className="w-full h-64 rounded-lg bg-white"></canvas>
       </div>
 
       {/* Back to Tracker Button */}

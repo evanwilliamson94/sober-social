@@ -74,6 +74,7 @@ const TrackerPage = () => {
     </Link>
   </div>
 </div>
+
 <div className="bg-gradient-to-r from-indigo-400 to-blue-500 p-8 rounded-lg shadow-2xl transition-shadow duration-500 space-y-6">
   <h2 className="text-4xl font-extrabold text-white mb-2 animate-fadeIn">Sleep Tracker</h2>
   <p className="text-base text-gray-200">How was your sleep last night?</p>
