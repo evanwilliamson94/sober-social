@@ -13,24 +13,27 @@ const TrackerPage = () => {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 space-y-16">
       <div className="container mx-auto space-y-12">
 
-        {/* Sobriety Progress Section */}
-        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative space-y-4">
-        <h2 className="text-3xl font-bold animate-fadeIn">Sobriety Progress</h2>
-        <div className="relative w-full h-6 bg-gray-700 rounded-full shadow-inner">
-          <div
-            className="absolute top-0 left-0 h-full bg-yellow-400 rounded-full transition-all duration-1000 animate-pulse"
-            style={{ width: `${(daysSober / sobrietyGoal) * 100}%` }}
-          ></div>
-        </div>
-        <p className="text-right text-lg text-gray-200">
-          {daysSober}/{sobrietyGoal} Days Sober
-        </p>
-        {nextMilestone <= 0 && (
-          <div className="absolute -top-8 right-0 p-3 bg-green-500 text-white rounded-full animate-bounce">
-            🎉 Milestone Achieved!
-          </div>
-        )}
-      </div>
+      {/* Sobriety Progress Section */}
+<div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-500 relative space-y-6">
+  <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-xl animate-fadeIn">
+    Sobriety Progress
+  </h2>
+  <div className="relative w-full h-8 bg-gray-800 rounded-full shadow-inner overflow-hidden">
+    <div
+      className="absolute top-0 left-0 h-full bg-gradient-to-r from-yellow-300 to-orange-600 rounded-full shadow-lg animate-progress transition-all duration-1500"
+      style={{ width: `${(daysSober / sobrietyGoal) * 100}%` }}
+    ></div>
+  </div>
+  <p className="text-right text-2xl text-gray-100 font-semibold">
+    {daysSober}/{sobrietyGoal} Days Sober
+  </p>
+  {nextMilestone <= 0 && (
+    <div className="absolute -top-10 right-4 p-4 bg-green-600 text-white font-bold rounded-full shadow-lg animate-bounce ring-4 ring-green-300">
+      🎉 Milestone Achieved!
+    </div>
+  )}
+</div>
+
 
       {/* Financial Tracker Section */}
       <div className="bg-gradient-to-r from-green-400 to-blue-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
