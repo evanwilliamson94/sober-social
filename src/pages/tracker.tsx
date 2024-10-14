@@ -99,23 +99,6 @@ const TrackerPage = () => {
   </div>
 </div>
 
-
-{/* AI Sober Coach Section */}
-<div className="bg-gradient-to-r from-indigo-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
-  <h2 className="text-3xl font-bold">AI Sober Coach</h2>
-  <p className="text-sm text-gray-300">
-    Get personalized advice and guidance with our AI Sober Coach. Ask anything!
-  </p>
-  <div className="flex justify-center">
-    <Link href="/sobercoach">
-      <button className="bg-purple-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-purple-500 transition-all transform hover:scale-105">
-        Talk to Your Coach
-      </button>
-    </Link>
-  </div>
-</div>
-
-
 {/* Testimonial Section */}
 <div className="bg-gradient-to-r from-green-400 to-teal-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-8">
   <h2 className="text-3xl font-bold animate-fadeIn">Share Your Story</h2>
@@ -160,6 +143,28 @@ const TrackerPage = () => {
   </div>
 </div>
 
+{/* AI Sober Coach Section */}
+<div className="relative bg-gradient-to-r from-indigo-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4 overflow-hidden">
+  <h2 className="text-3xl font-bold">AI Sober Coach</h2>
+  <p className="text-sm text-gray-300">
+    Get personalized advice and guidance with our AI Sober Coach. Ask anything!
+  </p>
+  <div className="flex justify-center">
+    <Link href="/sobercoach">
+      <button className="bg-purple-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-purple-500 transition-all transform hover:scale-105">
+        Talk to Your Coach
+      </button>
+    </Link>
+
+  {/* Coming Soon Overlay */}
+  <div className="absolute inset-0 bg-black/60 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-500">
+    <button className="bg-white text-purple-600 px-8 py-3 rounded-lg shadow hover:bg-purple-100 transition-all transform hover:scale-105 duration-300">
+      Coming Soon
+    </button>
+  </div>
+</div>
+  </div>
+
 
 {/* Reflection & Gratitude Journal Section */}
 <div className="bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative">
@@ -175,7 +180,7 @@ const TrackerPage = () => {
   {/* Unlock Premium Overlay */}
   <div className="absolute inset-0 bg-black/60 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-500">
     <button className="bg-white text-purple-600 px-8 py-3 rounded-lg shadow hover:bg-purple-100 transition-all transform hover:scale-105 duration-300">
-      Unlock Premium
+    Coming Soon
     </button>
   </div>
 </div>
@@ -194,7 +199,7 @@ const TrackerPage = () => {
   {/* Unlock Premium Overlay */}
   <div className="absolute inset-0 bg-black/60 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-500">
     <button className="bg-yellow-500 text-white px-8 py-3 rounded-lg shadow hover:bg-yellow-400 transition-all transform hover:scale-105 duration-300">
-      Unlock Premium
+      Coming Soon
     </button>
   </div>
 </div>
@@ -213,7 +218,7 @@ const TrackerPage = () => {
   {/* Unlock Premium Overlay */}
   <div className="absolute inset-0 bg-black/60 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-500">
     <button className="bg-white text-yellow-500 px-8 py-3 rounded-lg shadow hover:bg-yellow-100 transition-all transform hover:scale-105 duration-300">
-      Unlock Premium
+    Coming Soon
     </button>
   </div>
 </div>
