@@ -137,28 +137,29 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            {/* Achievements Section */}
-            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
-              <div className="grid grid-cols-2 gap-6">
-                {achievements
-                  .filter(achievement => achievement.achieved)
-                  .map((achievement, index) => (
-                    <div
-                      key={index}
-                      className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
-                    >
-                      <div className="flex items-center justify-center">
-                        <span className="text-4xl">{achievement.icon}</span>
-                      </div>
-                      <p className="font-semibold text-base hover:text-lg transition-all duration-300">
-                        {achievement.title}
-                      </p>
-                      <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
-                    </div>
-                  ))}
-              </div>
+           {/* Achievements Section */}
+<div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+  <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
+  <div className="grid grid-cols-2 gap-6">
+    {achievements
+      .filter(achievement => achievement.achieved)
+      .map((achievement, index) => (
+        <Link href="/achievements" key={index}> {/* Wrap in Link */}
+          <div
+            className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
+          >
+            <div className="flex items-center justify-center">
+              <span className="text-4xl">{achievement.icon}</span>
             </div>
+            <p className="font-semibold text-base hover:text-lg transition-all duration-300">
+              {achievement.title}
+            </p>
+            <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
+          </div>
+        </Link>
+      ))}
+  </div>
+</div>
 
             {/* User Posts Section */}
             <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 mt-8">
