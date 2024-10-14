@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHome, FaClipboardList, FaUsers, FaUser, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import BottomNavbar from '@/components/BottomNavbar';
 
 const CreatePage: React.FC = () => {
@@ -51,9 +51,10 @@ const CreatePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-28">
+      {/* Added padding-bottom (pb-28) to prevent overlap */}
       <div className="container mx-auto space-y-8">
-        
+  
         {/* Page Header */}
         <h2 className="text-4xl font-bold mb-6 text-center bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
           Create a New Post
@@ -136,11 +137,10 @@ const CreatePage: React.FC = () => {
           </div>
         )}
 
-     {/* Sticky Bottom Navigation */}
-     <BottomNavbar /> {/* Reusable Bottom Navbar */}
-          </div>
       </div>
-    
+      {/* Sticky Bottom Navigation */}
+      <BottomNavbar /> {/* Reusable Bottom Navbar */}
+    </div>
   );
 };
 
