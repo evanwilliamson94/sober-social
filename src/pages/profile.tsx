@@ -2,6 +2,7 @@ import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
+import BottomNavbar from '../components/BottomNavbar'; // Import the reusable navbar
 
 import {
   FaHome,
@@ -47,154 +48,139 @@ const ProfilePage = () => {
   const followers = 150;
   const following = 85;
 
-  
-    return (
-        <>
+  return (
+    <>
       <SignedIn>
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-6 lg:p-12 pb-20">
-  {/* Responsive Grid Layout */}
-  <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-    {/* Profile Section */}
-    <div className="lg:col-span-1 space-y-8 lg:space-y-10">
-      {/* Profile Header */}
-      <div className="relative p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 bg-gradient-to-r from-gray-900 to-black">
-        {/* Background Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent opacity-50 rounded-lg"></div>
-        <div className="relative flex flex-col lg:flex-row lg:space-x-6 items-center lg:items-start">
-          {/* Profile Picture */}
-          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300 mb-4 lg:mb-0">
-            {user?.imageUrl ? (
-               <Image
-               src={user.imageUrl}
-               alt="Profile"
-               width={96}
-               height={96}
-               className="rounded-full object-cover"
-             />
-           ) : (
-             <Image
-               src="/profile-placeholder.jpg"
-               alt="Profile"
-               width={96}
-               height={96}
-               className="rounded-full object-cover"
-             />
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-6 lg:p-12 pb-20">
+          {/* Responsive Grid Layout */}
+          <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+            {/* Profile Section */}
+            <div className="lg:col-span-1 space-y-8 lg:space-y-10">
+              {/* Profile Header */}
+              <div className="relative p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 bg-gradient-to-r from-gray-900 to-black">
+                {/* Background Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent opacity-50 rounded-lg"></div>
+                <div className="relative flex flex-col lg:flex-row lg:space-x-6 items-center lg:items-start">
+                  {/* Profile Picture */}
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300 mb-4 lg:mb-0">
+                    {user?.imageUrl ? (
+                      <Image
+                        src={user.imageUrl}
+                        alt="Profile"
+                        width={96}
+                        height={96}
+                        className="rounded-full object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src="/profile-placeholder.jpg"
+                        alt="Profile"
+                        width={96}
+                        height={96}
+                        className="rounded-full object-cover"
+                      />
                     )}
                   </div>
-  
-                 {/* User Info */}
-          <div className="text-center lg:text-left">
-            <h1 className="text-3xl lg:text-4xl font-bold">{user?.fullName || "User"}</h1>
-            <p className="text-base mt-2 lg:mt-3">
-              Sober for{" "}
-              <span className="font-bold text-yellow-400 animate-pulse">
-                {daysSober} days
-              </span>.
-            </p>
-            <p className="text-sm mt-1">
-              <span className="text-yellow-400">{nextMilestone} days</span>{" "}
-              until your next milestone!
-            </p>
-          </div>
-        </div>
 
-        {/* Followers/Following */}
-        <div className="mt-6 flex justify-around lg:justify-start text-center lg:text-left lg:space-x-6">
-          <div>
-            <p className="text-lg font-bold text-yellow-400">{followers}</p>
-            <p className="text-sm text-gray-300">Followers</p>
-          </div>
-          <div>
-            <p className="text-lg font-bold text-yellow-400">{following}</p>
-            <p className="text-sm text-gray-300">Following</p>
-          </div>
-            </div>
-            </div>
+                  {/* User Info */}
+                  <div className="text-center lg:text-left">
+                    <h1 className="text-3xl lg:text-4xl font-bold">{user?.fullName || "User"}</h1>
+                    <p className="text-base mt-2 lg:mt-3">
+                      Sober for{" "}
+                      <span className="font-bold text-yellow-400 animate-pulse">
+                        {daysSober} days
+                      </span>.
+                    </p>
+                    <p className="text-sm mt-1">
+                      <span className="text-yellow-400">{nextMilestone} days</span>{" "}
+                      until your next milestone!
+                    </p>
+                  </div>
+                </div>
 
-            {/* Sobriety Progress */}
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-4 lg:p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              <h2 className="text-xl lg:text-2xl font-semibold mb-3 lg:mb-4">
-                Sobriety Progress
-              </h2>
-              <div className="relative w-full h-4 lg:h-6 bg-gray-700 rounded-full shadow-inner">
-                <div
-                  className="absolute top-0 left-0 h-full bg-yellow-400 rounded-full transition-all duration-1000"
-                  style={{ width: `${(daysSober / sobrietyGoal) * 100}%` }}
-                  ></div>
+                {/* Followers/Following */}
+                <div className="mt-6 flex justify-around lg:justify-start text-center lg:text-left lg:space-x-6">
+                  <div>
+                    <p className="text-lg font-bold text-yellow-400">{followers}</p>
+                    <p className="text-sm text-gray-300">Followers</p>
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold text-yellow-400">{following}</p>
+                    <p className="text-sm text-gray-300">Following</p>
+                  </div>
+                </div>
               </div>
-              <p className="text-right mt-1 lg:mt-2 text-xs lg:text-sm text-gray-300">
-                {daysSober}/{sobrietyGoal} Days
-              </p>
+
+              {/* Sobriety Progress */}
+              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-4 lg:p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                <h2 className="text-xl lg:text-2xl font-semibold mb-3 lg:mb-4">
+                  Sobriety Progress
+                </h2>
+                <div className="relative w-full h-4 lg:h-6 bg-gray-700 rounded-full shadow-inner">
+                  <div
+                    className="absolute top-0 left-0 h-full bg-yellow-400 rounded-full transition-all duration-1000"
+                    style={{ width: `${(daysSober / sobrietyGoal) * 100}%` }}
+                  ></div>
+                </div>
+                <p className="text-right mt-1 lg:mt-2 text-xs lg:text-sm text-gray-300">
+                  {daysSober}/{sobrietyGoal} Days
+                </p>
+              </div>
+
+              {/* Edit Profile Button */}
+              <div className="text-center">
+                <Link href="/settings" passHref>
+                  <button className="bg-yellow-400 text-gray-900 px-4 py-2 lg:px-5 lg:py-2 rounded-lg shadow-lg hover:bg-yellow-300 transition-all hover:scale-105">
+                    Edit Profile
+                  </button>
+                </Link>
+              </div>
             </div>
-  
-            {/* Edit Profile Button */}
-            <div className="text-center">
-              <Link href="/settings" passHref>
-                <button className="bg-yellow-400 text-gray-900 px-4 py-2 lg:px-5 lg:py-2 rounded-lg shadow-lg hover:bg-yellow-300 transition-all hover:scale-105">
-                  Edit Profile
-                </button>
-              </Link>
+
+            {/* Achievements Section */}
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+              <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
+              <div className="grid grid-cols-2 gap-6">
+                {achievements
+                  .filter(achievement => achievement.achieved)
+                  .map((achievement, index) => (
+                    <div
+                      key={index}
+                      className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
+                    >
+                      <div className="flex items-center justify-center">
+                        <span className="text-4xl">{achievement.icon}</span>
+                      </div>
+                      <p className="font-semibold text-base hover:text-lg transition-all duration-300">
+                        {achievement.title}
+                      </p>
+                      <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
+                    </div>
+                  ))}
+              </div>
             </div>
-            </div>
-   {/* Achievements Section */}
-<div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-  <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
 
-
- {/* Display Unlocked Achievements */}
- <div className="grid grid-cols-2 gap-6">
-    {achievements
-      .filter(achievement => achievement.achieved)
-      .map((achievement, index) => (
-        <div
-          key={index}
-          className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
-        >
-          <div className="flex items-center justify-center">
-            <span className="text-4xl">{achievement.icon}</span>
-          </div>
-          <p className="font-semibold text-base hover:text-lg transition-all duration-300">
-            {achievement.title}
-          </p>
-          <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
-        </div>
-      ))}
-  </div>
-
-
-  {/* Link to All Achievements Page */}
-  <div className="text-center mt-4">
-    <a
-      href="/achievements"
-      className="text-yellow-400 hover:underline hover:text-yellow-300 text-sm"
-      >
-      View All Achievements
-    </a>
-  </div>
-
-         {/* User Posts Section */}
-<div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 mt-8">
-  <h2 className="text-xl lg:text-2xl font-semibold mb-4">Your Posts</h2>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {posts.map((post) => (
-      <div key={post.id} className="relative group">
-        {/* Square aspect ratio for posts */}
-        <div className="w-full aspect-w-1 aspect-h-1">
-          <img
-            src={post.image}
-            alt="Post"
-            className="w-full h-full object-cover rounded-lg"
-          />
-        </div>
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 flex items-center justify-center rounded-lg">
-          <div className="text-white text-sm flex space-x-4">
-            <span className="flex items-center">
-              <FaHeart className="mr-1" /> {post.likes}
-            </span>
-            <span className="flex items-center">
-              <FaComment className="mr-1" /> {post.comments}
-            </span>
+            {/* User Posts Section */}
+            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 mt-8">
+              <h2 className="text-xl lg:text-2xl font-semibold mb-4">Your Posts</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {posts.map((post) => (
+                  <div key={post.id} className="relative group">
+                    <div className="w-full aspect-w-1 aspect-h-1">
+                      <img
+                        src={post.image}
+                        alt="Post"
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 flex items-center justify-center rounded-lg">
+                      <div className="text-white text-sm flex space-x-4">
+                        <span className="flex items-center">
+                          <FaHeart className="mr-1" /> {post.likes}
+                        </span>
+                        <span className="flex items-center">
+                          <FaComment className="mr-1" /> {post.comments}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -203,83 +189,15 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-  
-  {/* Sticky Bottom Navigation */}
-<nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-black text-white shadow-2xl rounded-t-3xl px-4 py-4 z-50 transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-3xl">
-  <div className="flex justify-between items-center max-w-lg mx-auto relative">
-    {/* Home Icon */}
-    <a
-      href="/dashboard"
-      className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out"
-    >
-      <FaHome
-        size={28}
-        className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-      />
-      <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">
-        Home
-      </span>
-    </a>
 
-    {/* Tracker Icon */}
-    <a
-      href="/tracker"
-      className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out"
-    >
-      <FaClipboardList
-        size={28}
-        className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-      />
-      <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">
-        Tracker
-      </span>
-    </a>
+        {/* Add Bottom Navbar */}
+        <BottomNavbar />
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
+  );
+};
 
-    {/* Central Action Button */}
-    <div className="absolute left-1/2 transform -translate-x-1/2 -top-8 w-16 h-16 bg-yellow-400 border-4 border-gray-900 rounded-full p-3 shadow-2xl flex items-center justify-center transform hover:scale-110 hover:shadow-3xl transition-all duration-300 ease-in-out">
-      <a href="/create" className="text-gray-900">
-        <FaPlus size={34} className="hover:animate-pulse" />
-      </a>
-    </div>
-
-    {/* Community Icon */}
-    <a
-      href="/community"
-      className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out"
-    >
-      <FaUsers
-        size={28}
-        className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-      />
-      <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">
-        Community
-      </span>
-    </a>
-
-    {/* Profile Icon */}
-    <a
-      href="/profile"
-      className="text-center flex flex-col items-center group transition-all duration-300 ease-in-out"
-    >
-      <FaUser
-        size={28}
-        className="group-hover:text-yellow-400 transition duration-300 transform hover:scale-110"
-      />
-      <span className="text-sm mt-1 group-hover:text-yellow-400 transition duration-300">
-        Profile
-      </span>
-    </a>
-  </div>
-</nav>
-
-      </div>
-        </SignedIn>
-    <SignedOut>
-      <RedirectToSignIn />
-    </SignedOut>
-  </>
-);
-  };
-  
-  export default ProfilePage;
-  
+export default ProfilePage;
