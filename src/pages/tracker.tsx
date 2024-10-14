@@ -116,16 +116,50 @@ const TrackerPage = () => {
 </div>
 
 
-{/* Trigger & Cravings Log Section */}
-<div className="bg-gradient-to-r from-red-400 to-pink-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
-  <h2 className="text-3xl font-bold animate-fadeIn">Cravings & Triggers</h2>
+{/* Testimonial Section */}
+<div className="bg-gradient-to-r from-green-400 to-teal-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-8">
+  <h2 className="text-3xl font-bold animate-fadeIn">Share Your Story</h2>
   <p className="text-sm text-gray-300">
-    Document when you experience a craving and what triggered it.
+    Tell the community about your journey, or keep your thoughts private.
   </p>
-  <button className="bg-red-500 text-white px-8 py-3 rounded-lg shadow hover:bg-red-400 transition-all transform hover:scale-105 duration-300">
-    Log a Craving
-  </button>
+
+  {/* Public Testimonials */}
+  <div className="mt-8">
+    <h3 className="text-2xl font-semibold mb-6">Public Testimonials</h3>
+    <Link href="/Testimonial">
+      <button className="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-400 transition-all transform hover:scale-105 duration-300">
+        Share with the Community
+      </button>
+    </Link>
+    {/* Testimonials Feed (Placeholder) */}
+    <div className="mt-6 space-y-6">
+      <div className="bg-gray-800 p-4 rounded-lg shadow-md">
+        <p className="text-gray-300">"Sobriety has given me a new perspective on life!"</p>
+        <p className="text-sm text-yellow-400 mt-2">- User123</p>
+      </div>
+      {/* More testimonials can be added dynamically here */}
+    </div>
+  </div>
+
+  {/* Private Journals */}
+  <div className="mt-12">
+    <h3 className="text-2xl font-semibold mb-6">Private Journals</h3>
+    <Link href="/PrivateJournal">
+      <button className="bg-teal-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-teal-400 transition-all transform hover:scale-105 duration-300">
+        Log a Private Journal Entry
+      </button>
+    </Link>
+    {/* Journal Entries (Placeholder) */}
+    <div className="mt-6 space-y-6">
+      <div className="bg-gray-800 p-4 rounded-lg shadow-md">
+        <p className="text-gray-300">"Today I felt stronger in my journey."</p>
+        <p className="text-sm text-gray-500 mt-2">Private Entry</p>
+      </div>
+      {/* More private entries can be added dynamically here */}
+    </div>
+  </div>
 </div>
+
 
 {/* Reflection & Gratitude Journal Section */}
 <div className="bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 relative">
