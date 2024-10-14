@@ -1,15 +1,19 @@
 import { useEffect } from 'react';
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, Filler } from 'chart.js';
+import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, Filler } from 'chart.js';
 import Link from 'next/link';
 
-Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, Filler);
-
+// Register all necessary Chart.js components
+Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, Filler);
 
 const MoodTracker = () => {
   useEffect(() => {
-    Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend);
-
     const ctx = document.getElementById('moodChart') as HTMLCanvasElement;
+
+    // Ensure any existing chart is destroyed before creating a new one
+    if (Chart.getChart(ctx)) {
+      Chart.getChart(ctx)?.destroy(); // Destroy existing chart
+    }
+
     const moodChart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -57,7 +61,7 @@ const MoodTracker = () => {
     });
 
     return () => {
-      moodChart.destroy();
+      moodChart.destroy();  // Cleanup the chart on component unmount
     };
   }, []);
 
@@ -84,13 +88,12 @@ const MoodTracker = () => {
 
       {/* Back to Tracker Button */}
       <div className="mt-8 text-center">
-  <Link href="/tracker">
-    <button className="bg-yellow-400 text-blue-900 px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105">
-      Back to Tracker
-    </button>
-  </Link>
-</div>
-
+        <Link href="/tracker">
+          <button className="bg-yellow-400 text-blue-900 px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105">
+            Back to Tracker
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
