@@ -1,59 +1,45 @@
 import { useEffect } from 'react';
-import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, Filler } from 'chart.js';
+import { Chart, PieController, ArcElement, Tooltip, Legend } from 'chart.js';
 import Link from 'next/link';
 
-// Register all necessary Chart.js components
-Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend, Filler);
+// Register necessary components for Pie Chart
+Chart.register(PieController, ArcElement, Tooltip, Legend);
 
 const MoodTracker = () => {
   useEffect(() => {
     const ctx = document.getElementById('moodChart') as HTMLCanvasElement;
 
-    // Ensure any existing chart is destroyed before creating a new one
+    // Ensure any existing chart is destroyed
     if (Chart.getChart(ctx)) {
-      Chart.getChart(ctx)?.destroy(); // Destroy existing chart
+      Chart.getChart(ctx)?.destroy();
     }
 
     const moodChart = new Chart(ctx, {
-      type: 'line',
+      type: 'pie',
       data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: ['😊 Happy', '😐 Neutral', '😔 Sad'],
         datasets: [{
-          label: 'Mood Progress',
-          data: [3, 4, 2, 5, 4, 3, 4], 
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 2,
-          fill: true,
+          label: 'Mood Distribution',
+          data: [40, 30, 30],  // Example data
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(255, 99, 132, 0.7)',
+          ],
+          borderWidth: 1,
         }],
       },
       options: {
         responsive: true,
-        animation: {
-          duration: 1000,
-          easing: 'easeInOutQuad',
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 5,
-            grid: {
-              color: 'rgba(255, 255, 255, 0.2)',
-            },
-            ticks: {
-              color: '#fff',
-            },
-          },
-          x: {
-            ticks: {
-              color: '#fff',
-            },
-          },
-        },
         plugins: {
           legend: {
             labels: {
               color: '#fff',
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: (tooltipItem) => `Mood: ${tooltipItem.raw}%`,
             },
           },
         },
@@ -61,7 +47,7 @@ const MoodTracker = () => {
     });
 
     return () => {
-      moodChart.destroy();  // Cleanup the chart on component unmount
+      moodChart.destroy();
     };
   }, []);
 
@@ -82,7 +68,7 @@ const MoodTracker = () => {
 
       {/* Mood Progress Chart */}
       <div className="mt-8">
-        <h3 className="text-2xl font-bold text-gray-200 mb-4">Your Mood Progress</h3>
+        <h3 className="text-2xl font-bold text-gray-200 mb-4">Your Mood Distribution</h3>
         <canvas id="moodChart" className="w-full h-64"></canvas>
       </div>
 

@@ -1,6 +1,5 @@
-// components/SleepTracker.tsx
 import { useEffect, useRef } from 'react';
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title } from 'chart.js';
+import { Chart, BarController, BarElement, LinearScale, CategoryScale, Title } from 'chart.js';
 import Link from 'next/link';
 
 const SleepTracker = () => {
@@ -9,18 +8,18 @@ const SleepTracker = () => {
   useEffect(() => {
     if (!chartRef.current) return;
 
-    Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
+    Chart.register(BarController, BarElement, LinearScale, CategoryScale, Title);
 
     const sleepChart = new Chart(chartRef.current, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         datasets: [{
-          label: 'Sleep Quality',
+          label: 'Sleep Quality (Hours)',
           data: [7, 6, 5, 8, 7, 6, 7],
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          backgroundColor: 'rgba(75, 192, 192, 0.7)',
           borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 2,
+          borderWidth: 1,
         }],
       },
       options: {
@@ -29,6 +28,21 @@ const SleepTracker = () => {
           y: {
             beginAtZero: true,
             max: 10,
+          },
+          x: {
+            grid: {
+              display: false,
+            },
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Sleep Tracker (Hours)',
+            color: '#fff',
+            font: {
+              size: 16,
+            },
           },
         },
       },
@@ -64,10 +78,10 @@ const SleepTracker = () => {
 
       {/* Back to Tracker Button */}
       <div className="mt-8 text-center">
-        <Link href="/tracker" legacyBehavior>
-          <a className="bg-yellow-500 text-blue-900 px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-transform transform hover:scale-110">
+        <Link href="/tracker">
+          <button className="bg-yellow-500 text-blue-900 px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-transform transform hover:scale-110">
             Back to Tracker
-          </a>
+          </button>
         </Link>
       </div>
     </div>
