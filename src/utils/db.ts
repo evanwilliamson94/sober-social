@@ -7,7 +7,7 @@ export const sql = neon(process.env.DATABASE_URL!);
 async function testDatabase() {
   try {
     const result = await sql`SELECT NOW()`;  // Query to get the current time from the database
-    console.log(result);  // Outputs the result to your browser's console
+    console.log("Database connection successful:", result);  // Outputs the result to your browser's console
   } catch (error) {
     console.error('Database connection error:', error);  // Logs errors if the connection fails
   }
