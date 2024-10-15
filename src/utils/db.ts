@@ -1,17 +1,17 @@
 import { neon } from "@neondatabase/serverless";
 
-const sql = neon(process.env.DATABASE_URL!);
+// Database connection setup
+export const sql = neon(process.env.DATABASE_URL!);
 
-// Example query to test connection
-async function testConnection() {
+// Function to test the database connection
+async function testDatabase() {
   try {
-    const result = await sql`SELECT NOW()`;
-    console.log('Connection successful:', result);
+    const result = await sql`SELECT NOW()`;  // Query to get the current time from the database
+    console.log(result);  // Outputs the result to your browser's console
   } catch (error) {
-    console.error('Connection failed:', error);
+    console.error('Database connection error:', error);  // Logs errors if the connection fails
   }
 }
 
-testConnection(); // This will run the test query when the file is executed
-
-export default sql;
+// Call the function to test the database connection
+testDatabase();
