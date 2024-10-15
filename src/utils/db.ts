@@ -1,10 +1,10 @@
-import { neon } from '@neondatabase/serverless';
+import { neon, NeonClient } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 
-// Ensure the DATABASE_URL is being correctly used from the environment variables
-const neonClient = neon(process.env.DATABASE_URL!);
+// Initialize Neon client correctly with explicit typing
+const neonClient: NeonClient = neon(process.env.DATABASE_URL!);
 
-// Pass the Neon client into Drizzle
+// Pass the Neon client into Drizzle with proper typing
 const db = drizzle(neonClient);
 
 export default db;
