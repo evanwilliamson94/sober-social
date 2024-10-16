@@ -14,4 +14,5 @@ async function testDatabase() {
 }
 
 // Call the function to test the database connection
+
 testDatabase();
