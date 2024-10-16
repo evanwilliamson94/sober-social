@@ -12,6 +12,5 @@ async function testDatabase() {
     console.error('Database connection error:', error);  // Logs errors if the connection fails
   }
 }
-
 // Call the function to test the database connection
 testDatabase();
