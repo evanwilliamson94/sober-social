@@ -14,26 +14,28 @@ const TrackerPage = () => {
       <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 space-y-16">
       <div className="container mx-auto space-y-12">
 
-      {/* Sobriety Progress Section */}
+  {/* Sobriety Progress Section */}
 <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-500 relative space-y-6">
-  <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-xl animate-fadeIn">
-    Sobriety Progress
-  </h2>
+  <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-xl animate-fadeIn">Sobriety Progress</h2>
+  
+  {/* Progress Bar */}
   <div className="relative w-full h-8 bg-gray-800 rounded-full shadow-inner overflow-hidden">
     <div
       className="absolute top-0 left-0 h-full bg-gradient-to-r from-yellow-300 to-orange-600 rounded-full shadow-lg animate-progress transition-all duration-1500"
       style={{ width: `${(daysSober / sobrietyGoal) * 100}%` }}
     ></div>
   </div>
-  <p className="text-right text-2xl text-gray-100 font-semibold">
-    {daysSober}/{sobrietyGoal} Days Sober
-  </p>
+  
+  <p className="text-right text-2xl text-gray-100 font-semibold">{daysSober}/{sobrietyGoal} Days Sober</p>
+  
+  {/* Milestone Alert */}
   {nextMilestone <= 0 && (
     <div className="absolute -top-10 right-4 p-4 bg-green-600 text-white font-bold rounded-full shadow-lg animate-bounce ring-4 ring-green-300">
       🎉 Milestone Achieved!
     </div>
   )}
 </div>
+
 
 
       {/* Financial Tracker Section */}
@@ -51,53 +53,41 @@ const TrackerPage = () => {
         <p className="text-right text-sm text-gray-300">{(savings / savingsGoal) * 100}% of your savings goal achieved!</p>
       </div>
 
-    {/* Mood Tracker Section */}
+ {/* Mood Tracker Section */}
 <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
   <h2 className="text-3xl font-bold">Mood Tracker</h2>
-  <p className="text-sm text-gray-300">
-    How are you feeling today?
-  </p>
+  <p className="text-sm text-gray-300">How are you feeling today?</p>
   <div className="flex justify-between">
     <Link href="/MoodTracker">
-      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
-        😊
-      </button>
+      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😊</button>
     </Link>
     <Link href="/MoodTracker">
-      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
-        😐
-      </button>
+      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😐</button>
     </Link>
     <Link href="/MoodTracker">
-      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">
-        😔
-      </button>
+      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😔</button>
     </Link>
   </div>
 </div>
 
+
+ {/* Sleep Tracker Section */}
 <div className="bg-gradient-to-r from-indigo-400 to-blue-500 p-8 rounded-lg shadow-2xl transition-shadow duration-500 space-y-6">
   <h2 className="text-4xl font-extrabold text-white mb-2 animate-fadeIn">Sleep Tracker</h2>
   <p className="text-base text-gray-200">How was your sleep last night?</p>
-
   <div className="flex justify-between space-x-4">
     <Link href="/SleepTracker">
-      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
-        😴 Great
-      </button>
+      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">😴 Great</button>
     </Link>
     <Link href="/SleepTracker">
-      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
-        😐 Average
-      </button>
+      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">😐 Average</button>
     </Link>
     <Link href="/SleepTracker">
-      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">
-        😴 Poor
-      </button>
+      <button className="bg-indigo-600 p-4 rounded-full hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl">😴 Poor</button>
     </Link>
   </div>
 </div>
+
 
 {/* Testimonial Section */}
 <div className="bg-gradient-to-r from-green-400 to-teal-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-8">
