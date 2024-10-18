@@ -1,8 +1,8 @@
 import { useUser } from '@clerk/nextjs';
-import Image from 'next/image';
 import Link from 'next/link';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import BottomNavbar from '../components/BottomNavbar'; // Import the reusable navbar
+
 
 import {
   FaHome,
@@ -16,6 +16,14 @@ import {
 
 const ProfilePage = () => {
   const { user } = useUser(); // Fetch user details
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-white text-xl">Loading...</p>
+      </div>
+    );
+  }
+  
   const daysSober = 150;
   const sobrietyGoal = 180;
   const nextMilestone = 30; // days left for the next milestone
@@ -51,7 +59,7 @@ const ProfilePage = () => {
   return (
     <>
       <SignedIn>
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-6 lg:p-12 pb-20">
+      <div className="min-h-screen bg-gradient-to-b from-gray-800 via-gray-700 to-gray-800 text-white p-6 lg:p-12 pb-20">
           {/* Responsive Grid Layout */}
           <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Profile Section */}
@@ -64,15 +72,16 @@ const ProfilePage = () => {
                   {/* Profile Picture */}
                   <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300 mb-4 lg:mb-0">
                     {user?.imageUrl ? (
-                      <Image
-                        src={user.imageUrl}
-                        alt="Profile"
-                        width={96}
-                        height={96}
-                        className="rounded-full object-cover"
-                      />
+                     <img
+                     src={user.imageUrl}
+                     alt="Profile"
+                     width={96}
+                     height={96}
+                     className="rounded-full object-cover"
+                   />
+                   
                     ) : (
-                      <Image
+                      <img
                         src="/profile-placeholder.jpg"
                         alt="Profile"
                         width={96}
@@ -137,29 +146,29 @@ const ProfilePage = () => {
               </div>
             </div>
 
-           {/* Achievements Section */}
-<div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+{/* Achievements Section */}
+<div className="bg-gradient-to-r from-gray-700 to-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
   <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
   <div className="grid grid-cols-2 gap-6">
     {achievements
-      .filter(achievement => achievement.achieved)
+      .filter((achievement) => achievement.achieved)
       .map((achievement, index) => (
-        <Link href="/achievements" key={index}> {/* Wrap in Link */}
-          <div
-            className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
-          >
-            <div className="flex items-center justify-center">
-              <span className="text-4xl">{achievement.icon}</span>
-            </div>
-            <p className="font-semibold text-base hover:text-lg transition-all duration-300">
-              {achievement.title}
-            </p>
-            <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
+        <div
+          key={index}
+          className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
+        >
+          <div className="flex items-center justify-center">
+            <span className="text-4xl">{achievement.icon}</span>
           </div>
-        </Link>
+          <p className="font-semibold text-base hover:text-lg transition-all duration-300">
+            {achievement.title}
+          </p>
+          <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
+        </div>
       ))}
   </div>
 </div>
+
 
             {/* User Posts Section */}
             <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 mt-8">
