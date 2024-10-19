@@ -8,6 +8,7 @@ const Onboarding = () => {
   const [trackingFrequency, setTrackingFrequency] = useState('');
   const [engagementLevel, setEngagementLevel] = useState('');
   const [goals, setGoals] = useState('');
+  const [showReward, setShowReward] = useState(false);  // New state for rewards
   const router = useRouter();
 
   const calculateDays = () => {
@@ -19,14 +20,31 @@ const Onboarding = () => {
     return length;
   };
 
-  const nextStep = (e: React.FormEvent) => {
+  const handleNextStep = (e: React.FormEvent) => {
     e.preventDefault();
-    if (step < 3) {
-      setStep(step + 1);
-    } else {
-      const totalDays = calculateDays();
-      // Save data here, such as totalDays, engagementLevel, and goals
-      router.push('/dashboard');  // Redirect after onboarding
+    setShowReward(true);
+    setTimeout(() => {
+      setShowReward(false);
+      if (step < 3) {
+        setStep(step + 1);
+      } else {
+        const totalDays = calculateDays();
+        // Save data here, such as totalDays, engagementLevel, and goals
+        router.push('/dashboard');  // Redirect after onboarding
+      }
+    }, 1500); // 1.5 second delay to display reward
+  };
+
+  const rewardMessage = () => {
+    switch (step) {
+      case 1:
+        return "🎉 Congrats on unlocking the Sobriety Milestones!";
+      case 2:
+        return "🚀 Great! You’ve unlocked Personalized Journey Tracking!";
+      case 3:
+        return "👏 You’re all set! Welcome to Sober Social!";
+      default:
+        return "";
     }
   };
 
@@ -47,11 +65,18 @@ const Onboarding = () => {
           <p className="text-sm text-gray-400">{step}/3 Steps Completed</p>
         </div>
 
+        {/* Show reward message */}
+        {showReward && (
+          <div className="bg-yellow-500 text-gray-900 p-4 rounded-lg text-center shadow-lg mb-6">
+            {rewardMessage()}
+          </div>
+        )}
+
         {/* Step 1: Sobriety Duration */}
         {step === 1 && (
           <div>
             <h2 className="text-3xl font-bold">How long have you been sober?</h2>
-            <form onSubmit={nextStep}>
+            <form onSubmit={handleNextStep}>
               <label className="block text-sm font-medium text-gray-200 mb-2">Enter your sobriety duration:</label>
               <div className="flex space-x-4">
                 <input
@@ -84,7 +109,7 @@ const Onboarding = () => {
         {step === 2 && (
           <div>
             <h2 className="text-3xl font-bold">How would you like to track your journey?</h2>
-            <form onSubmit={nextStep}>
+            <form onSubmit={handleNextStep}>
               <label className="block text-sm font-medium text-gray-200 mb-2">Choose your preferred tracking frequency:</label>
               <div className="space-y-4">
                 <div>
@@ -132,7 +157,7 @@ const Onboarding = () => {
         {step === 3 && (
           <div>
             <h2 className="text-3xl font-bold">Set Your Sobriety Goals</h2>
-            <form onSubmit={nextStep}>
+            <form onSubmit={handleNextStep}>
               <label className="block text-sm font-medium text-gray-200 mb-2">How would you like to engage with the community?</label>
               <div className="space-y-4">
                 <div>
