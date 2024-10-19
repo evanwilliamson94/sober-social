@@ -149,7 +149,6 @@ export default function Home() {
 </SignUpButton>
 
 
-
   <SignInButton>
     <button className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-xl">
       Sign In
