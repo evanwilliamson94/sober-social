@@ -204,8 +204,9 @@ const ProfilePage = () => {
         <BottomNavbar />
       </SignedIn>
       <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
+  <RedirectToSignIn redirectUrl="/custom-signup" />
+</SignedOut>
+
     </>
   );
 };

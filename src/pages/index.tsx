@@ -137,10 +137,13 @@ export default function Home() {
   <p className="text-md md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-gray-200">
     Join SoberSocial today and take control of your sobriety in a supportive and motivating environment.
   </p>
- {/* Flexbox for Button Layout */}
+{/* Flexbox for Button Layout */}
 <div className="flex flex-col md:flex-row justify-center items-center gap-4">
   <SignUpButton>
-    <button className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-xl">
+    <button 
+      className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-xl"
+      onClick={() => window.location.href = "/custom-signup"}  // Custom redirect
+    >
       Join Now
     </button>
   </SignUpButton>

@@ -213,8 +213,9 @@ export default function Dashboard() {
           </div>
         </SignedIn>
         <SignedOut>
-          <RedirectToSignIn />
-        </SignedOut>
+  <RedirectToSignIn redirectUrl="/custom-signup" />
+</SignedOut>
+
       </>
     );
 }
