@@ -6,7 +6,8 @@ const Onboarding = () => {
   const [sobrietyLength, setSobrietyLength] = useState('');
   const [durationUnit, setDurationUnit] = useState('days');
   const [trackingFrequency, setTrackingFrequency] = useState('');
-  const [mood, setMood] = useState('');  // Add the mood state here
+  const [engagementLevel, setEngagementLevel] = useState('');
+  const [goals, setGoals] = useState('');
   const router = useRouter();
 
   const calculateDays = () => {
@@ -24,7 +25,7 @@ const Onboarding = () => {
       setStep(step + 1);
     } else {
       const totalDays = calculateDays();
-      // Store the data or send to the backend
+      // Save data here, such as totalDays, engagementLevel, and goals
       router.push('/dashboard');  // Redirect after onboarding
     }
   };
@@ -127,18 +128,43 @@ const Onboarding = () => {
           </div>
         )}
 
-        {/* Step 3: Mood Check-In */}
+        {/* Step 3: Community Engagement and Goal Setting */}
         {step === 3 && (
           <div>
-            <h2 className="text-3xl font-bold">How are you feeling today?</h2>
+            <h2 className="text-3xl font-bold">Set Your Sobriety Goals</h2>
             <form onSubmit={nextStep}>
-              <label className="block text-sm font-medium text-gray-200 mb-2">Mood:</label>
+              <label className="block text-sm font-medium text-gray-200 mb-2">How would you like to engage with the community?</label>
+              <div className="space-y-4">
+                <div>
+                  <input
+                    type="radio"
+                    id="engageMore"
+                    value="EngageMore"
+                    checked={engagementLevel === 'EngageMore'}
+                    onChange={() => setEngagementLevel('EngageMore')}
+                    className="mr-2"
+                  />
+                  <label htmlFor="engageMore" className="text-gray-200">Join discussions, post updates</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="engageLess"
+                    value="EngageLess"
+                    checked={engagementLevel === 'EngageLess'}
+                    onChange={() => setEngagementLevel('EngageLess')}
+                    className="mr-2"
+                  />
+                  <label htmlFor="engageLess" className="text-gray-200">Mostly track privately</label>
+                </div>
+              </div>
+              <label className="block text-sm font-medium text-gray-200 mt-6 mb-2">Set a goal to achieve in your sober journey:</label>
               <input
                 type="text"
-                value={mood}
-                onChange={(e) => setMood(e.target.value)}
+                value={goals}
+                onChange={(e) => setGoals(e.target.value)}
                 className="w-full p-4 bg-gray-700 rounded-lg text-gray-200"
-                placeholder="Describe your current mood"
+                placeholder="e.g., 'Stay sober for 6 months'"
                 required
               />
               <button className="mt-6 bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-300 transition-all" type="submit">
