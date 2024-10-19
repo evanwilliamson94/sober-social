@@ -32,7 +32,7 @@ const Onboarding = () => {
         // Save data here, such as totalDays, engagementLevel, and goals
         router.push('/dashboard');  // Redirect after onboarding
       }
-    }, 1500); // 1.5 second delay to display reward
+    }, 2500); // 2.5 second delay to display reward
   };
 
   const rewardMessage = () => {
