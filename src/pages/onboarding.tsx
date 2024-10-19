@@ -8,7 +8,7 @@ const Onboarding = () => {
   const [trackingFrequency, setTrackingFrequency] = useState('');
   const [engagementLevel, setEngagementLevel] = useState('');
   const [goals, setGoals] = useState('');
-  const [showReward, setShowReward] = useState(false);  // New state for rewards
+  const [showReward, setShowReward] = useState(false); // Reward state for positive feedback
   const router = useRouter();
 
   const calculateDays = () => {
@@ -29,13 +29,12 @@ const Onboarding = () => {
         setStep(step + 1);
       } else {
         const totalDays = calculateDays();
-        // Save data here, such as totalDays, engagementLevel, and goals
-        router.push('/dashboard');  // Redirect after onboarding
+        // Save data such as totalDays, engagementLevel, and goals
+        router.push('/dashboard'); // Redirect after completing onboarding
       }
-    }, 2500); // 2.5 second delay to display reward
+    }, 2500); // Delay for reward feedback
   };
 
-  
   const rewardMessage = () => {
     switch (step) {
       case 1:

@@ -1,7 +1,6 @@
-// /utils/schema.ts or /db/schema.ts
+// /utils/schema.ts 
 
-import { pgTable, serial, text, timestamp, integer } from 'drizzle-orm/pg-core';
-
+import { pgTable, serial, text, timestamp, integer, boolean } from 'drizzle-orm/pg-core';  // Add 'boolean'
 
 // Users Table
 export const users = pgTable('users', {
@@ -11,7 +10,8 @@ export const users = pgTable('users', {
   createdAt: timestamp('created_at').defaultNow(),
   sobrietyDays: integer('sobriety_days').default(0),  // New Column for Sobriety Days
   engagementLevel: text('engagement_level').default(''),  // New Column for Engagement Level
-  goals: text('goals').default('')  // New Column for Goals
+  goals: text('goals').default(''),  // New Column for Goals
+  hasCompletedOnboarding: boolean('has_completed_onboarding').default(false),  // New Column for Onboarding Status
 });
 
 
