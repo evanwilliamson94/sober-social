@@ -35,6 +35,7 @@ const Onboarding = () => {
     }, 2500); // 2.5 second delay to display reward
   };
 
+  
   const rewardMessage = () => {
     switch (step) {
       case 1:
