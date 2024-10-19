@@ -18,6 +18,7 @@ function AuthRedirectWrapper({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ClerkProvider>
@@ -29,3 +30,4 @@ export default function App({ Component, pageProps }: AppProps) {
     </ClerkProvider>
   );
 }
+
