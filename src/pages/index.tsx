@@ -139,11 +139,16 @@ export default function Home() {
   </p>
  {/* Flexbox for Button Layout */}
 <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-  <SignUpButton>
-    <button className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-xl">
-      Join Now
-    </button>
-  </SignUpButton>
+<SignUpButton>
+  <button
+    className="inline-block px-8 py-4 bg-yellow-400 text-blue-900 font-bold rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-xl"
+    onClick={() => window.location.href = '/custom-signup'}
+  >
+    Join Now
+  </button>
+</SignUpButton>
+
+
 
   <SignInButton>
     <button className="inline-block px-8 py-4 bg-transparent border-2 border-yellow-400 text-yellow-400 font-bold rounded-full hover:bg-yellow-400 hover:text-blue-900 transition-all transform hover:scale-105 shadow-xl">
