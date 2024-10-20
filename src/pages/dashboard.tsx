@@ -11,36 +11,36 @@ import BottomNavbar from '@/components/BottomNavbar';
 import { getSobrietyData } from '../utils/api'
 
 export default function Dashboard() {
-  const { user } = useUser(); // Access user object
+  const { user } = useUser(); // Access Clerk user object
   const [daysSober, setDaysSober] = useState(0);
   const [dailyQuote, setDailyQuote] = useState('');
   const [loading, setLoading] = useState(true);
   const milestone = 30;
 
   useEffect(() => {
-    if (!user) return; // Ensure user is loaded
+    if (!user) return;
 
-    // Fetch user's sobriety data
-    const fetchSobrietyData = async () => {
-      try {
-        const response = await fetch('/api/sobriety');
-        if (!response.ok) throw new Error('Failed to fetch');
-        const data = await response.json();
-        setDaysSober(data.daysSober);
-      } catch (error) {
-        console.error('Error fetching sobriety data:', error);
-      }
-    };
-    
-
-    fetchSobrietyData();
-
-    // Fetch the daily quote
+    // Fetch daily quote
     getDailyQuote().then((quote) => {
       setDailyQuote(quote);
     });
 
-  }, [user]); // Only re-run the effect if the user changes
+    // Fetch sobriety data
+    const fetchSobrietyData = async () => {
+      try {
+        const response = await fetch('/api/sobriety');
+        if (!response.ok) throw new Error('Failed to fetch sobriety data');
+        const data = await response.json();
+        setDaysSober(data.daysSober);
+      } catch (error) {
+        console.error('Error fetching sobriety data:', error);
+      } finally {
+        setLoading(false); // End loading state
+      }
+    };
+
+    fetchSobrietyData();
+  }, [user]);
 
   const percentage = (daysSober / milestone) * 100;
 
