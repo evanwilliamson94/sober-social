@@ -1,16 +1,32 @@
-// /pages/api/sobriety.ts
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSobrietyTracking, addSobrietyTracking } from '@/utils/db';
+import { db } from '@/utils/db';
+import { sobrietyTracking } from '@/utils/schema';
+import { getAuth } from '@clerk/nextjs/server';
+import { eq } from 'drizzle-orm';
+import { NextApiRequest, NextApiResponse } from 'next'; // Add correct types for req, res
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { userId } = getAuth(req);
+
   if (req.method === 'GET') {
-    const { userId } = req.query;
-    const sobrietyData = await getSobrietyTracking(Number(userId));
-    return res.status(200).json(sobrietyData);
-  } else if (req.method === 'POST') {
-    const { userId, sobrietyDate, milestone } = req.body;
-    const newEntry = await addSobrietyTracking(userId, sobrietyDate, milestone);
-    return res.status(201).json(newEntry);
+    try {
+      const data = await db
+        .select()
+        .from(sobrietyTracking)
+        .where(eq(sobrietyTracking.userId, Number(userId))); // Ensure userId is a number
+
+      if (data.length === 0) {
+        return res.status(404).json({ daysSober: 0 });
+      }
+
+      const sobrietyDate = data[0]?.sobrietyDate;
+      const daysSober = sobrietyDate
+        ? Math.floor((new Date().getTime() - new Date(sobrietyDate).getTime()) / (1000 * 60 * 60 * 24))
+        : 0;
+
+      res.status(200).json({ daysSober });
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching sobriety data' });
+    }
   } else {
     res.status(405).json({ error: 'Method not allowed' });
   }

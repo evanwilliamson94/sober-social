@@ -8,28 +8,38 @@ import Image from "next/image";
 import Link from 'next/link';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import BottomNavbar from '@/components/BottomNavbar';
+import { getSobrietyData } from '../utils/api'
 
 export default function Dashboard() {
-    const { user } = useUser(); // Access user object
-  
-    // Track days sober and daily quote
-    const [daysSober, setDaysSober] = useState(0);
-    const [dailyQuote, setDailyQuote] = useState("");
-    const [loading, setLoading] = useState(true);
-    const milestone = 30;
-  
-    useEffect(() => {
-      const sobrietyStartDate = new Date("2024-01-01");
-      const today = new Date();
-      const diffTime = Math.abs(today.getTime() - sobrietyStartDate.getTime());
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      setDaysSober(diffDays);
-  
-      getDailyQuote().then((quote) => {
-        setDailyQuote(quote);
-        setLoading(false);
-      });
-    }, []);
+  const { user } = useUser(); // Access user object
+  const [daysSober, setDaysSober] = useState(0);
+  const [dailyQuote, setDailyQuote] = useState('');
+  const [loading, setLoading] = useState(true);
+  const milestone = 30;
+
+  useEffect(() => {
+    if (!user) return; // Ensure user is loaded
+
+    // Fetch user's sobriety data
+    const fetchSobrietyData = async () => {
+      try {
+        const sobrietyData = await getSobrietyData(user.id); // Fetch sobriety data from the API
+        setDaysSober(sobrietyData.daysSober || 0);
+      } catch (error) {
+        console.error('Error fetching sobriety data:', error);
+      } finally {
+        setLoading(false); // End loading state
+      }
+    };
+
+    fetchSobrietyData();
+
+    // Fetch the daily quote
+    getDailyQuote().then((quote) => {
+      setDailyQuote(quote);
+    });
+
+  }, [user]); // Only re-run the effect if the user changes
 
   const percentage = (daysSober / milestone) * 100;
 
