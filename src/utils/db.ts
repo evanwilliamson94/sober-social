@@ -39,7 +39,6 @@ export async function getUsers() {
     throw error;  // Re-throw error for proper error handling
   }
 }
-
 // Function to insert a new user into the users table
 export async function addUser(name: string, email: string) {
   try {
