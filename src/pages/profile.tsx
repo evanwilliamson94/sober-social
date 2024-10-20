@@ -52,6 +52,7 @@ const ProfilePage = () => {
       comments: 10,
     },
   ];
+  
 
   const followers = 150;
   const following = 85;
