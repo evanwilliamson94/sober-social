@@ -3,21 +3,19 @@ import { ClerkProvider, useAuth, useUser } from "@clerk/nextjs";
 import '@/styles/globals.css';
 import type { AppProps } from "next/app";
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 function AuthRedirectWrapper({ children }: { children: React.ReactNode }) {
   const { isSignedIn } = useAuth();
   const { user } = useUser();
-  const router = useRouter();
 
-  useEffect(() => {
-    if (isSignedIn) {
-      if (!user?.publicMetadata.hasCompletedOnboarding) {
-        // Redirect to onboarding if it's not completed
-        router.push('/onboarding');
-      }
-    }
-  }, [isSignedIn, user]);
+  if (!isSignedIn) {
+    return null; // or show a loading spinner while Clerk is checking the session
+  }
+
+  if (!user?.publicMetadata.hasCompletedOnboarding) {
+    // Let Clerk handle the redirection via its configuration
+    return null; // Or a loading spinner if needed
+  }
 
   return <>{children}</>;
 }
