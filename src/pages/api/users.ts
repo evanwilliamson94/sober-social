@@ -1,16 +1,17 @@
-// /pages/api/users.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getUsers, addUser } from '@/utils/db';
+import { addUser } from '@/utils/db';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
-    const users = await getUsers();
-    return res.status(200).json(users);
-  } else if (req.method === 'POST') {
-    const { name, email } = req.body;
-    const newUser = await addUser(name, email);
-    return res.status(201).json(newUser);
+  if (req.method === 'POST') {
+    const { firstName, lastName, email, username } = req.body;
+    try {
+      const newUser = await addUser(`${firstName} ${lastName}`, email, username);
+      return res.status(201).json(newUser);
+    } catch (error) {
+      console.error('Error adding user:', error);
+      return res.status(500).json({ error: 'Error adding user' });
+    }
   } else {
-    res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 }

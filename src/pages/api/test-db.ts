@@ -12,20 +12,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(500).json({ error: 'Error fetching users from the database' });
     }
   } else if (req.method === 'POST') {
-    const { name, email } = req.body;
-    if (!name || !email) {
-      return res.status(400).json({ error: 'Name and email are required' });
+    const { first_name, last_name, email, username } = req.body;  // Added username
+
+    if (!first_name || !last_name || !email || !username) {  // Check for username
+      return res.status(400).json({ error: 'First name, last name, email, and username are required' });
     }
+
     try {
       // Add a new user to the database
-      const newUser = await addUser(name, email);
+      const name = `${first_name} ${last_name}`;
+      const newUser = await addUser(name, email, username);  // Pass username as well
       res.status(201).json({ newUser });
     } catch (error) {
       console.error('Error adding user:', error);
       res.status(500).json({ error: 'Error adding user to the database' });
     }
- 
-} else {
+  } else {
     // Handle unsupported methods
     res.status(405).json({ error: 'Method not allowed' });
   }
