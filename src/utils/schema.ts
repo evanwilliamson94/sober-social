@@ -5,6 +5,6 @@ export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
   email: text('email').unique().notNull(),
-  username: text('username').notNull(), // Add the username field here
+  username: text('username').notNull(), // Ensure this column is defined
   createdAt: timestamp('created_at').defaultNow(),
 });
