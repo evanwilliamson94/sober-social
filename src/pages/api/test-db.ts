@@ -24,7 +24,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.error('Error adding user:', error);
       res.status(500).json({ error: 'Error adding user to the database' });
     }
-  } else {
+ 
+} else {
     // Handle unsupported methods
     res.status(405).json({ error: 'Method not allowed' });
   }
