@@ -23,14 +23,15 @@ export default function Dashboard() {
     // Fetch user's sobriety data
     const fetchSobrietyData = async () => {
       try {
-        const sobrietyData = await getSobrietyData(user.id); // Fetch sobriety data from the API
-        setDaysSober(sobrietyData.daysSober || 0);
+        const response = await fetch('/api/sobriety');
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        setDaysSober(data.daysSober);
       } catch (error) {
         console.error('Error fetching sobriety data:', error);
-      } finally {
-        setLoading(false); // End loading state
       }
     };
+    
 
     fetchSobrietyData();
 
