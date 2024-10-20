@@ -14,20 +14,3 @@ export const users = pgTable('users', {
   goals: text('goals').default('')  // New Column for Goals
 });
 
-
-// Posts Table
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  userId: integer('user_id').references(() => users.id), // Foreign key to users table
-  content: text('content').notNull(),
-  createdAt: timestamp('created_at').defaultNow(),
-});
-
-// Sobriety Tracking Table
-export const sobrietyTracking = pgTable('sobriety_tracking', {
-  id: serial('id').primaryKey(),
-  userId: integer('user_id').references(() => users.id), // Foreign key to users table
-  sobrietyDate: timestamp('sobriety_date').notNull(),
-  milestone: text('milestone'), // Optional, for custom milestones
-  createdAt: timestamp('created_at').defaultNow(),
-});
