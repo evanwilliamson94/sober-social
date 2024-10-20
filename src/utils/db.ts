@@ -29,17 +29,25 @@ export async function getUsers() {
 // Function to insert a new user into the users table with username
 export async function addUser(name: string, email: string, username: string) {
   try {
+    const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    
+    if (existingUser.length > 0) {
+      throw new Error('User already exists');
+    }
+    
     const newUser = await db.insert(users).values({
-      name,     // Must match the column name in the schema
-      email,    // Must match the column name in the schema
-      username, // Ensure this column exists in your schema
+      name,
+      email,
+      username,
     }).returning();
+    
     return newUser;
   } catch (error) {
     console.error('Error adding user:', error);
     throw error;
   }
 }
+
 
 // Function to fetch a specific user by ID
 export async function getUserById(userId: number) {
