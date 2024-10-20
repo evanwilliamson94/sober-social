@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const data = await db
         .select()
         .from(sobrietyTracking)
-        .where(eq(sobrietyTracking.userId, Number(userId))); // Ensure userId is a number
+        .where(eq(sobrietyTracking.userId, parseInt(userId, 10))); // Convert userId to number
 
       if (data.length === 0) {
         return res.status(404).json({ daysSober: 0 });
@@ -27,8 +27,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ? Math.floor((new Date().getTime() - new Date(sobrietyDate).getTime()) / (1000 * 60 * 60 * 24))
         : 0;
 
+      res.setHeader('Content-Type', 'application/json'); // Set content type explicitly
       res.status(200).json({ daysSober });
     } catch (error) {
+      console.error('Error fetching sobriety data:', error); // Add error logging
       res.status(500).json({ error: 'Error fetching sobriety data' });
     }
   } else {
