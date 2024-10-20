@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from 'next/link';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import BottomNavbar from '@/components/BottomNavbar';
-import { getSobrietyData } from '../utils/api'
 
 export default function Dashboard() {
   const { user } = useUser(); // Access Clerk user object
