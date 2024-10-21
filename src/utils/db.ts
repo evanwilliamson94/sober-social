@@ -26,14 +26,14 @@ export async function getUsers() {
   }
 }
 
-// Updated Function to insert a new user into the users table with email uniqueness check
+// Updated function to insert a new user into the users table with email uniqueness check
 export async function addUser(name: string, email: string, username: string) {
   try {
     // Check if the email already exists
     const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
-    
+
     if (existingUser.length > 0) {
-      throw new Error(`User with email ${email} already exists`);
+      return { error: `User with email ${email} already exists`, status: 409 };
     }
 
     // If no existing user, insert the new user
