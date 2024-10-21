@@ -36,12 +36,10 @@ export async function addUser(name: string, email: string, username: string) {
     }).returning();
     return newUser;
   } catch (error) {
-    console.error('Detailed error:', error); // This logs the actual error to Vercel
+    console.error('Detailed Neon DB error:', error); // Logs the exact error to Vercel logs
     throw error;
   }
 }
-
-
 
 // Function to fetch a specific user by ID
 export async function getUserById(userId: number) {
