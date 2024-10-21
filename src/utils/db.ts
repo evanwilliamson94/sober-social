@@ -33,7 +33,7 @@ export async function addUser(name: string, email: string, username: string) {
     const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
 
     if (existingUser.length > 0) {
-      return { error: `User with email ${email} already exists`, status: 409 };
+      return { error: `User with email ${email} already exists`, status: 409 }; // Return error object if user exists
     }
 
     // If no existing user, insert the new user
@@ -43,7 +43,7 @@ export async function addUser(name: string, email: string, username: string) {
       username,
     }).returning();
 
-    return newUser;
+    return { user: newUser, status: 201 }; // Return user object on success
   } catch (error) {
     console.error('Detailed Neon DB error:', error); // Logs the exact error to Vercel logs
     throw error;
