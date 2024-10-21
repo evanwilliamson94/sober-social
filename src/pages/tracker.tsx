@@ -1,4 +1,4 @@
-import { FaHome, FaClipboardList, FaUsers, FaUser, FaPlus } from "react-icons/fa";
+import { useRouter } from 'next/router'; 
 import Link from "next/link";
 import React from 'react';
 import BottomNavbar from "@/components/BottomNavbar";
@@ -9,10 +9,27 @@ const TrackerPage = () => {
     const nextMilestone = 30;  // Days left for the next milestone
     const savings = 450;  // Placeholder for savings
     const savingsGoal = 600;  // Placeholder savings goal
-  
+      const router = useRouter();
+
+    const userHasCompletedOnboarding = false;
     return (
       <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 space-y-16">
       <div className="container mx-auto space-y-12">
+
+   {/* Onboarding Box - only display if onboarding isn't completed */}
+   {!userHasCompletedOnboarding && (
+        <div className="bg-blue-600 text-white p-4 rounded-lg shadow-lg mb-6">
+          <h3 className="text-xl font-bold">Complete Your Onboarding</h3>
+          <p className="text-sm mb-2">Start your journey by setting your sobriety date and goals.</p>
+          <button
+            className="bg-yellow-400 text-black px-4 py-2 rounded-md"
+            onClick={() => router.push('/onboarding')}
+          >
+            Start Onboarding
+          </button>
+        </div>
+      )}
+
 
   {/* Sobriety Progress Section */}
 <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-500 relative space-y-6">
