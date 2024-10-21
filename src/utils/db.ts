@@ -26,14 +26,23 @@ export async function getUsers() {
   }
 }
 
-// Function to insert a new user into the users table with username
+// Updated Function to insert a new user into the users table with email uniqueness check
 export async function addUser(name: string, email: string, username: string) {
   try {
+    // Check if the email already exists
+    const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    
+    if (existingUser.length > 0) {
+      throw new Error(`User with email ${email} already exists`);
+    }
+
+    // If no existing user, insert the new user
     const newUser = await db.insert(users).values({
       name,
       email,
       username,
     }).returning();
+
     return newUser;
   } catch (error) {
     console.error('Detailed Neon DB error:', error); // Logs the exact error to Vercel logs
