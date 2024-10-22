@@ -10,19 +10,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     try {
       // Safely access the body and ensure it's structured as expected
-      const { first_name, last_name, email_addresses, username } = req.body?.data || {};
+      const { first_name, last_name, email_addresses, username, id } = req.body?.data || {}; // `id` is the Clerk user ID
 
       // Ensure email_addresses array exists and is not empty
       const email = email_addresses?.[0]?.email_address;
 
       // Ensure valid data is present
-      if (!first_name || !last_name || !email || !username) {
+      if (!first_name || !last_name || !email || !username || !id) {
         console.error('Invalid user data received:', req.body);
         return res.status(400).json({ error: 'Invalid user data' });
       }
 
-      // Add the user to the database
-      const result = await addUser(`${first_name} ${last_name}`, email, username);
+      // Add the user to the database, passing the Clerk user ID (id)
+      const result = await addUser(`${first_name} ${last_name}`, email, username, id); // Passing the Clerk user ID as `id`
 
       // Check if an error was returned
       if (result.error) {

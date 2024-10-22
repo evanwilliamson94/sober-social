@@ -26,10 +26,10 @@ export async function getUsers() {
   }
 }
 
-// Function to insert a new user into the users table with email uniqueness check
-export async function addUser(name: string, email: string, username: string) {
+// Updated function to insert a new user into the users table with email uniqueness check
+export async function addUser(name: string, email: string, username: string, clerkUserId: string) {
   try {
-    // Check if the email already exists using raw SQL query syntax
+    // Check if the email already exists
     const existingUser = await db
       .select()
       .from(users)
@@ -37,22 +37,27 @@ export async function addUser(name: string, email: string, username: string) {
       .limit(1);
 
     if (existingUser.length > 0) {
-      return { error: `User with email ${email} already exists`, status: 409 }; // Return error object if user exists
+      return { error: `User with email ${email} already exists`, status: 409 }; // Return error if the user exists
     }
 
-    // Insert the new user without providing the `id`, since it should auto-generate
-    const newUser = await db.insert(users).values({
-      name,
-      email,
-      username,
-    }).returning();
+    // Insert the new user including the clerk_user_id
+    const newUser = await db
+      .insert(users)
+      .values({
+        name,
+        email,
+        username,
+        clerkUserId,  // Save the Clerk user ID
+      })
+      .returning();
 
-    return { user: newUser[0], status: 201 }; // Return the first inserted user object on success
+    return { user: newUser[0], status: 201 }; // Return the inserted user
   } catch (error) {
     console.error('Detailed Neon DB error:', error); // Logs the exact error to Vercel logs
     throw error;
   }
 }
+
 
 // Function to fetch a specific user by ID
 export async function getUserById(userId: string) {
