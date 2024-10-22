@@ -1,6 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import { eq } from "drizzle-orm/expressions";
+import { eq } from "drizzle-orm/expressions";  // Correct import for eq
 import { users } from './schema';
 
 // Ensure the DATABASE_URL environment variable is set
@@ -26,11 +26,15 @@ export async function getUsers() {
   }
 }
 
-// Updated function to insert a new user into the users table with email uniqueness check
+// Function to insert a new user with email uniqueness check
 export async function addUser(name: string, email: string, username: string) {
   try {
-    // Check if the email already exists
-    const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    // Check if the email already exists using eq() correctly
+    const existingUser = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email))  // Use eq() for email comparison
+      .limit(1);
 
     if (existingUser.length > 0) {
       return { error: `User with email ${email} already exists`, status: 409 }; // Return error object if user exists
@@ -43,7 +47,7 @@ export async function addUser(name: string, email: string, username: string) {
       username,
     }).returning();
 
-    return { user: newUser, status: 201 }; // Return user object on success
+    return { user: newUser[0], status: 201 }; // Return the first inserted user object on success
   } catch (error) {
     console.error('Detailed Neon DB error:', error); // Logs the exact error to Vercel logs
     throw error;
@@ -51,10 +55,15 @@ export async function addUser(name: string, email: string, username: string) {
 }
 
 // Function to fetch a specific user by ID
-export async function getUserById(userId: number) {
+export async function getUserById(userId: string) {  // Use string type for userId
   try {
-    const user = await db.select().from(users).where(eq(users.id, userId));
-    return user;
+    const user = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, userId))  // Use eq() for ID comparison
+      .limit(1);
+    
+    return user[0];  // Return the first user, if found
   } catch (error) {
     console.error('Error fetching user:', error);
     throw error;
