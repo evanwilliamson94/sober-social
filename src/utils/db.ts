@@ -33,14 +33,14 @@ export async function addUser(name: string, email: string, username: string) {
     const existingUser = await db
       .select()
       .from(users)
-      .where(eq(users.email, email))  // Use eq() for email comparison
+      .where(eq(users.email, email))
       .limit(1);
 
     if (existingUser.length > 0) {
       return { error: `User with email ${email} already exists`, status: 409 }; // Return error object if user exists
     }
 
-    // If no existing user, insert the new user
+    // Insert the new user without providing the `id`, since it should auto-generate
     const newUser = await db.insert(users).values({
       name,
       email,
@@ -54,7 +54,7 @@ export async function addUser(name: string, email: string, username: string) {
   }
 }
 
-// Updated function to fetch a specific user by ID
+// Function to fetch a specific user by ID
 export async function getUserById(userId: string) {
   try {
     // Convert userId to a number if it's a string (ensure compatibility with serial ID type in your schema)
@@ -67,7 +67,7 @@ export async function getUserById(userId: string) {
     const user = await db
       .select()
       .from(users)
-      .where(eq(users.id, numericUserId))  // Compare with the numeric ID
+      .where(eq(users.id, numericUserId))
       .limit(1);
 
     return user[0];  // Return the first user, if found
