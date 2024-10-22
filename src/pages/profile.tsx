@@ -1,40 +1,52 @@
 import { useUser } from '@clerk/nextjs';
+import { useState, useEffect } from 'react';  // Import for state and effect hooks
 import Link from 'next/link';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
-import BottomNavbar from '../components/BottomNavbar'; // Import the reusable navbar
-
-
-import {
-  FaHome,
-  FaClipboardList,
-  FaPlus,
-  FaUsers,
-  FaUser,
-  FaHeart,
-  FaComment,
-} from "react-icons/fa";
+import BottomNavbar from '../components/BottomNavbar';  // Reusable bottom navigation
+import { FaHeart, FaComment } from 'react-icons/fa';
 
 const ProfilePage = () => {
-  const { user } = useUser(); // Fetch user details
-  if (!user) {
+  const { user } = useUser();  // Fetch user data from Clerk
+  const [username, setUsername] = useState('');  // State to store Neon DB username
+  const [loading, setLoading] = useState(true);  // Loading state while fetching user data
+
+  // Fetch the username from Neon DB via the API
+  useEffect(() => {
+    const fetchUsername = async () => {
+      if (!user) return;
+
+      try {
+        const response = await fetch(`/api/getUserData?userId=${user.id}`);  // Fetch Neon DB data
+        const data = await response.json();
+        setUsername(data.username);  // Set the fetched username
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      } finally {
+        setLoading(false);  // End loading state
+      }
+    };
+
+    fetchUsername();  // Trigger the API call to fetch user data
+  }, [user]);
+
+  // If user data is not available or still loading, show a loading indicator
+  if (!user || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-white text-xl">Loading...</p>
       </div>
     );
   }
-  
-  const daysSober = 150;
-  const sobrietyGoal = 180;
-  const nextMilestone = 30; // days left for the next milestone
+
+  const daysSober = 150;  // Placeholder for days sober (you can replace it with real data)
+  const sobrietyGoal = 180;  // Placeholder for sobriety goal
+  const nextMilestone = 30;  // Placeholder for next milestone
+  const followers = 150;  // Placeholder for followers
+  const following = 85;  // Placeholder for following count
   const achievements = [
     { title: "30 Days Sober", achieved: true, icon: "🎉" },
     { title: "100 Days Sober", achieved: true, icon: "🏅" },
     { title: "1 Year Sober", achieved: false, icon: "🎖️" },
-  ];
-  const futureAchievements = [
-    { title: "1 Year Sober", achieved: false, icon: "🎖️" },
-    { title: "5 Years Sober", achieved: false, icon: "🏆" },
   ];
   const posts = [
     {
@@ -52,35 +64,28 @@ const ProfilePage = () => {
       comments: 10,
     },
   ];
-  
-
-  const followers = 150;
-  const following = 85;
 
   return (
     <>
       <SignedIn>
-      <div className="min-h-screen bg-gradient-to-b from-gray-800 via-gray-700 to-gray-800 text-white p-6 lg:p-12 pb-20">
+        <div className="min-h-screen bg-gradient-to-b from-gray-800 via-gray-700 to-gray-800 text-white p-6 lg:p-12 pb-20">
           {/* Responsive Grid Layout */}
           <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Profile Section */}
             <div className="lg:col-span-1 space-y-8 lg:space-y-10">
               {/* Profile Header */}
               <div className="relative p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 bg-gradient-to-r from-gray-900 to-black">
-                {/* Background Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent opacity-50 rounded-lg"></div>
                 <div className="relative flex flex-col lg:flex-row lg:space-x-6 items-center lg:items-start">
                   {/* Profile Picture */}
                   <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300 mb-4 lg:mb-0">
                     {user?.imageUrl ? (
-                     <img
-                     src={user.imageUrl}
-                     alt="Profile"
-                     width={96}
-                     height={96}
-                     className="rounded-full object-cover"
-                   />
-                   
+                      <img
+                        src={user.imageUrl}
+                        alt="Profile"
+                        width={96}
+                        height={96}
+                        className="rounded-full object-cover"
+                      />
                     ) : (
                       <img
                         src="/profile-placeholder.jpg"
@@ -94,7 +99,8 @@ const ProfilePage = () => {
 
                   {/* User Info */}
                   <div className="text-center lg:text-left">
-                    <h1 className="text-3xl lg:text-4xl font-bold">{user?.fullName || "User"}</h1>
+                    <h1 className="text-3xl lg:text-4xl font-bold">{user?.fullName || 'User'}</h1>
+                    <p className="text-lg lg:text-xl text-gray-400">@{username}</p>  {/* Displaying username */}
                     <p className="text-base mt-2 lg:mt-3">
                       Sober for{" "}
                       <span className="font-bold text-yellow-400 animate-pulse">
@@ -147,29 +153,28 @@ const ProfilePage = () => {
               </div>
             </div>
 
-{/* Achievements Section */}
-<div className="bg-gradient-to-r from-gray-700 to-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-  <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
-  <div className="grid grid-cols-2 gap-6">
-    {achievements
-      .filter((achievement) => achievement.achieved)
-      .map((achievement, index) => (
-        <div
-          key={index}
-          className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
-        >
-          <div className="flex items-center justify-center">
-            <span className="text-4xl">{achievement.icon}</span>
-          </div>
-          <p className="font-semibold text-base hover:text-lg transition-all duration-300">
-            {achievement.title}
-          </p>
-          <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
-        </div>
-      ))}
-  </div>
-</div>
-
+            {/* Achievements Section */}
+            <div className="bg-gradient-to-r from-gray-700 to-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+              <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
+              <div className="grid grid-cols-2 gap-6">
+                {achievements
+                  .filter((achievement) => achievement.achieved)
+                  .map((achievement, index) => (
+                    <div
+                      key={index}
+                      className="p-4 rounded-lg text-center shadow-lg bg-green-600 text-white hover:scale-105 transition-transform duration-300"
+                    >
+                      <div className="flex items-center justify-center">
+                        <span className="text-4xl">{achievement.icon}</span>
+                      </div>
+                      <p className="font-semibold text-base hover:text-lg transition-all duration-300">
+                        {achievement.title}
+                      </p>
+                      <div className="mt-1 text-xs text-yellow-400 animate-pulse">Achieved!</div>
+                    </div>
+                  ))}
+              </div>
+            </div>
 
             {/* User Posts Section */}
             <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 mt-8">
