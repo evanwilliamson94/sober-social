@@ -1,5 +1,4 @@
-import { useUser } from '@clerk/nextjs';
-import { useState, useEffect } from 'react';  // Import for state and effect hooks
+import { useUser } from '@clerk/nextjs';  // Fetch user details directly from Clerk
 import Link from 'next/link';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import BottomNavbar from '../components/BottomNavbar';  // Reusable bottom navigation
@@ -7,30 +6,9 @@ import { FaHeart, FaComment } from 'react-icons/fa';
 
 const ProfilePage = () => {
   const { user } = useUser();  // Fetch user data from Clerk
-  const [username, setUsername] = useState('');  // State to store Neon DB username
-  const [loading, setLoading] = useState(true);  // Loading state while fetching user data
 
-  // Fetch the username from Neon DB via the API
-  useEffect(() => {
-    const fetchUsername = async () => {
-      if (!user) return;
-
-      try {
-        const response = await fetch(`/api/getUserData?userId=${user.id}`);  // Fetch Neon DB data
-        const data = await response.json();
-        setUsername(data.username);  // Set the fetched username
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      } finally {
-        setLoading(false);  // End loading state
-      }
-    };
-
-    fetchUsername();  // Trigger the API call to fetch user data
-  }, [user]);
-
-  // If user data is not available or still loading, show a loading indicator
-  if (!user || loading) {
+  // If user data is not available, show a loading indicator
+  if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-white text-xl">Loading...</p>
@@ -38,7 +16,8 @@ const ProfilePage = () => {
     );
   }
 
-  const daysSober = 150;  // Placeholder for days sober (you can replace it with real data)
+  // Replace these placeholders with real data if needed in the future
+  const daysSober = 150;  // Placeholder for days sober
   const sobrietyGoal = 180;  // Placeholder for sobriety goal
   const nextMilestone = 30;  // Placeholder for next milestone
   const followers = 150;  // Placeholder for followers
@@ -96,11 +75,11 @@ const ProfilePage = () => {
                       />
                     )}
                   </div>
-
+  
                   {/* User Info */}
                   <div className="text-center lg:text-left">
                     <h1 className="text-3xl lg:text-4xl font-bold">{user?.fullName || 'User'}</h1>
-                    <p className="text-lg lg:text-xl text-gray-400">@{username}</p>  {/* Displaying username */}
+                    <p className="text-lg lg:text-xl text-gray-400">@{user?.username || 'username'}</p> {/* Displaying username */}
                     <p className="text-base mt-2 lg:mt-3">
                       Sober for{" "}
                       <span className="font-bold text-yellow-400 animate-pulse">
@@ -113,7 +92,7 @@ const ProfilePage = () => {
                     </p>
                   </div>
                 </div>
-
+  
                 {/* Followers/Following */}
                 <div className="mt-6 flex justify-around lg:justify-start text-center lg:text-left lg:space-x-6">
                   <div>
@@ -126,7 +105,7 @@ const ProfilePage = () => {
                   </div>
                 </div>
               </div>
-
+  
               {/* Sobriety Progress */}
               <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-4 lg:p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
                 <h2 className="text-xl lg:text-2xl font-semibold mb-3 lg:mb-4">
@@ -142,7 +121,7 @@ const ProfilePage = () => {
                   {daysSober}/{sobrietyGoal} Days
                 </p>
               </div>
-
+  
               {/* Edit Profile Button */}
               <div className="text-center">
                 <Link href="/settings" passHref>
@@ -152,7 +131,7 @@ const ProfilePage = () => {
                 </Link>
               </div>
             </div>
-
+  
             {/* Achievements Section */}
             <div className="bg-gradient-to-r from-gray-700 to-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
               <h2 className="text-xl lg:text-2xl font-semibold mb-4">Achievements</h2>
@@ -175,7 +154,7 @@ const ProfilePage = () => {
                   ))}
               </div>
             </div>
-
+  
             {/* User Posts Section */}
             <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 mt-8">
               <h2 className="text-xl lg:text-2xl font-semibold mb-4">Your Posts</h2>
@@ -205,7 +184,7 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-
+  
         {/* Add Bottom Navbar */}
         <BottomNavbar />
       </SignedIn>
@@ -214,6 +193,4 @@ const ProfilePage = () => {
       </SignedOut>
     </>
   );
-};
-
-export default ProfilePage;
+}
