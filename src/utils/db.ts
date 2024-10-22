@@ -57,7 +57,7 @@ export async function addUser(name: string, email: string, username: string) {
 // Updated function to fetch a specific user by ID
 export async function getUserById(userId: string) {
   try {
-    // Convert userId to a number if it's a string
+    // Convert userId to a number if it's a string (ensure compatibility with serial ID type in your schema)
     const numericUserId = parseInt(userId, 10);
     
     if (isNaN(numericUserId)) {
