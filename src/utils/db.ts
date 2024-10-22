@@ -1,6 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import { eq } from "drizzle-orm/expressions";  // Correct import for eq
+import { eq } from "drizzle-orm/expressions";
 import { users } from './schema';
 
 // Ensure the DATABASE_URL environment variable is set
@@ -26,10 +26,10 @@ export async function getUsers() {
   }
 }
 
-// Function to insert a new user with email uniqueness check
+// Function to insert a new user into the users table with email uniqueness check
 export async function addUser(name: string, email: string, username: string) {
   try {
-    // Check if the email already exists using eq() correctly
+    // Check if the email already exists using raw SQL query syntax
     const existingUser = await db
       .select()
       .from(users)
@@ -54,15 +54,22 @@ export async function addUser(name: string, email: string, username: string) {
   }
 }
 
-// Function to fetch a specific user by ID
-export async function getUserById(userId: string) {  // Use string type for userId
+// Updated function to fetch a specific user by ID
+export async function getUserById(userId: string) {
   try {
+    // Convert userId to a number if it's a string
+    const numericUserId = parseInt(userId, 10);
+    
+    if (isNaN(numericUserId)) {
+      throw new Error('Invalid user ID');
+    }
+
     const user = await db
       .select()
       .from(users)
-      .where(eq(users.id, userId))  // Use eq() for ID comparison
+      .where(eq(users.id, numericUserId))  // Compare with the numeric ID
       .limit(1);
-    
+
     return user[0];  // Return the first user, if found
   } catch (error) {
     console.error('Error fetching user:', error);
