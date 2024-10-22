@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaLock, FaTrophy } from "react-icons/fa"; // FaTrophy for unlocked and FaLock for locked
+import Link from 'next/link'; // Import Link from next/link
 
 // Expanded list of achievements
 const allAchievements = [
@@ -112,12 +113,11 @@ const AchievementsPage: React.FC = () => {
 
         {/* Back to Profile Button */}
         <div className="text-center mt-12">
-          <a
-            href="/profile"
-            className="bg-yellow-500 text-black px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300 hover:scale-105"
-          >
-            Back to Profile
-          </a>
+          <Link href="/profile" passHref>
+            <a className="bg-yellow-500 text-black px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300 hover:scale-105">
+              Back to Profile
+            </a>
+          </Link>
         </div>
       </div>
     </div>

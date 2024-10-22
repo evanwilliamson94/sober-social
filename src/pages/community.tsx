@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaHome, FaHeart, FaComment, FaClipboardList, FaPlus, FaUsers, FaUser } from "react-icons/fa";
 import BottomNavbar from '@/components/BottomNavbar';
+import Image from 'next/image'; // Import Image from next/image
 
 interface Post {
   id: number;
@@ -90,7 +91,7 @@ const CommunityPage: React.FC = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading]);
+  }, [loading, fetchMorePosts]); // Added fetchMorePosts as a dependency
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 page-content">
@@ -101,36 +102,47 @@ const CommunityPage: React.FC = () => {
           Sober Social
         </h2>
 
-      {/* Top Community Posts */}
-<div className="featured-posts mb-6">
-  <h3 className="text-3xl font-semibold mb-6">Community Posts</h3>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {postList.map((post) => (
-      <div key={post.id} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
-        <div className="flex items-center mb-4 space-x-3">
-          <a href={`/profile/${post.username}`} className="flex items-center">
-            <img src={post.avatar} alt="avatar" className="w-12 h-12 rounded-full object-cover shadow-lg" />
-            <span className="font-bold text-lg text-white hover:underline ml-3">{post.username}</span>
-          </a>
+        {/* Top Community Posts */}
+        <div className="featured-posts mb-6">
+          <h3 className="text-3xl font-semibold mb-6">Community Posts</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {postList.map((post) => (
+              <div key={post.id} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                <div className="flex items-center mb-4 space-x-3">
+                  <a href={`/profile/${post.username}`} className="flex items-center">
+                    <Image
+                      src={post.avatar}
+                      alt="avatar"
+                      width={48}
+                      height={48}
+                      className="rounded-full object-cover shadow-lg"
+                    />
+                    <span className="font-bold text-lg text-white hover:underline ml-3">{post.username}</span>
+                  </a>
+                </div>
+                <Image
+                  src={post.image}
+                  alt="post"
+                  width={500}
+                  height={200}
+                  className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105"
+                />
+                <p className="text-gray-300 mb-4">{post.caption}</p>
+                <div className="flex justify-between items-center text-sm text-gray-400">
+                  <button
+                    className={`flex items-center space-x-1 ${post.isLiked ? 'text-red-500 animate-pulse' : 'hover:text-yellow-400'}`}
+                    onClick={() => handleLike(post.id)}
+                  >
+                    <FaHeart className="mr-1" /> {post.likes}
+                  </button>
+                  <button className="flex items-center space-x-1 hover:text-yellow-400">
+                    <FaComment className="mr-1" /> {post.comments}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        <img src={post.image} alt="post" className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105" />
-        <p className="text-gray-300 mb-4">{post.caption}</p>
-        <div className="flex justify-between items-center text-sm text-gray-400">
-          <button
-            className={`flex items-center space-x-1 ${post.isLiked ? 'text-red-500 animate-pulse' : 'hover:text-yellow-400'}`}
-            onClick={() => handleLike(post.id)}
-          >
-            <FaHeart className="mr-1" /> {post.likes}
-          </button>
-          <button className="flex items-center space-x-1 hover:text-yellow-400">
-            <FaComment className="mr-1" /> {post.comments}
-          </button>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-
 
         {/* Infinite Scroll Loader */}
         {loading && (
@@ -138,12 +150,11 @@ const CommunityPage: React.FC = () => {
             <p className="text-yellow-500">Loading more posts...</p>
           </div>
         )}
-{/* Sticky Bottom Navigation */}
-<BottomNavbar /> {/* Reusable Bottom Navbar */}
-          </div>
+
+        {/* Sticky Bottom Navigation */}
+        <BottomNavbar /> {/* Reusable Bottom Navbar */}
       </div>
-    
-    
+    </div>
   );
 };
 
