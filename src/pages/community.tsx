@@ -110,7 +110,7 @@ const CommunityPage: React.FC = () => {
 
         {/* Button to Testimonials */}
         <div className="text-center mb-12">
-          <Link href="/testimonials">
+          <Link href="/Testimonial">
             <a className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105">
               View Community Testimonials
             </a>
