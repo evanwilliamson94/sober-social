@@ -2,14 +2,16 @@ import { useRouter } from 'next/router';
 import Link from "next/link";
 import React from 'react';
 import BottomNavbar from "@/components/BottomNavbar";
+import { useUser } from '@clerk/nextjs';  // Import useUser to fetch user details
 
 const TrackerPage = () => {
+    const { user } = useUser();  // Fetch user data from Clerk
     const daysSober = 150;  // Placeholder for real data
     const sobrietyGoal = 365;  // Placeholder goal
     const nextMilestone = 30;  // Days left for the next milestone
     const savings = 450;  // Placeholder for savings
     const savingsGoal = 600;  // Placeholder savings goal
-      const router = useRouter();
+    const router = useRouter();
 
     const userHasCompletedOnboarding = false;
     return (
@@ -31,9 +33,11 @@ const TrackerPage = () => {
       )}
 
 
-  {/* Sobriety Progress Section */}
-<div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-500 relative space-y-6">
-  <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-xl animate-fadeIn">Sobriety Progress</h2>
+ {/* Sobriety Progress Section */}
+ <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-500 relative space-y-6">
+          <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-xl animate-fadeIn">
+            {user?.fullName || "User"}'s Sobriety Progress
+          </h2>
   
   {/* Progress Bar */}
   <div className="relative w-full h-8 bg-gray-800 rounded-full shadow-inner overflow-hidden">
