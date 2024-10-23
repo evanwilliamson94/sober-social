@@ -59,8 +59,9 @@ const TrackerPage = () => {
       <div className="bg-gradient-to-r from-green-400 to-blue-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
         <h2 className="text-3xl font-bold">Financial Savings</h2>
         <p className="text-lg text-gray-300">
-          You've saved an estimated <span className="text-green-200 font-bold">${savings}</span> since becoming sober.
-        </p>
+  You&apos;ve saved an estimated <span className="text-green-200 font-bold">${savings}</span> since becoming sober.
+</p>
+
         <div className="relative w-full h-6 bg-gray-700 rounded-full shadow-inner">
           <div
             className="absolute top-0 left-0 h-full bg-green-400 rounded-full transition-all duration-1000"
@@ -124,7 +125,7 @@ const TrackerPage = () => {
     {/* Testimonials Feed (Placeholder) */}
     <div className="mt-6 space-y-6">
       <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-        <p className="text-gray-300">"Sobriety has given me a new perspective on life!"</p>
+      <p className="text-gray-300">&quot;Sobriety has given me a new perspective on life!&quot;</p>
         <p className="text-sm text-yellow-400 mt-2">- User123</p>
       </div>
       {/* More testimonials can be added dynamically here */}
@@ -142,7 +143,7 @@ const TrackerPage = () => {
     {/* Journal Entries (Placeholder) */}
     <div className="mt-6 space-y-6">
       <div className="bg-gray-800 p-4 rounded-lg shadow-md">
-        <p className="text-gray-300">"Today I felt stronger in my journey."</p>
+      <p className="text-gray-300">&quot;Today I felt stronger in my journey.&quot;</p>
         <p className="text-sm text-gray-500 mt-2">Private Entry</p>
       </div>
       {/* More private entries can be added dynamically here */}
