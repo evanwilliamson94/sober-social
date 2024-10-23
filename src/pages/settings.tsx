@@ -2,6 +2,7 @@ import { useUser } from '@clerk/nextjs';
 import { useState } from 'react';
 import { FaUserEdit, FaKey, FaBell, FaTrashAlt } from 'react-icons/fa';
 import Link from 'next/link';
+import Image from 'next/image'; // Import the Next.js Image component
 
 const SettingsPage: React.FC = () => {
   const { user } = useUser();
@@ -23,7 +24,7 @@ const SettingsPage: React.FC = () => {
   };
 
   const uploadProfileImageToServer = async (file: File): Promise<string> => {
-    // Upload logic (connect to NeonDB)
+    // Simulate upload logic (connect to NeonDB)
     return new Promise((resolve) => {
       setTimeout(() => resolve(URL.createObjectURL(file)), 1000);
     });
@@ -38,19 +39,18 @@ const SettingsPage: React.FC = () => {
           Account Settings
         </h1>
 
-       {/* Settings Tabs */}
-<div className="flex flex-wrap justify-center gap-4 mb-8">
-  {['profile', 'password', 'notifications', 'delete'].map(section => (
-    <button
-      key={section}
-      className={`w-full sm:w-auto px-4 py-2 rounded-lg ${activeSection === section ? 'bg-yellow-400 text-blue-900' : 'bg-gray-700 text-gray-300'}`}
-      onClick={() => setActiveSection(section)}
-    >
-      {section === 'profile' ? 'Edit Profile' : section.charAt(0).toUpperCase() + section.slice(1)}
-    </button>
-  ))}
-</div>
-
+        {/* Settings Tabs */}
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {['profile', 'password', 'notifications', 'delete'].map(section => (
+            <button
+              key={section}
+              className={`w-full sm:w-auto px-4 py-2 rounded-lg ${activeSection === section ? 'bg-yellow-400 text-blue-900' : 'bg-gray-700 text-gray-300'}`}
+              onClick={() => setActiveSection(section)}
+            >
+              {section === 'profile' ? 'Edit Profile' : section.charAt(0).toUpperCase() + section.slice(1)}
+            </button>
+          ))}
+        </div>
 
         {/* Profile Section */}
         {activeSection === 'profile' && (
@@ -70,7 +70,17 @@ const SettingsPage: React.FC = () => {
               <div className="mb-4">
                 <label className="block mb-2 text-gray-300">Profile Picture</label>
                 <input type="file" className="w-full p-2 rounded-lg bg-gray-700 text-white" onChange={handleImageUpload} />
-                {profileImage && <img src={profileImage} alt="Profile" className="mt-4 rounded-lg w-24 h-24 object-cover" />}
+                {profileImage && (
+                  <div className="mt-4">
+                    <Image
+                      src={profileImage}
+                      alt="Profile"
+                      width={96} // Specify width
+                      height={96} // Specify height
+                      className="rounded-lg object-cover"
+                    />
+                  </div>
+                )}
                 {uploadError && <p className="text-red-500 mt-2">{uploadError}</p>}
               </div>
               <button className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-lg hover:bg-yellow-300">Save Changes</button>

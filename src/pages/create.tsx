@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaPlus } from "react-icons/fa";
 import BottomNavbar from '@/components/BottomNavbar';
+import Image from 'next/image'; // Import Image from next/image
 
 const CreatePage: React.FC = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -69,7 +70,13 @@ const CreatePage: React.FC = () => {
             <div className="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center transition-all duration-300 hover:shadow-xl hover:border-yellow-500">
               {imagePreview ? (
                 <div className="relative">
-                  <img src={imagePreview} alt="Preview" className="w-full h-64 object-cover rounded-lg" />
+                  <Image
+                    src={imagePreview}
+                    alt="Preview"
+                    width={500}
+                    height={256}
+                    className="object-cover rounded-lg"
+                  />
                   <button 
                     className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full hover:bg-red-500 transition duration-300"
                     onClick={() => {
