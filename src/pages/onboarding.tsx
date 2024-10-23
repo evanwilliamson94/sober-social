@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useUser } from '@clerk/nextjs'; // Import Clerk user data
 import { useRouter } from 'next/router';
 
 const Onboarding = () => {
+  const { user } = useUser(); // Fetch Clerk user data
   const [step, setStep] = useState(1);
   const [sobrietyLength, setSobrietyLength] = useState('');
   const [durationUnit, setDurationUnit] = useState('days');
   const [trackingFrequency, setTrackingFrequency] = useState('');
   const [engagementLevel, setEngagementLevel] = useState('');
   const [goals, setGoals] = useState('');
-  const [showReward, setShowReward] = useState(false); // Reward state for positive feedback
+  const [showReward, setShowReward] = useState(false);
   const router = useRouter();
 
   const calculateDays = () => {
@@ -51,9 +53,12 @@ const Onboarding = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <div className="max-w-4xl mx-auto space-y-12">
-        <h1 className="text-4xl font-bold text-yellow-400">Welcome to SoberSocial!</h1>
+        {/* Personalized Greeting */}
+        <h1 className="text-4xl font-bold text-yellow-400">
+          Welcome, {user?.firstName || 'Friend'}, to SoberSocial!
+        </h1>
         <p className="text-lg text-gray-300">Let’s personalize your sober journey for better tracking.</p>
-
+  
         {/* Progress Bar */}
         <div className="relative pt-1">
           <div className="overflow-hidden h-4 mb-4 text-xs flex rounded bg-yellow-200">
@@ -64,18 +69,18 @@ const Onboarding = () => {
           </div>
           <p className="text-sm text-gray-400">{step}/3 Steps Completed</p>
         </div>
-
+  
         {/* Show reward message */}
         {showReward && (
           <div className="bg-yellow-500 text-gray-900 p-4 rounded-lg text-center shadow-lg mb-6">
             {rewardMessage()}
           </div>
         )}
-
+  
         {/* Step 1: Sobriety Duration */}
         {step === 1 && (
           <div>
-            <h2 className="text-3xl font-bold">How long have you been sober?</h2>
+            <h2 className="text-3xl font-bold">How long have you been sober, {user?.firstName || 'Friend'}?</h2>
             <form onSubmit={handleNextStep}>
               <label className="block text-sm font-medium text-gray-200 mb-2">Enter your sobriety duration:</label>
               <div className="flex space-x-4">
@@ -104,7 +109,7 @@ const Onboarding = () => {
             </form>
           </div>
         )}
-
+  
         {/* Step 2: Tracking Preferences */}
         {step === 2 && (
           <div>
@@ -152,7 +157,7 @@ const Onboarding = () => {
             </form>
           </div>
         )}
-
+  
         {/* Step 3: Community Engagement and Goal Setting */}
         {step === 3 && (
           <div>
@@ -201,6 +206,4 @@ const Onboarding = () => {
       </div>
     </div>
   );
-};
-
-export default Onboarding;
+}  
