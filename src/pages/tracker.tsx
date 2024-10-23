@@ -35,9 +35,10 @@ const TrackerPage = () => {
 
  {/* Sobriety Progress Section */}
  <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-8 rounded-lg shadow-2xl hover:shadow-3xl transition-shadow duration-500 relative space-y-6">
-          <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-xl animate-fadeIn">
-            {user?.fullName || "User"}'s Sobriety Progress
-          </h2>
+ <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-xl animate-fadeIn">
+  {user?.fullName || "User"}&apos;s Sobriety Progress
+</h2>
+
   
   {/* Progress Bar */}
   <div className="relative w-full h-8 bg-gray-800 rounded-full shadow-inner overflow-hidden">
