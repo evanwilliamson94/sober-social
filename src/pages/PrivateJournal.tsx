@@ -1,7 +1,11 @@
 import { useState } from "react";
 import BottomNavbar from '@/components/BottomNavbar';
+import { useUser } from '@clerk/nextjs'; // Import useUser for Clerk data
 
 const PrivateJournalPage = () => {
+  const { user } = useUser(); // Access Clerk user data
+  const firstName = user?.firstName || "User"; // Fallback if no name is available
+
   const [entries, setEntries] = useState([
     { id: 1, text: "Today I felt empowered to overcome a challenge.", date: "2024-10-02" },
     { id: 2, text: "Meditation helped me stay calm today.", date: "2024-10-01" },
@@ -31,14 +35,14 @@ const PrivateJournalPage = () => {
 
         {/* Page Header */}
         <h2 className="text-5xl font-bold mb-10 text-center bg-gradient-to-r from-yellow-400 to-teal-500 bg-clip-text text-transparent">
-          Private Journal
+          {firstName}'s Private Journal {/* Displaying user's first name */}
         </h2>
 
         {/* New Journal Entry Form */}
         <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-6">
           <textarea
             className="w-full p-4 rounded-lg bg-gray-700 text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-teal-500 focus:bg-gray-600 transition duration-300"
-            placeholder="Write your private thoughts here..."
+            placeholder={`Write your private thoughts here, ${firstName}...`} // Personalized placeholder
             rows={4}
             value={newEntry}
             onChange={(e) => setNewEntry(e.target.value)}
@@ -55,7 +59,7 @@ const PrivateJournalPage = () => {
         {isSubmitted && (
           <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
             <div className="bg-gray-900 p-8 rounded-lg text-center shadow-lg">
-              <h3 className="text-3xl font-bold text-teal-400 mb-4">🎉 Entry Logged!</h3>
+              <h3 className="text-3xl font-bold text-teal-400 mb-4">🎉 Entry Logged, {firstName}!</h3> {/* Personalized success message */}
               <p className="text-gray-300">Your private journal entry has been successfully saved.</p>
             </div>
           </div>
