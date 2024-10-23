@@ -78,12 +78,11 @@ export default function Dashboard() {
 
               {/* Settings / Profile Button */}
               <div className="flex items-center justify-center">
-              <Link href="/profile" passHref>
-  <a className="text-yellow-300">
-    <FaUserCircle size={20} />
-  </a>
-</Link>
-
+                <Link href="/profile" passHref>
+                  <a className="text-yellow-300">
+                    <FaUserCircle size={20} />
+                  </a>
+                </Link>
               </div>
             </div>
           </section>
@@ -146,13 +145,33 @@ export default function Dashboard() {
             </div>
           </section>
 
-   {/* Sticky Bottom Navigation */}
-   <BottomNavbar /> {/* Reusable Bottom Navbar */}
-          </div>
-        </SignedIn>
-        <SignedOut>
-          <RedirectToSignIn />
-        </SignedOut>
-      </>
-    );
+          {/* Emergency Hotlines */}
+          <section className="mt-8 px-6">
+            <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+              <h3 className="text-xl font-semibold text-yellow-400 mb-2">Need Help Now?</h3>
+              <p className="text-gray-300 mb-2">
+                If you or someone you know is struggling, reach out for help immediately.
+              </p>
+              <p className="text-yellow-400 font-bold">
+                <a href="tel:988" className="underline hover:text-yellow-300">
+                  Suicide & Crisis Lifeline: 988
+                </a>
+              </p>
+              <p className="text-yellow-400 font-bold">
+                <a href="tel:18006624357" className="underline hover:text-yellow-300">
+                  National Helpline: 1-800-662-HELP (4357)
+                </a>
+              </p>
+            </div>
+          </section>
+
+          {/* Sticky Bottom Navigation */}
+          <BottomNavbar /> {/* Reusable Bottom Navbar */}
+        </div>
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
+  );
 }
