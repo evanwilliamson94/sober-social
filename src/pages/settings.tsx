@@ -10,6 +10,26 @@ const SettingsPage: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string | null>(user?.imageUrl || null);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
+  // State for username change
+  const [newUsername, setNewUsername] = useState(user?.username || '');
+
+  // Handle username update
+  const handleUsernameChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
+
+    try {
+      await user.update({
+        username: newUsername,
+      });
+      alert('Username updated successfully!');
+    } catch (error) {
+      console.error('Failed to update username:', error);
+      alert('Failed to update username. Please try again.');
+    }
+  };
+
+  // Handle image upload (mock example for Neon)
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
       const file = e.target.files[0];
@@ -24,7 +44,7 @@ const SettingsPage: React.FC = () => {
   };
 
   const uploadProfileImageToServer = async (file: File): Promise<string> => {
-    // Simulate upload logic (connect to NeonDB)
+    // Simulate upload logic (this should connect to Neon)
     return new Promise((resolve) => {
       setTimeout(() => resolve(URL.createObjectURL(file)), 1000);
     });
@@ -57,12 +77,13 @@ const SettingsPage: React.FC = () => {
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold text-yellow-400 mb-4">Edit Profile</h3>
             <p className="text-gray-300 mb-6">Update your personal information, username, and profile picture.</p>
-            <form>
+            <form onSubmit={handleUsernameChange}>
               <div className="mb-4">
                 <label className="block mb-2 text-gray-300">Username</label>
                 <input
                   type="text"
-                  defaultValue={user?.fullName || ''}
+                  value={newUsername}
+                  onChange={(e) => setNewUsername(e.target.value)}
                   className="w-full p-2 rounded-lg bg-gray-700 text-white"
                   placeholder="Enter your username"
                 />
@@ -75,8 +96,8 @@ const SettingsPage: React.FC = () => {
                     <Image
                       src={profileImage}
                       alt="Profile"
-                      width={96} // Specify width
-                      height={96} // Specify height
+                      width={96}
+                      height={96}
                       className="rounded-lg object-cover"
                     />
                   </div>
