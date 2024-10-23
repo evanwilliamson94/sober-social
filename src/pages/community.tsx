@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { FaHome, FaHeart, FaComment, FaClipboardList, FaPlus, FaUsers, FaUser } from "react-icons/fa";
+import { FaHeart, FaComment } from "react-icons/fa";
 import BottomNavbar from '@/components/BottomNavbar';
-import Image from 'next/image'; // Import Image from next/image
+import Image from 'next/image';
+import Link from 'next/link'; // Import Link for navigation
 
 interface Post {
   id: number;
@@ -96,6 +97,15 @@ const CommunityPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 page-content">
       <div className="container mx-auto space-y-12">
+
+        {/* Button to Testimonials */}
+        <div className="flex justify-end mb-4">
+          <Link href="/testimonials">
+            <a className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
+              View Testimonials
+            </a>
+          </Link>
+        </div>
 
         {/* Page Header */}
         <h2 className="text-5xl font-bold mb-10 text-center lg:text-left transition-transform duration-300 transform hover:scale-105">
