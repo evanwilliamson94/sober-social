@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FaHome, FaHeart, FaComment, FaClipboardList, FaPlus, FaUsers, FaUser } from "react-icons/fa";
 import BottomNavbar from '@/components/BottomNavbar';
 import Image from 'next/image'; // Import Image from next/image
@@ -53,11 +53,11 @@ const CommunityPage: React.FC = () => {
   };
 
   // Simulate fetching more posts
-  const fetchMorePosts = () => {
+  const fetchMorePosts = useCallback(() => {
     if (loading) return;
-    
+
     setLoading(true);
-    
+
     // Simulate fetching data
     setTimeout(() => {
       const newPosts = [
@@ -75,7 +75,7 @@ const CommunityPage: React.FC = () => {
       setPostList((prevPosts) => [...prevPosts, ...newPosts]);
       setLoading(false);
     }, 1500);
-  };
+  }, [loading]);
 
   // Infinite scroll implementation
   useEffect(() => {
@@ -83,7 +83,7 @@ const CommunityPage: React.FC = () => {
       const scrollHeight = document.documentElement.scrollHeight;
       const scrollTop = document.documentElement.scrollTop;
       const clientHeight = document.documentElement.clientHeight;
-      
+
       if (scrollTop + clientHeight >= scrollHeight - 100 && !loading) {
         fetchMorePosts();
       }
@@ -91,7 +91,7 @@ const CommunityPage: React.FC = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading, fetchMorePosts]); // Added fetchMorePosts as a dependency
+  }, [loading, fetchMorePosts]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 page-content">
