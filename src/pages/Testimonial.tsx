@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaHeart, FaUserPlus } from "react-icons/fa";
+import Link from 'next/link'; // Import Link for navigation
 import BottomNavbar from '@/components/BottomNavbar';
 
 const TestimonialPage = () => {
@@ -81,6 +82,15 @@ const TestimonialPage = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Link to Community Page */}
+        <div className="text-center mt-8">
+          <Link href="/community" passHref>
+            <button className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300 transform hover:scale-105">
+              Back to Community
+            </button>
+          </Link>
         </div>
       </div>
 
