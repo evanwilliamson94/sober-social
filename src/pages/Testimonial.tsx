@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FaHeart, FaUserPlus } from "react-icons/fa";
-import Link from 'next/link'; // Import Link for navigation
 import BottomNavbar from '@/components/BottomNavbar';
 
 const TestimonialPage = () => {
@@ -36,10 +35,15 @@ const TestimonialPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-24">
       <div className="container mx-auto space-y-12">
-        {/* Page Header */}
-        <h2 className="text-5xl font-bold mb-10 text-center bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-          Community Testimonials
-        </h2>
+        {/* Header Section */}
+        <div className="text-center">
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-teal-400 to-purple-500 bg-clip-text text-transparent">
+            Testimonials
+          </h2>
+          <p className="text-gray-400 text-base">
+            A space to share and reflect on your sober journey.
+          </p>
+        </div>
 
         {/* Write a Testimonial */}
         <form onSubmit={handleSubmit} className="mb-8">
@@ -52,9 +56,9 @@ const TestimonialPage = () => {
           ></textarea>
           <button
             type="submit"
-            className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 mt-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 w-full text-center"
+            className="bg-gradient-to-r from-teal-400 to-purple-500 text-white px-6 py-3 mt-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 w-full text-center"
           >
-            Submit
+            Submit Your Story
           </button>
         </form>
 
@@ -64,7 +68,7 @@ const TestimonialPage = () => {
             <div key={testimonial.id} className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-semibold">{testimonial.user}</h3>
-                <button className="flex items-center space-x-2 text-sm text-yellow-400 hover:text-yellow-300 transition">
+                <button className="flex items-center space-x-2 text-sm text-teal-400 hover:text-teal-300 transition">
                   <FaUserPlus />
                   <span>Follow</span>
                 </button>
@@ -78,19 +82,9 @@ const TestimonialPage = () => {
                   <FaHeart />
                   <span>{liked.includes(testimonial.id) ? testimonial.likes + 1 : testimonial.likes} Likes</span>
                 </button>
-                <span className="text-gray-500">{testimonial.user}</span>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Link to Community Page */}
-        <div className="text-center mt-8">
-          <Link href="/community" passHref>
-            <button className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-400 transition-all duration-300 transform hover:scale-105">
-              Back to Community
-            </button>
-          </Link>
         </div>
       </div>
 
