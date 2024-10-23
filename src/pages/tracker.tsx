@@ -77,21 +77,23 @@ const TrackerPage = () => {
       </div>
 
  {/* Mood Tracker Section */}
-<div className="bg-gradient-to-r from-blue-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
-  <h2 className="text-3xl font-bold">Mood Tracker</h2>
-  <p className="text-sm text-gray-300">How are you feeling today?</p>
-  <div className="flex justify-between">
-    <Link href="/MoodTracker">
-      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😊</button>
-    </Link>
-    <Link href="/MoodTracker">
-      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😐</button>
-    </Link>
-    <Link href="/MoodTracker">
-      <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😔</button>
-    </Link>
-  </div>
-</div>
+ <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-500 space-y-4">
+      <h2 className="text-3xl font-bold">Mood Tracker</h2>
+      <p className="text-sm text-gray-300">
+        How are you feeling today, {user?.firstName || "User"}?
+      </p>
+      <div className="flex justify-between">
+        <Link href="/MoodTracker">
+          <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😊</button>
+        </Link>
+        <Link href="/MoodTracker">
+          <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😐</button>
+        </Link>
+        <Link href="/MoodTracker">
+          <button className="bg-blue-600 p-4 rounded-full hover:bg-blue-500 transition duration-300">😔</button>
+        </Link>
+      </div>
+    </div>
 
 
  {/* Sleep Tracker Section */}
