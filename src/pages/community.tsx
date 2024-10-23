@@ -95,22 +95,27 @@ const CommunityPage: React.FC = () => {
   }, [loading, fetchMorePosts]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20 page-content">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12 pb-20">
       <div className="container mx-auto space-y-12">
 
+        {/* Page Header */}
+        <div className="text-center mb-8">
+          <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-4">
+            Sober Social Community
+          </h2>
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+            Connect with others on their sobriety journey. Share your achievements, motivate others, and engage with the community.
+          </p>
+        </div>
+
         {/* Button to Testimonials */}
-        <div className="flex justify-end mb-4">
+        <div className="text-center mb-12">
           <Link href="/testimonials">
-            <a className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow-md transition duration-300 transform hover:scale-105">
-              View Testimonials
+            <a className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-105">
+              View Community Testimonials
             </a>
           </Link>
         </div>
-
-        {/* Page Header */}
-        <h2 className="text-5xl font-bold mb-10 text-center lg:text-left transition-transform duration-300 transform hover:scale-105">
-          Sober Social
-        </h2>
 
         {/* Top Community Posts */}
         <div className="featured-posts mb-6">
