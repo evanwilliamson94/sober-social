@@ -44,7 +44,7 @@ export default function Dashboard() {
   return (
     <>
       <SignedIn>
-        <div className="min-h-screen bg-gray-900 text-white font-roboto pb-20">
+        <div className="min-h-screen bg-gray-900 text-white font-roboto pb-32"> {/* Added pb-32 to give enough bottom padding */}
           {/* Dashboard Hero Section */}
           <section className="px-2 py-4 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white rounded-b-3xl shadow-lg">
             <div className="flex items-center space-x-4">
@@ -164,6 +164,9 @@ export default function Dashboard() {
               </p>
             </div>
           </section>
+
+          {/* Extra Bottom Padding */}
+          <div className="pb-32"></div> {/* Added extra bottom padding */}
 
           {/* Sticky Bottom Navigation */}
           <BottomNavbar /> {/* Reusable Bottom Navbar */}
