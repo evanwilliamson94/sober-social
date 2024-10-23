@@ -35,8 +35,9 @@ const PrivateJournalPage = () => {
 
         {/* Page Header */}
         <h2 className="text-5xl font-bold mb-10 text-center bg-gradient-to-r from-yellow-400 to-teal-500 bg-clip-text text-transparent">
-          {firstName}'s Private Journal {/* Displaying user's first name */}
-        </h2>
+  {firstName}&apos;s Private Journal {/* Displaying user's first name */}
+</h2>
+
 
         {/* New Journal Entry Form */}
         <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-6">
