@@ -78,9 +78,12 @@ export default function Dashboard() {
 
               {/* Settings / Profile Button */}
               <div className="flex items-center justify-center">
-                <a href="/profile" className="text-yellow-300">
-                  <FaUserCircle size={20} />
-                </a>
+              <Link href="/profile" passHref>
+  <a className="text-yellow-300">
+    <FaUserCircle size={20} />
+  </a>
+</Link>
+
               </div>
             </div>
           </section>
