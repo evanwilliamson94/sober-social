@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import BottomNavbar from '../components/BottomNavbar';  // Reusable bottom navigation
 import { FaHeart, FaComment } from 'react-icons/fa';
-
+import Image from 'next/image';
 const ProfilePage = () => {
   const { user } = useUser();  // Fetch user data from Clerk
 
@@ -57,23 +57,24 @@ const ProfilePage = () => {
                 <div className="relative flex flex-col lg:flex-row lg:space-x-6 items-center lg:items-start">
                   {/* Profile Picture */}
                   <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg hover:scale-105 transition-transform duration-300 mb-4 lg:mb-0">
-                    {user?.imageUrl ? (
-                      <img
-                        src={user.imageUrl}
-                        alt="Profile"
-                        width={96}
-                        height={96}
-                        className="rounded-full object-cover"
-                      />
-                    ) : (
-                      <img
-                        src="/profile-placeholder.jpg"
-                        alt="Profile"
-                        width={96}
-                        height={96}
-                        className="rounded-full object-cover"
-                      />
-                    )}
+                  {user?.imageUrl ? (
+  <Image
+    src={user.imageUrl}
+    alt="Profile"
+    width={96}
+    height={96}
+    className="rounded-full object-cover"
+  />
+) : (
+  <Image
+    src="/profile-placeholder.jpg"
+    alt="Profile"
+    width={96}
+    height={96}
+    className="rounded-full object-cover"
+  />
+)}
+
                   </div>
   
                   {/* User Info */}
@@ -162,11 +163,14 @@ const ProfilePage = () => {
                 {posts.map((post) => (
                   <div key={post.id} className="relative group">
                     <div className="w-full aspect-w-1 aspect-h-1">
-                      <img
-                        src={post.image}
-                        alt="Post"
-                        className="w-full h-full object-cover rounded-lg"
-                      />
+                    <Image
+  src={post.image}
+  alt="Post"
+  width={500}
+  height={500}
+  className="w-full h-full object-cover rounded-lg"
+/>
+
                     </div>
                     <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 flex items-center justify-center rounded-lg">
                       <div className="text-white text-sm flex space-x-4">
