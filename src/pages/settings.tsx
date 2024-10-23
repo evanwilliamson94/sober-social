@@ -13,6 +13,10 @@ const SettingsPage: React.FC = () => {
   // State for username change
   const [newUsername, setNewUsername] = useState(user?.username || '');
 
+  // State for password change
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+
   // Handle username update
   const handleUsernameChange = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +30,23 @@ const SettingsPage: React.FC = () => {
     } catch (error) {
       console.error('Failed to update username:', error);
       alert('Failed to update username. Please try again.');
+    }
+  };
+
+  // Handle password update
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
+
+    try {
+      await user.updatePassword({
+        currentPassword,
+        newPassword,
+      });
+      alert('Password updated successfully!');
+    } catch (error) {
+      console.error('Failed to update password:', error);
+      alert('Failed to update password. Please try again.');
     }
   };
 
@@ -109,19 +130,31 @@ const SettingsPage: React.FC = () => {
           </div>
         )}
 
-        {/* Change Password Section */}
-        {activeSection === 'password' && (
+     {/* Change Password Section */}
+     {activeSection === 'password' && (
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold text-yellow-400 mb-4">Change Password</h3>
             <p className="text-gray-300 mb-6">Ensure your account is secure by updating your password regularly.</p>
-            <form>
+            <form onSubmit={handlePasswordChange}>
               <div className="mb-4">
                 <label className="block mb-2 text-gray-300">Current Password</label>
-                <input type="password" className="w-full p-2 rounded-lg bg-gray-700 text-white" placeholder="Enter current password" />
+                <input
+                  type="password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  className="w-full p-2 rounded-lg bg-gray-700 text-white"
+                  placeholder="Enter current password"
+                />
               </div>
               <div className="mb-4">
                 <label className="block mb-2 text-gray-300">New Password</label>
-                <input type="password" className="w-full p-2 rounded-lg bg-gray-700 text-white" placeholder="Enter new password" />
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="w-full p-2 rounded-lg bg-gray-700 text-white"
+                  placeholder="Enter new password"
+                />
               </div>
               <button className="bg-yellow-400 text-blue-900 px-6 py-2 rounded-lg hover:bg-yellow-300 transition-all hover:scale-105">
                 Save Changes
