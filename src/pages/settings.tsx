@@ -50,26 +50,36 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  // Handle image upload (mock example for Neon)
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
       const file = e.target.files[0];
       try {
-        const imageUrl = await uploadProfileImageToServer(file);
-        setProfileImage(imageUrl);
-        setUploadError(null);
-      } catch {
+        // Create a FormData object to send the file to your API
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('userId', user?.id || '');
+  
+        // Send the file to the backend API
+        const response = await fetch('/api/upload-profile-image', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          setProfileImage(data.imageUrl);  // Update with the URL from NeonDB
+          setUploadError(null);
+        } else {
+          setUploadError('Failed to upload image. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
         setUploadError('Failed to upload image. Please try again.');
       }
     }
   };
-
-  const uploadProfileImageToServer = async (file: File): Promise<string> => {
-    // Simulate upload logic (this should connect to Neon)
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(URL.createObjectURL(file)), 1000);
-    });
-  };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white p-8 lg:p-12">
