@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import AWS from 'aws-sdk';
+import { IncomingForm, Fields, Files, File as FormidableFile } from 'formidable';
 import { db } from '../../utils/db';  // Correct path for db connection
 import { userProfileImages } from '../../utils/schema'; // Assuming you have a schema for user profile images
 
@@ -10,23 +11,50 @@ const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
 });
 
+// Helper function to parse FormData using formidable
+const parseForm = (req: NextApiRequest): Promise<{ fields: Fields; files: Files }> =>
+  new Promise((resolve, reject) => {
+    const form = new IncomingForm();
+    form.parse(req, (err, fields, files) => {
+      if (err) reject(err);
+      resolve({ fields, files });
+    });
+  });
+
+export const config = {
+  api: {
+    bodyParser: false, // Disable Next.js body parsing to handle FormData manually with formidable
+  },
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const { userId, image } = req.body;  // Assuming image is sent as base64 string
-
     try {
-      // Convert base64 image to binary
-      const base64Data = Buffer.from(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-      const fileType = image.split(';')[0].split('/')[1];  // Get file type (e.g., jpeg, png)
+      // Parse the incoming form data (including file and fields)
+      const { fields, files } = await parseForm(req);
+
+      // Handle userId safely (it could be string or array of strings)
+      const userId = Array.isArray(fields.userId) ? fields.userId[0] : fields.userId;
+
+      if (!userId || typeof userId !== 'string') {
+        return res.status(400).json({ error: 'Invalid user ID' });
+      }
+
+      // Check if a file was uploaded (files.file can be an array or a single file)
+      const file = Array.isArray(files.file) ? files.file[0] : (files.file as FormidableFile);
+
+      if (!file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
 
       // Define S3 upload parameters
+      const fileExtension = file.originalFilename?.split('.').pop(); // Get the file extension (e.g., jpeg, png)
       const params: AWS.S3.PutObjectRequest = {
         Bucket: process.env.AWS_S3_BUCKET_NAME as string,  // Your S3 bucket name
-        Key: `user-profile-images/${userId}.${fileType}`,  // File name: userId + file type (e.g., userId.jpeg)
-        Body: base64Data,  // The binary image data
+        Key: `user-profile-images/${userId}.${fileExtension}`,  // File name: userId + file type (e.g., userId.jpeg)
+        Body: file.filepath,  // The file path to the uploaded file
         ACL: 'public-read',  // Publicly readable
-        ContentEncoding: 'base64',  // Specify that the image is base64 encoded
-        ContentType: `image/${fileType}`,  // Set the content type for the image
+        ContentType: file.mimetype || 'application/octet-stream',  // Set the content type for the image
       };
 
       // Upload the image to S3
