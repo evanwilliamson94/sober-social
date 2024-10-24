@@ -40,21 +40,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ error: 'Invalid user ID' });
       }
 
-      // Check if a file was uploaded (files.file can be an array or a single file)
-      const file = Array.isArray(files.file) ? files.file[0] : (files.file as FormidableFile);
-
-      if (!file) {
+      // Check if files.file exists
+      if (!files.file) {
         return res.status(400).json({ error: 'No file uploaded' });
       }
 
+      // Check if a file was uploaded (files.file can be an array or a single file)
+      const file = Array.isArray(files.file) ? files.file[0] : files.file;
+
+      // Make sure file is defined and is of type FormidableFile
+      if (!file || !(file as FormidableFile).filepath) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+
+      const formidableFile = file as FormidableFile;
+
       // Define S3 upload parameters
-      const fileExtension = file.originalFilename?.split('.').pop(); // Get the file extension (e.g., jpeg, png)
+      const fileExtension = formidableFile.originalFilename?.split('.').pop(); // Get the file extension (e.g., jpeg, png)
       const params: AWS.S3.PutObjectRequest = {
         Bucket: process.env.AWS_S3_BUCKET_NAME as string,  // Your S3 bucket name
         Key: `user-profile-images/${userId}.${fileExtension}`,  // File name: userId + file type (e.g., userId.jpeg)
-        Body: file.filepath,  // The file path to the uploaded file
+        Body: formidableFile.filepath,  // The file path to the uploaded file
         ACL: 'public-read',  // Publicly readable
-        ContentType: file.mimetype || 'application/octet-stream',  // Set the content type for the image
+        ContentType: formidableFile.mimetype || 'application/octet-stream',  // Set the content type for the image
       };
 
       // Upload the image to S3
