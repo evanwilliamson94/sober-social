@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import AWS from 'aws-sdk';
 import { IncomingForm, Fields, Files, File as FormidableFile } from 'formidable';
+import fs from 'fs';
 import { db } from '../../utils/db';  // Correct path for db connection
 import { userProfileImages } from '../../utils/schema'; // Assuming you have a schema for user profile images
 
@@ -55,12 +56,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const formidableFile = file as FormidableFile;
 
-      // Define S3 upload parameters without ACL
+      // Define S3 upload parameters, using file stream instead of file path
       const fileExtension = formidableFile.originalFilename?.split('.').pop(); // Get the file extension (e.g., jpeg, png)
+      const fileStream = fs.createReadStream(formidableFile.filepath);  // Create a file stream for S3
       const params: AWS.S3.PutObjectRequest = {
         Bucket: process.env.AWS_S3_BUCKET_NAME as string,  // Your S3 bucket name
         Key: `user-profile-images/${userId}.${fileExtension}`,  // File name: userId + file type (e.g., userId.jpeg)
-        Body: formidableFile.filepath,  // The file path to the uploaded file
+        Body: fileStream,  // Stream the file to S3
         ContentType: formidableFile.mimetype || 'application/octet-stream',  // Set the content type for the image
       };
 
